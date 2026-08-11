@@ -1,121 +1,67 @@
 ---
 const today = new Date();
-import Image from "astro/components/Image.astro";
+import { Instagram, Mail, Phone, MapPin } from "@lucide/astro";
 ---
 
-<footer class="footer w-full bg-[#F2FAFF] gap-0 dark:bg-black">
-  <div class="footer-top w-full py-15">
+<footer class="footer w-full bg-[var(--color-main-100)]/10 gap-0 dark:bg-black mt-20">
+  <div class="footer-top w-full py-16">
     <div class="container">
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12">
         <div>
-          <a href="/">
-            <Image
-              src="/img/logo2.svg"
-              alt="HealNet Logo"
-              width="168"
-              height="144"
-            />
-          </a>
-          <p class="mt-4">
-            Experience personalized medical care from the comfort of your home.
+          <h2 class="text-3xl font-bold font-['Playfair_Display'] mb-4 text-[var(--color-main-200)]">Alicia Lozano</h2>
+          <p class="mt-4 text-gray-700">
+            Acompañándote a sanar tu relación con la comida y tu cuerpo desde el respeto y la evidencia científica.
           </p>
-
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           <div>
-            <h3 class="text-main-200">Support</h3>
-
-            <nav class="grid gap-3">
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Getting Started</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline">FAQS</a>
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Help Articles</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Report an issue</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Contact Help Desk</a
-              >
+            <h3 class="text-[var(--color-main-200)] font-bold mb-4">Contacto</h3>
+            <nav class="grid gap-4 text-gray-700">
+              <div class="flex items-center gap-2">
+                <Phone size={18} />
+                <a href="tel:+34655042852" class="hover:text-[var(--color-main-200)] transition-colors">+34 655 042 852</a>
+              </div>
+              <div class="flex items-center gap-2">
+                <Mail size={18} />
+                <a href="mailto:alicia.lozano.psicologia@gmail.com" class="hover:text-[var(--color-main-200)] transition-colors text-sm break-all">alicia.lozano.psicologia@gmail.com</a>
+              </div>
+              <div class="flex items-center gap-2">
+                <Instagram size={18} />
+                <a href="https://www.instagram.com/alilozanopsico/" target="_blank" class="hover:text-[var(--color-main-200)] transition-colors">@alilozanopsico</a>
+              </div>
             </nav>
           </div>
-          <div>
-            <h3 class="text-main-200">Services</h3>
-
-            <nav class="grid gap-3">
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Booking appointments</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Online consultations</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Prescriptions</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Medicine Refills</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Medical Notes</a
-              >
-            </nav>
-          </div>
-          <div>
-            <h3 class="text-main-200">Legal</h3>
-
-            <nav class="grid gap-3">
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Terms & Conditions</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Privacy Policy</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Cookie Notice</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Cookie Preferences</a
-              >
-              <a href="#" class="hover:text-main-200 hover:underline"
-                >Trust Center</a
-              >
+          <div class="lg:col-span-2">
+            <h3 class="text-[var(--color-main-200)] font-bold mb-4">Ubicaciones (Sevilla)</h3>
+            <nav class="grid gap-4 text-gray-700 text-sm">
+              <div class="flex items-start gap-2">
+                <MapPin size={18} class="shrink-0 mt-1" />
+                <p><strong>Tomares:</strong> Glorieta del agua SN, Edificio Center, Puerta 2, Planta 1, Local 10</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <MapPin size={18} class="shrink-0 mt-1" />
+                <p><strong>Dos Hermanas:</strong> Avenida Gabriel Miró 3, Edificio Wértice, 2ª planta, oficina 7A</p>
+              </div>
+              <div class="flex items-start gap-2">
+                <MapPin size={18} class="shrink-0 mt-1" />
+                <p><strong>Mairena:</strong> Polígono Pisa, Calle Industria 1, Edificio Metropol 1, Planta 3, oficina 19</p>
+              </div>
             </nav>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="footer-btm w-full">
-    <div class="container pb-5">
-      <hr class="border-t border-main-200 mb-5" />
-      <div class="flex flex-wrap gap-4 items-center justify-between">
-          <div class="flex flex-wrap gap-3 items-center">
-            <a href="#" class="transition hover:-rotate-6" title="Facebook">
-              <svg class="icon" width="32" height="32">
-                <use xlink:href="#soc1"></use>
-              </svg>
-            </a>
-            <a href="#" class="transition hover:-rotate-6" title="Instagram">
-              <svg class="icon" width="32" height="32">
-                <use xlink:href="#soc2"></use>
-              </svg>
-            </a>
-            <a href="#" class="transition hover:-rotate-6" title="Linkedin">
-              <svg class="icon" width="32" height="32">
-                <use xlink:href="#soc3"></use>
-              </svg>
-            </a>
-            <a href="#" class="transition hover:-rotate-6" title="Youtube">
-              <svg class="icon" width="32" height="32">
-                <use xlink:href="#soc4"></use>
-              </svg>
-            </a>
-          </div>
+  <div class="footer-btm w-full bg-[var(--color-main-100)]/20">
+    <div class="container py-6">
+      <div class="flex flex-wrap gap-4 items-center justify-between text-gray-600 text-sm">
         <p>
-          HealNet &copy; {today.getFullYear()}. All Rights Reserved
+          Alicia Lozano &copy; {today.getFullYear()}. Todos los derechos reservados.
         </p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-[var(--color-main-200)] transition-colors">Aviso Legal</a>
+          <a href="#" class="hover:text-[var(--color-main-200)] transition-colors">Política de Privacidad</a>
+        </div>
       </div>
     </div>
   </div>

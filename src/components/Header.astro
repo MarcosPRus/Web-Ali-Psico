@@ -1,23 +1,22 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { Menu } from '@lucide/astro';
-import Logo from './Logo.astro';
 ---
 
-<header>
-	<nav class="container grid grid-cols-[168px_1fr_auto] py-4 items-center gap-2">
-		<Logo />
-		<div class="hidden lg:flex gap-10 items-center mx-auto">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/services">Services</HeaderLink>
-			<HeaderLink href="/doctors">Find Doctors</HeaderLink>
-			<HeaderLink href="#">About us</HeaderLink>
+<header class="bg-white sticky top-0 z-50 border-b border-gray-100">
+	<nav class="container grid grid-cols-[auto_1fr_auto] py-4 items-center gap-6">
+		<a href="/" class="text-2xl font-bold font-['Playfair_Display'] text-[var(--color-main-200)] hover:opacity-80 transition-opacity">
+      Alicia Lozano
+    </a>
+		<div class="hidden lg:flex gap-8 items-center justify-end w-full">
+			<HeaderLink href="/">Inicio</HeaderLink>
+			<HeaderLink href="/#sobre-mi">Sobre mí</HeaderLink>
+			<HeaderLink href="/#servicios">Servicios</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="#">Contact us</HeaderLink>
 		</div>
-		<a href="#" class="btn ml-auto bg-[linear-gradient(125deg,var(--color-main-100),var(--color-main-200))] text-white border-0 rounded-xl text-lg py-3 px-6 h-auto shadow-xl hover:shadow-2xl">Join us</a>
-			<label for="my-drawer-2" aria-label="open sidebar" class="btn btn-square btn-ghost lg:hidden">
-         <Menu />
-        </label>
+		<a href="/contacto" class="btn hidden lg:flex bg-[linear-gradient(125deg,var(--color-main-100),var(--color-main-200))] text-white border-0 rounded-xl text-md py-2 px-6 h-auto shadow-md hover:shadow-lg transition-shadow">Reserva tu cita</a>
+    <label for="my-drawer-2" aria-label="open sidebar" class="btn btn-square btn-ghost lg:hidden ml-auto">
+      <Menu size={24} />
+    </label>
 	</nav>
 </header>

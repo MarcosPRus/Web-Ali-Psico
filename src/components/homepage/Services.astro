@@ -1,86 +1,69 @@
 ---
-
+import { Brain, Heart, MessageCircle, Utensils, Video, Sparkles } from "@lucide/astro";
 ---
 
 <section class="section my-0! py-10 relative z-0 overflow-hidden">
   <div class="container">
     <hgroup class="text-center max-w-5xl mx-auto">
       <h2>
-        Top <span
-          class="bg-linear-to-r from-[#0179B4] to-[#88D8FF] bg-clip-text text-transparent"
-          >services</span
-        > we offer
+        Mis <span
+          class="bg-linear-to-r from-[var(--color-main-200)] to-[#e89b96] bg-clip-text text-transparent"
+          >Servicios</span
+        >
       </h2>
-      <p>
-        In today’s fast-paced world, your health deserves the utmost attention
-        and convenience. That’s why HealNet offers a suite of integrated
-        services designed to cater to your healthcare needs digitally:
+      <p class="text-lg">
+        Cada persona es un mundo, por eso adapto mi terapia a tus necesidades específicas. Ya sea presencial en Sevilla u online desde tu casa, te ofrezco un acompañamiento profesional e integrador.
       </p>
     </hgroup>
 
-    <div class="relative grid gap-10 grid-cols-1 lg:grid-cols-3 mt-10 max-w-6xl mx-auto after:absolute after:-top-5 after:-left-10 after:bg-[url('/img/shape/shape2.svg')] after:bg-no-repeat after:w-35.5 after:h-9.25 after:bg-position-[left_top]] after:bg-contain after:z-0 
-	
-	before:absolute before:-bottom-5 before:-right-10 before:bg-[url('/img/shape/shape2-1.svg')] before:bg-no-repeat before:w-35.5 before:h-9.25 before:bg-position-[right_bottom]] before:bg-contain before:z-0">
+    <div class="relative grid gap-10 grid-cols-1 lg:grid-cols-3 mt-10 max-w-6xl mx-auto z-10">
       <article
-        class="lg:col-span-2 border-2 border-main-200 rounded-xl p-4 lg:p-10 bg-[linear-gradient(45deg,#F8FDFF,#FFFFFF)] text-black"
+        class="lg:col-span-2 border border-[var(--color-main-100)] rounded-3xl p-6 lg:p-10 bg-[linear-gradient(45deg,#FFF7F3,#FFFFFF)] text-black shadow-md hover:shadow-lg transition-shadow"
       >
-        <svg class="icon" width="44" height="44">
-          <use xlink:href="#i1"></use>
-        </svg>
-        <h3 class="text-main-200 mt-3">Online Consultations</h3>
+        <Utensils class="text-[var(--color-main-200)]" size={44} />
+        <h3 class="text-main-200 mt-4">Trastornos de la Conducta Alimentaria (TCA)</h3>
         <p>
-          Consult with top doctors across various specialties via video or chat
-          communication. It’s totally secure, private, and convenient. Choose
-          the best time for an in-person visit with our easy-to-use scheduling
-          system, or proceed with our online consultation.
+          Tratamiento especializado en Anorexia, Bulimia, Trastorno por Atracón y TCANE. Trabajaremos juntas para identificar el origen, sanar los miedos alimentarios y devolverte la libertad y la paz mental que mereces en tu día a día.
         </p>
       </article>
+      
       <article
-        class="border-2 border-main-200 rounded-xl p-4 lg:p-10 bg-[linear-gradient(45deg,#F8FDFF,#FFFFFF)] text-black"
+        class="border border-[var(--color-main-100)] rounded-3xl p-6 lg:p-10 bg-[linear-gradient(45deg,#FFF7F3,#FFFFFF)] text-black shadow-md hover:shadow-lg transition-shadow"
       >
-        <svg class="icon" width="44" height="44">
-          <use xlink:href="#i2"></use>
-        </svg>
-        <h3 class="text-main-200 mt-3">Booking Appointments</h3>
+        <Sparkles class="text-[var(--color-main-200)]" size={44} />
+        <h3 class="text-main-200 mt-4">Imagen Corporal</h3>
         <p>
-          Choose the best time for an in-person visit with our easy-to-use
-          scheduling system, or proceed with our online consultation features.
+          Abordaremos la insatisfacción corporal desde la compasión, alejándonos de los cánones irreales para que puedas habitar tu cuerpo desde el respeto.
         </p>
       </article>
+      
       <article
-        class="border-2 border-main-200 rounded-xl p-4 lg:p-10 bg-[linear-gradient(45deg,#F8FDFF,#FFFFFF)] text-black"
+        class="border border-[var(--color-main-100)] rounded-3xl p-6 lg:p-10 bg-[linear-gradient(45deg,#FFF7F3,#FFFFFF)] text-black shadow-md hover:shadow-lg transition-shadow"
       >
-        <svg class="icon" width="44" height="44">
-          <use xlink:href="#i3"></use>
-        </svg>
-        <h3 class="text-main-200 mt-3">Prescriptions</h3>
+        <Brain class="text-[var(--color-main-200)]" size={44} />
+        <h3 class="text-main-200 mt-4">Psiconutrición</h3>
         <p>
-          Receive and renew prescriptions digitally after your consultation with
-          our specialists .
+          Exploraremos cómo tus emociones se relacionan con lo que comes. Si sufres de comer emocional o ansiedad por la comida, te enseñaré herramientas de regulación.
         </p>
       </article>
+      
       <article
-        class="border-2 border-main-200 rounded-xl p-4 lg:p-10 bg-[linear-gradient(45deg,#F8FDFF,#FFFFFF)] text-black"
+        class="border border-[var(--color-main-100)] rounded-3xl p-6 lg:p-10 bg-[linear-gradient(45deg,#FFF7F3,#FFFFFF)] text-black shadow-md hover:shadow-lg transition-shadow"
       >
-        <svg class="icon" width="44" height="44">
-          <use xlink:href="#i4"></use>
-        </svg>
-        <h3 class="text-main-200 mt-3">Medical Notes</h3>
+        <MessageCircle class="text-[var(--color-main-200)]" size={44} />
+        <h3 class="text-main-200 mt-4">Gestión Emocional</h3>
         <p>
-          Obtain necessary medical notes for work or school with only a few
-          clicks of hassle.
+          Terapia enfocada en la autoestima, la ansiedad, estrés y el desarrollo de recursos de afrontamiento saludables para tu bienestar general.
         </p>
       </article>
+      
       <article
-        class="border-2 border-main-200 rounded-xl p-4 lg:p-10 bg-[linear-gradient(45deg,#F8FDFF,#FFFFFF)] text-black"
+        class="border border-[var(--color-main-100)] rounded-3xl p-6 lg:p-10 bg-[linear-gradient(45deg,#FFF7F3,#FFFFFF)] text-black shadow-md hover:shadow-lg transition-shadow"
       >
-        <svg class="icon" width="44" height="44">
-          <use xlink:href="#i5"></use>
-        </svg>
-        <h3 class="text-main-200 mt-3">Medicine Refills</h3>
+        <Video class="text-[var(--color-main-200)]" size={44} />
+        <h3 class="text-main-200 mt-4">Terapia Online y Presencial</h3>
         <p>
-          Skip the pharmacy queues and save time + energy by ordering medicine
-          refills online.
+          Sesiones desde cualquier parte del mundo a través de videollamada, o si lo prefieres, te atiendo en mis consultas presenciales en Tomares, Dos Hermanas o Mairena.
         </p>
       </article>
     </div>
