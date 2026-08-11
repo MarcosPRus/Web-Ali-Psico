@@ -4,26 +4,24 @@ import { z } from "astro/zod";
 
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      pubDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      heroImage: image().optional(),
-    }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+  }),
 });
 
 const services = defineCollection({
   loader: glob({ base: "./src/content/services", pattern: "**/*.{md,mdx}" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      heroImage: image().optional(),
-      pubDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-    }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    heroImage: z.string().optional(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+  }),
 });
 
 const doctors = defineCollection({

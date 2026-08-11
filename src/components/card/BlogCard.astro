@@ -1,6 +1,5 @@
 ---
 import FormattedDate from "../../components/FormattedDate.astro";
-import { Image } from "astro:assets";
 import { ChevronRight } from  '@lucide/astro';
 const { id, data, slug = "/blog", date = true, book = false } = Astro.props;
 ---
@@ -12,13 +11,11 @@ const { id, data, slug = "/blog", date = true, book = false } = Astro.props;
     data.heroImage && (
       <div class="grid">
         <a href={`${slug}/${id}`} class="[grid-area:1/1/2/2]">
-          <Image
+          <img
             src={data.heroImage}
             alt={data.title}
             width="500"
             height="250"
-            format="webp"
-            quality={45}
             class="aspect-2/1 w-full h-auto object-cover"
           />
         </a>
