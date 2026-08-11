@@ -1,5 +1,4 @@
 ---
-import Image from "astro/components/Image.astro";
 import { ChevronRight } from "@lucide/astro";
 ---
 
@@ -25,13 +24,11 @@ import { ChevronRight } from "@lucide/astro";
       </div>
       <div>
         <div class="grid">
-          <Image
+          <img
             src="/img/hero-placeholder.jpg"
             alt="Alicia Lozano Consulta"
-            format="webp"
-            quality="80"
-            fetchpriority="high"
             loading="eager"
+            fetchpriority="high"
             width="400"
             height="500"
             class="w-full max-w-[400px] h-auto mx-auto rounded-3xl object-cover [grid-area:1/1/2/2] shadow-2xl"
