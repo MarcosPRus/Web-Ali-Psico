@@ -1,26 +1,42 @@
 ---
-import Layout from "../layouts/MainLayout.astro";
-import Logo from "../components/Logo.astro";
+import Base from "../layouts/Base.astro";
+import Media from "../components/art/Media.astro";
+import Icon from "../components/Icon.astro";
 ---
 
-<Layout title="Not found">
-  <section class="section flex-1 flex flex-col justify-center items-center">
-    <div class="container text-center grid gap-4">
-      <div class="text-center mx-auto">
-        <Logo />
+<Base title="Página no encontrada">
+  <section class="section nf">
+    <div class="container narrow wrap">
+      <Media scene="ventana" shape="arch" ratio="4 / 5" class="art" />
+      <p class="eyebrow">Error 404</p>
+      <h1>Esta página se ha ido <em>a dar un paseo</em></h1>
+      <p class="lead">No pasa nada: a veces perderse también es parte del camino. Te ayudo a volver.</p>
+      <div class="btns">
+        <a class="btn" href="/">Volver al inicio <Icon name="arrow" class="arrow" /></a>
+        <a class="btn ghost" href="/contacto">Contactar</a>
       </div>
-      <h1 class="text-5xl! lg:text-[10em]! font-bold leading-none">404</h1>
-      <p>Sorry, we couldn't fint that page</p>
-      <a href="/" class="btn bg-[linear-gradient(125deg,var(--color-main-100),var(--color-main-200))] text-white border-0 rounded-xl text-lg py-3 px-6 h-auto shadow-xl hover:shadow-2xl mx-auto"
-        >GO TO HOME</a
-      >
     </div>
   </section>
+</Base>
 
-  <style>
-	h1 {
-		font-size: 10em;
-		line-height: 0.8;
-	}
-  </style>
-</Layout>
+<style>
+  .wrap {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+  .wrap :global(.art) {
+    width: 12rem;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: var(--step-4);
+  }
+  .btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

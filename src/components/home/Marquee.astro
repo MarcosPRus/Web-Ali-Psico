@@ -1,0 +1,85 @@
+---
+interface Props {
+  items?: string[];
+}
+const {
+  items = [
+    "Trastornos de la conducta alimentaria",
+    "Imagen corporal",
+    "Psiconutrición",
+    "Hambre emocional",
+    "Autoestima",
+    "Ansiedad",
+    "Familias",
+    "Terapia online",
+  ],
+} = Astro.props;
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    {
+      [0, 1].map(() => (
+        <ul>
+          {items.map((it, i) => (
+            <li>
+              <span class:list={[i % 2 && "it"]}>{it}</span>
+              <span class="dot">✺</span>
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquee {
+    position: relative;
+    background: var(--wine);
+    color: var(--oat);
+    padding-block: 1.1rem;
+    rotate: -1.6deg;
+    margin-inline: -2rem;
+    box-shadow: 0 20px 40px -24px rgb(78 31 48 / 0.6);
+    z-index: 2;
+    overflow: hidden;
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: marquee 48s linear infinite;
+  }
+  .marquee:hover .track {
+    animation-play-state: paused;
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-right: 2rem;
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 1rem + 1.6vw, 2.4rem);
+    font-weight: 330;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .it {
+    font-style: italic;
+    color: var(--blush);
+  }
+  .dot {
+    color: var(--terracotta);
+    font-size: 0.8em;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

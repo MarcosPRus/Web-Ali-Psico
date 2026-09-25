@@ -1,0 +1,114 @@
+---
+import Icon from "./Icon.astro";
+import Media from "./art/Media.astro";
+import Shape from "./art/Shape.astro";
+import { CONTACT } from "../consts";
+interface Props {
+  title?: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="cta section" aria-labelledby="cta-title">
+  <div class="container wide">
+    <div class="panel" data-reveal>
+      <div class="copy">
+        <p class="eyebrow">Primer paso</p>
+        <h2 id="cta-title">
+          {title ? title : <>El primer paso puede ser <em>un mensaje</em>.</>}
+        </h2>
+        <p class="lead">
+          Escríbeme sin compromiso. Te respondo personalmente en menos de 48&nbsp;h laborables y, si quieres, hacemos una
+          llamada breve para conocernos.
+        </p>
+        <div class="buttons">
+          <a class="btn" href={CONTACT.whatsapp} target="_blank" rel="noopener">
+            <Icon name="whatsapp" /> WhatsApp
+          </a>
+          <a class="btn ghost" href="/contacto">
+            Formulario de contacto <Icon name="arrow" class="arrow" />
+          </a>
+        </div>
+        <p class="alt">
+          O llámame al <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+        </p>
+      </div>
+      <div class="art">
+        <Media scene="sol" shape="arch" ratio="4 / 5" alt="" />
+        <Shape name="star" color="var(--terracotta)" size="4.5rem" class="star float" style="--t:7s" />
+        <Shape name="sprig" color="var(--sage-ink)" size="5rem" class="sprig float" style="--t:11s;--r:-10deg" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-bottom: calc(var(--section) + 1rem);
+  }
+  .panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding: clamp(2rem, 6vw, 5.5rem);
+    border-radius: calc(var(--radius-lg) * 1.4);
+    background: var(--blush);
+    overflow: hidden;
+  }
+  .panel::before {
+    content: "";
+    position: absolute;
+    width: 40rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--rose);
+    opacity: 0.35;
+    left: -18rem;
+    bottom: -26rem;
+  }
+  .copy {
+    position: relative;
+    display: grid;
+    gap: 1.4rem;
+    justify-items: start;
+  }
+  .copy .lead {
+    color: var(--ink);
+    max-width: 34ch;
+  }
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .alt {
+    color: var(--ink);
+  }
+  .art {
+    position: relative;
+    max-width: 22rem;
+    justify-self: center;
+    width: 100%;
+  }
+  .art :global(.star) {
+    position: absolute;
+    top: -1.2rem;
+    right: -1.2rem;
+  }
+  .art :global(.sprig) {
+    position: absolute;
+    bottom: 1rem;
+    left: -2.4rem;
+  }
+  @media (max-width: 52rem) {
+    .panel {
+      grid-template-columns: 1fr;
+    }
+    .art {
+      max-width: 16rem;
+      grid-row: 1;
+    }
+  }
+</style>

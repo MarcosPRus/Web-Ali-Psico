@@ -1,8 +1,9 @@
 ---
 title: "Cómo mejorar la percepción de tu propio cuerpo"
 description: "Herramientas desde la psicología para empezar a mirar tu cuerpo con respeto y compasión."
-pubDate: "2024-04-15"
-heroImage: "/img/blog-placeholder.jpg"
+pubDate: "2026-07-03"
+category: "Imagen corporal"
+scene: "espejo"
 ---
 
 Aceptar nuestro cuerpo en una sociedad que lucra con nuestras inseguridades es un acto de rebeldía y, al mismo tiempo, un proceso largo que requiere paciencia. Muchas veces, la insatisfacción corporal no tiene tanto que ver con cómo somos realmente, sino con cómo nos hemos acostumbrado a evaluarnos.

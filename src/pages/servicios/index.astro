@@ -1,0 +1,183 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHead from "../../components/SectionHead.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import Steps from "../../components/Steps.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Icon from "../../components/Icon.astro";
+import Shape from "../../components/art/Shape.astro";
+import { PRICES, LOCATIONS } from "../../consts";
+
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="Cómo te puedo ayudar"
+  description="Terapia psicológica para TCA, imagen corporal, psiconutrición, ansiedad y familias. Presencial en Tomares, Dos Hermanas y Mairena, y online."
+>
+  <PageHero eyebrow="Servicios" scene="jarrones" tone="lilac" crumbs={[{ label: "Cómo te ayudo" }]}>
+    Cómo te puedo <em>ayudar</em>
+    <Fragment slot="lead">
+      Cada historia es distinta, pero casi todas empiezan igual: con la sensación de que la comida o el cuerpo ocupan
+      demasiado espacio. Estas son las áreas en las que trabajo.
+    </Fragment>
+  </PageHero>
+
+  <section class="section" style="padding-top:0">
+    <div class="container wide cards">
+      {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+    </div>
+  </section>
+
+  <section class="section formats">
+    <div class="container wide">
+      <SectionHead eyebrow="Modalidades y tarifas">
+        Presencial u online, <em>tú eliges</em>
+        <Fragment slot="lead">Las sesiones tienen el mismo precio en cualquier modalidad. Emito factura de todas ellas.</Fragment>
+      </SectionHead>
+
+      <div class="prices">
+        {
+          PRICES.map((p, i) => (
+            <article class:list={["price", i === 1 && "hl"]} data-reveal style={`--d:${i}`}>
+              {i === 1 && <Shape name="sun" color="var(--butter)" size="5rem" class="badge" />}
+              <h3>{p.name}</h3>
+              <p class="amount">{p.price}</p>
+              <p class="time"><Icon name="clock" size={16} /> {p.time}</p>
+              <p class="detail">{p.detail}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <ul class="places" data-reveal>
+        {
+          LOCATIONS.map((l) => (
+            <li>
+              <Icon name={l.id === "online" ? "video" : "pin"} size={18} />
+              <strong>{l.name}</strong>
+              <span>{l.id === "online" ? "Videollamada" : l.lines[0]}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="fine muted" data-reveal>
+        Cancelaciones: te pido avisar con al menos 24&nbsp;h de antelación para poder ofrecer el hueco a otra persona.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Cómo empezamos" align="center">
+        Tres pasos <em>sin prisa</em>
+      </SectionHead>
+      <Steps />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+  .formats {
+    background: var(--sand);
+  }
+  .prices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+  .price {
+    position: relative;
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .price.hl {
+    background: var(--ink);
+    color: var(--oat);
+  }
+  .price :global(.badge) {
+    position: absolute;
+    top: -1.6rem;
+    right: 1.5rem;
+    animation: spin 30s linear infinite;
+  }
+  .price h3 {
+    font-size: var(--step-1);
+  }
+  .amount {
+    font-family: var(--serif);
+    font-size: var(--step-4);
+    font-weight: 330;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .detail {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .hl .detail {
+    color: color-mix(in oklab, var(--oat) 75%, transparent);
+  }
+  .places {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .places li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.1rem;
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 0.95rem;
+  }
+  .places :global(.icon) {
+    color: var(--terracotta-ink);
+  }
+  .places span {
+    color: var(--ink-2);
+  }
+  .fine {
+    margin-top: 1.5rem;
+    font-size: 0.92rem;
+  }
+  @media (max-width: 60rem) {
+    .cards {
+      grid-template-columns: 1fr 1fr;
+    }
+    .prices {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 40rem) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

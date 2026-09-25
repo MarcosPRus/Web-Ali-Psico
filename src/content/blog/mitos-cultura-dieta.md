@@ -1,8 +1,9 @@
 ---
 title: "Mitos sobre la cultura de la dieta"
 description: "Desmontando las creencias más comunes que nos hacen daño y perjudican nuestra relación con la comida."
-pubDate: "2024-03-10"
-heroImage: "/img/blog-placeholder.jpg"
+pubDate: "2026-06-12"
+category: "Cultura de dieta"
+scene: "mesa"
 ---
 
 La "cultura de la dieta" es un sistema de creencias que premia la delgadez y la equipara con la salud y el valor moral, mientras promueve la pérdida de peso como un fin para alcanzar el éxito y la felicidad.

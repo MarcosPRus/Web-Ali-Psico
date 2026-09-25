@@ -1,0 +1,48 @@
+---
+/**
+ * Marco de imagen. Si le pasas `src`, muestra la foto;
+ * si no, muestra la ilustración `scene` como imagen provisional.
+ *
+ *   <Media src="/img/alicia.jpg" alt="Alicia en consulta" shape="arch" />
+ *   <Media scene="retrato" alt="Retrato ilustrado" shape="arch" />
+ */
+import Art, { type Scene } from "./Art.astro";
+
+interface Props {
+  src?: string;
+  scene?: Scene;
+  alt?: string;
+  shape?: "rounded" | "arch" | "circle" | "square";
+  ratio?: string;
+  class?: string;
+  loading?: "lazy" | "eager";
+  style?: string;
+}
+const {
+  src,
+  scene = "ventana",
+  alt = "",
+  shape = "rounded",
+  ratio = "4 / 5",
+  class: className,
+  loading = "lazy",
+  style = "",
+} = Astro.props;
+---
+
+<figure
+  class:list={["frame", "media", shape === "arch" && "arch", shape === "circle" && "circle", shape === "square" && "square", className]}
+  style={`aspect-ratio:${ratio};${style}`}
+>
+  {src ? <img src={src} alt={alt} loading={loading} decoding="async" /> : <Art scene={scene} label={alt || undefined} />}
+</figure>
+
+<style>
+  .media {
+    margin: 0;
+    background: var(--sand);
+  }
+  .media.square {
+    border-radius: 0;
+  }
+</style>

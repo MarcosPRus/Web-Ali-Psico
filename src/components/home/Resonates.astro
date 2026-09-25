@@ -1,0 +1,180 @@
+---
+import SectionHead from "../SectionHead.astro";
+import Icon from "../Icon.astro";
+const thoughts = [
+  "El lunes empiezo. Esta vez sí.",
+  "Me paso el día pensando en comida.",
+  "Evito salir en las fotos.",
+  "Si como esto, luego lo compenso.",
+  "Cuando estoy nerviosa, como sin parar.",
+  "Me siento culpable después de comer.",
+  "No sé cuándo tengo hambre de verdad.",
+  "Viviré de verdad cuando adelgace.",
+  "Me da miedo comer fuera de casa.",
+  "Nunca me siento suficiente.",
+];
+const tones = ["blush", "lilac", "butter", "sage", "paper"];
+const rot = [-2.5, 1.5, -1, 2.5, -2, 1, -1.5, 2, -3, 1.2];
+---
+
+<section class="section resonates" aria-labelledby="res-title">
+  <div class="container">
+    <SectionHead eyebrow="Quizá te pase algo así" align="center">
+      <span id="res-title">¿Te suena alguna de <em>estas frases</em>?</span>
+      <Fragment slot="lead">Toca las que sientas como tuyas. Nadie más las verá.</Fragment>
+    </SectionHead>
+
+    <ul class="bubbles" data-bubbles>
+      {
+        thoughts.map((t, i) => (
+          <li data-reveal style={`--d:${i % 5};--rot:${rot[i]}deg`}>
+            <button type="button" aria-pressed="false" class={`tone-${tones[i % tones.length]}`}>
+              <span class="check">
+                <Icon name="check" size={16} />
+              </span>
+              {t}
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="answer" data-answer aria-live="polite">
+      <p class="idle">
+        Si alguna te ha resonado, quiero que sepas dos cosas: <strong>no es falta de fuerza de voluntad</strong>, y&nbsp;<em class="script">se puede salir</em>.
+      </p>
+      <p class="active" hidden>
+        <span class="count" data-count>0</span>
+        <span data-msg></span>
+        <a href="/contacto" class="link">Hablemos <Icon name="arrow" size={16} /></a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-bubbles]").forEach((list) => {
+    const section = list.closest("section")!;
+    const idle = section.querySelector<HTMLElement>(".idle")!;
+    const active = section.querySelector<HTMLElement>(".active")!;
+    const count = section.querySelector<HTMLElement>("[data-count]")!;
+    const msg = section.querySelector<HTMLElement>("[data-msg]")!;
+    const update = () => {
+      const n = list.querySelectorAll('[aria-pressed="true"]').length;
+      idle.hidden = n > 0;
+      active.hidden = n === 0;
+      count.textContent = String(n);
+      msg.textContent =
+        n === 1
+          ? "frase marcada. Es más común de lo que parece, y se puede trabajar."
+          : n < 4
+            ? "frases marcadas. No estás sola: son pensamientos muy frecuentes, y se pueden trabajar."
+            : "frases marcadas. Parece que la comida y el cuerpo te están ocupando mucho espacio. Mereces un lugar donde soltarlo.";
+    };
+    list.querySelectorAll("button").forEach((b) =>
+      b.addEventListener("click", () => {
+        b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+        update();
+      }),
+    );
+  });
+</script>
+
+<style>
+  .resonates {
+    background: linear-gradient(var(--oat), var(--paper) 30%, var(--paper) 70%, var(--oat));
+  }
+  .bubbles {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 0.9rem;
+    max-width: 62rem;
+    margin-inline: auto;
+  }
+  li {
+    rotate: var(--rot);
+  }
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.35rem;
+    border-radius: 1.6rem 1.6rem 1.6rem 0.4rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
+    font-weight: 350;
+    line-height: 1.25;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px var(--line), 0 10px 24px -18px rgb(47 33 39 / 0.5);
+    transition: transform 0.5s var(--ease), background-color 0.3s, color 0.3s, box-shadow 0.4s;
+  }
+  li:nth-child(even) button {
+    border-radius: 1.6rem 1.6rem 0.4rem 1.6rem;
+  }
+  .tone-blush { --bg: var(--blush); }
+  .tone-lilac { --bg: var(--lilac); }
+  .tone-butter { --bg: #f6e2ac; }
+  .tone-sage { --bg: #cfd8c4; }
+  .tone-paper { --bg: #fff; }
+  button:hover {
+    transform: translateY(-4px) rotate(calc(var(--rot) * -1));
+  }
+  .check {
+    display: grid;
+    place-items: center;
+    width: 0;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--oat);
+    overflow: hidden;
+    margin-right: -0.6rem;
+    transition: width 0.4s var(--ease), margin 0.4s var(--ease);
+  }
+  button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--oat);
+  }
+  button[aria-pressed="true"] .check {
+    width: 1.6rem;
+    margin-right: 0;
+    background: var(--terracotta);
+  }
+  .answer {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+    font-size: var(--step-1);
+    max-width: 40rem;
+    margin-inline: auto;
+    min-height: 4em;
+  }
+  .answer .script {
+    font-size: 1.25em;
+    color: var(--terracotta-ink);
+  }
+  .active {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.25rem 0.6rem;
+  }
+  .active[hidden],
+  .idle[hidden] {
+    display: none;
+  }
+  .count {
+    font-family: var(--serif);
+    font-size: 2.6em;
+    line-height: 0.8;
+    font-style: italic;
+    color: var(--terracotta-ink);
+  }
+  .active .link {
+    color: var(--terracotta-ink);
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { CONTACT } from "../consts";
+---
+
+<Legal title="Política de privacidad">
+  <p>
+    Tu privacidad es especialmente importante en el ámbito de la salud. Aquí te explico de forma clara qué datos se
+    recogen y para qué, conforme al Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).
+  </p>
+  <h2>Responsable del tratamiento</h2>
+  <p>Alicia Lozano [apellidos] · NIF [pendiente] · {CONTACT.email}</p>
+  <h2>Qué datos recojo y para qué</h2>
+  <ul>
+    <li><strong>Formulario de contacto, email o WhatsApp:</strong> nombre, email, teléfono y el contenido de tu mensaje, únicamente para responderte y, si lo deseas, gestionar tu cita.</li>
+    <li><strong>Pacientes:</strong> los datos clínicos se tratan con la máxima confidencialidad, conforme al secreto profesional y a la normativa sanitaria.</li>
+  </ul>
+  <h2>Base legal</h2>
+  <p>Tu consentimiento al contactar y, en caso de iniciar terapia, la relación asistencial.</p>
+  <h2>Conservación</h2>
+  <p>
+    Los mensajes de contacto se conservan el tiempo necesario para responderte. La historia clínica se conserva durante
+    los plazos exigidos por la legislación sanitaria.
+  </p>
+  <h2>Destinatarios</h2>
+  <p>
+    No se ceden datos a terceros salvo obligación legal. El formulario puede utilizar un proveedor de envío de correo
+    [pendiente: indicar proveedor] como encargado del tratamiento.
+  </p>
+  <h2>Tus derechos</h2>
+  <p>
+    Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a
+    {CONTACT.email}. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).
+  </p>
+</Legal>

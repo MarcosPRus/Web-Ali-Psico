@@ -1,0 +1,289 @@
+---
+import Icon from "./Icon.astro";
+import { LOCATIONS } from "../consts";
+const W = 400, H = 340;
+const px = (x: number) => (x / 100) * W;
+const py = (y: number) => (y / 100) * H;
+const sevilla = { x: px(56), y: py(33) };
+---
+
+<div class="locations" data-locations data-active="tomares">
+  <div class="list">
+    <div class="tabs" role="group" aria-label="Elige consulta">
+      {
+        LOCATIONS.map((l, i) => (
+          <button type="button" data-loc={l.id} aria-pressed={i === 0 ? "true" : "false"}>
+            <span class="n">{l.name}</span>
+            <span class="a">{l.area}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      LOCATIONS.map((l, i) => (
+        <div class="detail" data-detail={l.id} data-first={i === 0 ? "" : undefined}>
+          <div class="ico">
+            <Icon name={l.id === "online" ? "video" : "pin"} size={22} />
+          </div>
+          <div>
+            <h3>
+              {l.id === "online" ? (
+                "Terapia online"
+              ) : (
+                <>
+                  Consulta en <em>{l.name}</em>
+                </>
+              )}
+            </h3>
+            <address>
+              {l.lines.map((line) => (
+                <span>{line}</span>
+              ))}
+            </address>
+            <p class="note">{l.note}</p>
+            {l.maps ? (
+              <a class="link" href={l.maps} target="_blank" rel="noopener">
+                Cómo llegar <Icon name="arrow-up-right" size={16} />
+              </a>
+            ) : (
+              <a class="link" href="/servicios/terapia-online">
+                Cómo funciona <Icon name="arrow" size={16} />
+              </a>
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="map" aria-hidden="true">
+    <svg viewBox={`0 0 ${W} ${H}`}>
+      {/* colinas del Aljarafe */}
+      <path d="M-10 90 C 40 60, 110 70, 150 110 C 170 160, 150 250, 90 300 C 50 330, 0 330, -10 320 Z" fill="var(--sage)" opacity=".5" />
+      <path d="M-10 150 C 30 130, 90 140, 110 180 C 120 230, 80 280, 30 300 L -10 300 Z" fill="var(--sage)" opacity=".45" />
+      {/* campiña */}
+      <circle cx="330" cy="290" r="90" fill="var(--butter)" opacity=".35" />
+      {/* Guadalquivir */}
+      <path
+        d="M205 -10 C 190 40, 176 70, 196 110 C 214 146, 170 170, 180 210 C 190 250, 150 280, 170 350"
+        fill="none"
+        stroke="var(--lilac-2)"
+        stroke-width="16"
+        stroke-linecap="round"
+      />
+      <text x="140" y="262" class="river" transform="rotate(-62 140 262)">Guadalquivir</text>
+      {/* caminos */}
+      <g stroke="var(--ink)" stroke-opacity=".28" stroke-width="1.6" stroke-dasharray="4 6" fill="none">
+        {LOCATIONS.filter((l) => l.id !== "online").map((l) => (
+          <path d={`M${sevilla.x} ${sevilla.y} Q ${(sevilla.x + px(l.x)) / 2} ${(sevilla.y + py(l.y)) / 2 + 30} ${px(l.x)} ${py(l.y)}`} />
+        ))}
+      </g>
+      {/* Sevilla */}
+      <g transform={`translate(${sevilla.x} ${sevilla.y})`}>
+        <circle r="30" fill="var(--paper)" opacity=".8" />
+        <path d="M-4 10 V -14 L 0 -20 L 4 -14 V 10 Z M-6 10 H 6 V 13 H -6 Z" fill="var(--wine)" />
+        <circle cy="-22" r="2.4" fill="var(--butter)" />
+        <text y="28" class="city" text-anchor="middle">Sevilla</text>
+      </g>
+      {/* pines */}
+      {LOCATIONS.map((l) =>
+        l.id === "online" ? (
+          <g class="pin" data-pin={l.id} transform={`translate(${px(l.x)} ${py(l.y)})`}>
+            <circle class="pulse" r="22" />
+            <circle r="22" fill="var(--paper)" stroke="var(--lilac-ink)" stroke-width="2" stroke-dasharray="3 4" />
+            <rect x="-10" y="-7" width="13" height="14" rx="3" fill="var(--lilac-ink)" />
+            <path d="M4 -3 L 11 -7 V 7 L 4 3 Z" fill="var(--lilac-ink)" />
+            <text y="40" text-anchor="middle" class="label">Online</text>
+          </g>
+        ) : (
+          <g class="pin" data-pin={l.id} transform={`translate(${px(l.x)} ${py(l.y)})`}>
+            <circle class="pulse" cy="-26" r="16" />
+            <path class="drop" d="M0 0 C -12 -14, -14 -20, -14 -26 A 14 14 0 0 1 14 -26 C 14 -20, 12 -14, 0 0 Z" />
+            <circle cy="-26" r="5" fill="var(--paper)" />
+            <text y="18" text-anchor="middle" class="label">{l.name}</text>
+          </g>
+        ),
+      )}
+    </svg>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-locations]").forEach((root) => {
+    const set = (id: string) => {
+      root.dataset.active = id;
+      root.querySelectorAll<HTMLButtonElement>("[data-loc]").forEach((b) =>
+        b.setAttribute("aria-pressed", String(b.dataset.loc === id)),
+      );
+      root.querySelectorAll<HTMLElement>("[data-detail]").forEach((d) => (d.hidden = d.dataset.detail !== id));
+      root.querySelectorAll<SVGGElement>("[data-pin]").forEach((p) => p.classList.toggle("on", p.dataset.pin === id));
+    };
+    root.querySelectorAll<HTMLButtonElement>("[data-loc]").forEach((b) =>
+      b.addEventListener("click", () => set(b.dataset.loc!)),
+    );
+    root.querySelectorAll<SVGGElement>("[data-pin]").forEach((p) =>
+      p.addEventListener("click", () => set(p.dataset.pin!)),
+    );
+    set(root.dataset.active || "tomares");
+  });
+</script>
+
+<style>
+  .locations {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+  }
+  .tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .tabs button {
+    display: grid;
+    text-align: left;
+    gap: 0.15rem;
+    padding: 1rem 1.15rem;
+    border-radius: var(--radius);
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--line);
+    transition: background-color 0.35s, color 0.35s, transform 0.4s var(--ease);
+  }
+  .tabs button:hover {
+    transform: translateY(-2px);
+  }
+  .tabs button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--oat);
+  }
+  .tabs .n {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    line-height: 1.1;
+  }
+  .tabs .a {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .detail {
+    display: flex;
+    gap: 1.1rem;
+    padding: 1.6rem;
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow);
+    animation: pop 0.6s var(--ease);
+  }
+  .detail[hidden] {
+    display: none;
+  }
+  @media (scripting: none) {
+    .detail[hidden] {
+      display: flex;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  .ico {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--blush);
+    color: var(--terracotta-ink);
+  }
+  .detail h3 {
+    font-size: var(--step-2);
+    margin-bottom: 0.6rem;
+  }
+  address {
+    font-style: normal;
+    display: grid;
+  }
+  .note {
+    margin-block: 0.8rem 1rem;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .map {
+    position: relative;
+    border-radius: calc(var(--radius-lg) * 1.4);
+    background: var(--oat);
+    box-shadow: inset 0 0 0 1px var(--line);
+    overflow: hidden;
+    aspect-ratio: 400 / 340;
+  }
+  .map svg {
+    width: 100%;
+    height: 100%;
+  }
+  .map .river {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 11px;
+    fill: var(--lilac-ink);
+    opacity: 0.8;
+  }
+  .map .city {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    fill: var(--wine);
+  }
+  .pin {
+    cursor: pointer;
+  }
+  .pin .drop {
+    fill: var(--terracotta);
+    transition: fill 0.3s;
+  }
+  .pin .label {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    fill: var(--ink);
+  }
+  .pin .pulse {
+    fill: var(--terracotta);
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .pin[data-pin="online"] .pulse {
+    fill: var(--lilac-2);
+  }
+  .pin.on .drop {
+    fill: var(--wine);
+  }
+  .pin.on .pulse {
+    animation: pulse 2s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    0% {
+      opacity: 0.45;
+      transform: scale(0.6);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2.2);
+    }
+  }
+  @media (max-width: 56rem) {
+    .locations {
+      grid-template-columns: 1fr;
+    }
+    .map {
+      order: -1;
+    }
+  }
+</style>

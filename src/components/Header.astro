@@ -1,22 +1,267 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { Menu } from '@lucide/astro';
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import Shape from "./art/Shape.astro";
+import { NAV, CONTACT } from "../consts";
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => path === href || path.startsWith(href + "/");
 ---
 
-<header class="bg-white sticky top-0 z-50 border-b border-gray-100">
-	<nav class="container grid grid-cols-[auto_1fr_auto] py-4 items-center gap-6">
-		<a href="/" class="text-2xl font-bold font-['Playfair_Display'] text-[var(--color-main-200)] hover:opacity-80 transition-opacity">
-      Alicia Lozano
+<header class="site-header" data-header>
+  <div class="container wide bar">
+    <a href="/" class="brand">
+      <Logo />
     </a>
-		<div class="hidden lg:flex gap-8 items-center justify-end w-full">
-			<HeaderLink href="/">Inicio</HeaderLink>
-			<HeaderLink href="/#sobre-mi">Sobre mí</HeaderLink>
-			<HeaderLink href="/#servicios">Servicios</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-		</div>
-		<a href="/contacto" class="btn hidden lg:flex bg-[linear-gradient(125deg,var(--color-main-100),var(--color-main-200))] text-white border-0 rounded-xl text-md py-2 px-6 h-auto shadow-md hover:shadow-lg transition-shadow">Reserva tu cita</a>
-    <label for="my-drawer-2" aria-label="open sidebar" class="btn btn-square btn-ghost lg:hidden ml-auto">
-      <Menu size={24} />
-    </label>
-	</nav>
+
+    <nav class="nav" aria-label="Principal">
+      <ul>
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="actions">
+      <a href="/contacto" class="btn small">Pide tu primera cita</a>
+      <button class="burger" popovertarget="mobile-menu" aria-label="Abrir menú">
+        <Icon name="menu" size={26} />
+      </button>
+    </div>
+  </div>
 </header>
+
+<div id="mobile-menu" popover class="mobile-menu" data-menu>
+  <div class="mm-top container">
+    <a href="/" class="brand"><Logo /></a>
+    <button class="burger close" popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Cerrar menú">
+      <Icon name="close" size={26} />
+    </button>
+  </div>
+  <nav class="container mm-nav" aria-label="Menú móvil">
+    <ul>
+      <li style="--i:0"><a href="/">Inicio</a></li>
+      {
+        NAV.map((item, i) => (
+          <li style={`--i:${i + 1}`}>
+            <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <div class="container mm-foot">
+    <a href={CONTACT.whatsapp} class="btn" target="_blank" rel="noopener">
+      <Icon name="whatsapp" /> Escríbeme por WhatsApp
+    </a>
+    <p class="muted">
+      <a href={CONTACT.phoneHref}>{CONTACT.phone}</a><br />
+      <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+    </p>
+  </div>
+  <Shape name="sun" color="var(--butter)" size="18rem" class="mm-sun" />
+  <Shape name="leaf" color="var(--lilac)" size="12rem" class="mm-leaf" />
+</div>
+
+<script>
+  const header = document.querySelector("[data-header]");
+  const onScroll = () => header?.classList.toggle("is-scrolled", window.scrollY > 24);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+  menu?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      try {
+        menu.hidePopover();
+      } catch {}
+    }),
+  );
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition: background-color 0.4s var(--ease), box-shadow 0.4s var(--ease), backdrop-filter 0.4s;
+  }
+  .site-header.is-scrolled {
+    background: color-mix(in oklab, var(--oat) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 1.1rem;
+    transition: padding 0.4s var(--ease);
+  }
+  .is-scrolled .bar {
+    padding-block: 0.7rem;
+  }
+  .brand {
+    text-decoration: none;
+  }
+  .nav ul {
+    display: flex;
+    gap: 0.35rem;
+    list-style: none;
+    padding: 0.35rem;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--paper) 55%, transparent);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .nav a {
+    display: block;
+    padding: 0.55rem 1.05rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .nav a:hover {
+    background: var(--sand);
+  }
+  .nav a[aria-current="page"] {
+    background: var(--ink);
+    color: var(--oat);
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .burger {
+    display: none;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+
+  @media (max-width: 62rem) {
+    .nav {
+      display: none;
+    }
+    .burger {
+      display: grid;
+    }
+  }
+  @media (max-width: 30rem) {
+    .actions .btn {
+      display: none;
+    }
+  }
+
+  /* Menú móvil (popover nativo, sin librerías) */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--blush);
+    color: var(--ink);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease), display 0.4s allow-discrete, overlay 0.4s allow-discrete;
+  }
+  .mobile-menu:popover-open {
+    display: flex;
+    opacity: 1;
+  }
+  @starting-style {
+    .mobile-menu:popover-open {
+      opacity: 0;
+    }
+  }
+  .mm-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1.1rem;
+    position: relative;
+    z-index: 2;
+  }
+  .mm-nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .mm-nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  .mm-nav a {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 11vw, 4rem);
+    font-weight: 350;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .mm-nav a[aria-current="page"] {
+    font-style: italic;
+    color: var(--terracotta-ink);
+  }
+  .mobile-menu:popover-open .mm-nav li {
+    animation: mm-in 0.7s var(--ease) both;
+    animation-delay: calc(var(--i) * 60ms + 80ms);
+  }
+  @keyframes mm-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+  .mm-foot {
+    padding-bottom: 2rem;
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    position: relative;
+    z-index: 2;
+  }
+  .mm-foot a:not(.btn) {
+    text-decoration: none;
+  }
+  .mm-foot p {
+    color: var(--ink);
+  }
+  .mobile-menu :global(.mm-sun) {
+    position: absolute;
+    right: -5rem;
+    top: 18%;
+    opacity: 0.9;
+    animation: spin 60s linear infinite;
+  }
+  .mobile-menu :global(.mm-leaf) {
+    position: absolute;
+    right: 1rem;
+    bottom: 22%;
+    transform: rotate(-30deg);
+  }
+</style>

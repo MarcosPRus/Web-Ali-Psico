@@ -1,60 +1,199 @@
 ---
-import Layout from "../../layouts/MainLayout.astro";
-
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
-import { SITE_DESCRIPTION } from "../../consts";
-import Pagination from "../../components/Pagination.astro";
-import BlogCard from "../../components/card/BlogCard.astro";
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import PostCard from "../../components/PostCard.astro";
+import Media from "../../components/art/Media.astro";
+import Icon from "../../components/Icon.astro";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
-export async function getStaticPaths({ paginate }) {
-  const posts = (await getCollection("blog")).sort(
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection("blog", (p) => !p.data.draft)).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
+  return paginate(posts, { pageSize: 9 });
+}) satisfies GetStaticPaths;
 
-  return paginate(posts, {
-    pageSize: 6,
-  });
-}
-
-const { page } = Astro.props;
-
-const site = Astro.site?.toString() ?? "";
-
-const baseUrl = `${site}blog/`;
+const { page } = Astro.props as { page: Page<CollectionEntry<"blog">> };
+const [featured, ...rest] = page.currentPage === 1 ? page.data : [undefined, ...page.data];
+const categories = [...new Set(page.data.map((p) => p.data.category))];
+const fmt = (d: Date) => d.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
 ---
 
-<Layout title="Blog" description={SITE_DESCRIPTION}>
-  <div class="container py-5 lg:py-15">
-	 <!-- Breadcrumbs -->
-      <div class="breadcrumbs text-sm mb-6">
-        <ul class="flex! flex-wrap">
-          <li><a href="/">Home</a></li>
-          <li>Blog</li>
-        </ul>
+<Base
+  title="Blog"
+  description="Artículos sobre relación con la comida, imagen corporal, cultura de dieta y bienestar emocional, escritos por la psicóloga Alicia Lozano."
+>
+  <PageHero eyebrow="Blog" tone="butter" crumbs={[{ label: "Blog" }]} compact>
+    Lecturas para <em>mirarte con más calma</em>
+    <Fragment slot="lead">
+      Reflexiones, herramientas y un poco de mirada crítica sobre la comida, el cuerpo y todo lo que nos cuentan de ellos.
+    </Fragment>
+  </PageHero>
+
+  <section class="section" style="padding-top:0">
+    <div class="container wide">
+      {
+        featured && (
+          <article class="featured" data-reveal>
+            <Media scene={featured.data.scene} src={featured.data.heroImage} ratio="4 / 3" class="f-img" />
+            <div class="f-copy">
+              <p class="eyebrow">Último artículo · {featured.data.category}</p>
+              <h2>
+                <a href={`/blog/${featured.id}`}>{featured.data.title}</a>
+              </h2>
+              <p class="lead">{featured.data.description}</p>
+              <p class="meta">
+                <time datetime={featured.data.pubDate.toISOString()}>{fmt(featured.data.pubDate)}</time>
+              </p>
+              <span class="btn ghost" aria-hidden="true">
+                Leer artículo <Icon name="arrow" class="arrow" />
+              </span>
+            </div>
+          </article>
+        )
+      }
+
+      <div class="filters" role="group" aria-label="Filtrar por tema" data-filters>
+        <button type="button" aria-pressed="true" data-cat="*">Todos</button>
+        {categories.map((c) => <button type="button" aria-pressed="false" data-cat={c}>{c}</button>)}
       </div>
 
-	  <h1>BLOG</h1>
-
-    <section>
-      <ul
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 items-stretch"
-      >
+      <div class="grid" data-grid>
         {
-          page.data.map((post) => (
-            <li>
-              <BlogCard {...post} />
-            </li>
-          ))
+          rest.map((p, i) =>
+            p ? (
+              <div data-cat={p.data.category}>
+                <PostCard post={p} index={i} />
+              </div>
+            ) : null,
+          )
         }
-      </ul>
+      </div>
 
-      {page.lastPage != 1 && <Pagination page={page} />}
-    </section>
-  </div>
-</Layout>
+      {
+        page.lastPage > 1 && (
+          <nav class="pager" aria-label="Paginación">
+            {page.url.prev ? <a class="btn ghost" href={page.url.prev}>← Más recientes</a> : <span />}
+            <span class="muted">
+              Página {page.currentPage} de {page.lastPage}
+            </span>
+            {page.url.next ? <a class="btn ghost" href={page.url.next}>Anteriores →</a> : <span />}
+          </nav>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<script>
+  const wrap = document.querySelector<HTMLElement>("[data-filters]");
+  const items = document.querySelectorAll<HTMLElement>("[data-grid] > [data-cat]");
+  wrap?.querySelectorAll<HTMLButtonElement>("button").forEach((b) =>
+    b.addEventListener("click", () => {
+      const cat = b.dataset.cat;
+      wrap.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      items.forEach((it) => (it.hidden = cat !== "*" && it.dataset.cat !== cat));
+      // la primera vez, featured incluido: mostramos también los artículos ya revelados
+      items.forEach((it) => it.querySelector("[data-reveal]")?.classList.add("is-in"));
+    }),
+  );
+</script>
+
+<style>
+  .featured {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    padding: clamp(0.75rem, 1.5vw, 1.25rem);
+    padding-right: clamp(1.5rem, 4vw, 4rem);
+    border-radius: calc(var(--radius-lg) * 1.3);
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--line);
+    transition: box-shadow 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .featured:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+  }
+  .featured :global(.f-img) {
+    border-radius: var(--radius-lg);
+  }
+  .f-copy {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
+    padding-block: 1.5rem;
+  }
+  .f-copy h2 {
+    font-size: var(--step-3);
+  }
+  .f-copy h2 a {
+    text-decoration: none;
+  }
+  .f-copy h2 a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .meta {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: clamp(3rem, 6vw, 5rem) 0 2rem;
+  }
+  .filters button {
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--line);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .filters button:hover {
+    background: var(--sand);
+  }
+  .filters button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--oat);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .grid > [hidden] {
+    display: none;
+  }
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  @media (max-width: 60rem) {
+    .featured {
+      grid-template-columns: 1fr;
+      padding-right: clamp(0.75rem, 1.5vw, 1.25rem);
+    }
+    .f-copy {
+      padding: 0.5rem 1rem 1.5rem;
+    }
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 40rem) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

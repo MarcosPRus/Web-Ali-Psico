@@ -1,0 +1,32 @@
+---
+interface Props {
+  eyebrow?: string;
+  align?: "left" | "center";
+  class?: string;
+  as?: "h1" | "h2";
+}
+const { eyebrow, align = "left", class: className, as: Tag = "h2" } = Astro.props;
+---
+
+<div class:list={["section-head", `align-${align}`, className]} data-reveal>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <Tag><slot /></Tag>
+  {Astro.slots.has("lead") && <p class="lead"><slot name="lead" /></p>}
+</div>
+
+<style>
+  .section-head {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 44rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .align-center {
+    margin-inline: auto;
+    text-align: center;
+    justify-items: center;
+  }
+  .align-center .lead {
+    margin-inline: auto;
+  }
+</style>

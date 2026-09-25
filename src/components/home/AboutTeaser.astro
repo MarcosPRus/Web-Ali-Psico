@@ -1,0 +1,140 @@
+---
+import Media from "../art/Media.astro";
+import Shape from "../art/Shape.astro";
+import Icon from "../Icon.astro";
+---
+
+<section class="section about" aria-labelledby="about-title">
+  <div class="container wide grid">
+    <div class="collage" data-reveal>
+      <Media scene="jardin" shape="rounded" ratio="3 / 4" class="big" alt="Ilustración provisional (aquí irá una foto de Alicia en consulta)" />
+      <Media scene="taza" shape="circle" ratio="1 / 1" class="small" />
+      <Shape name="squiggle" color="var(--terracotta)" size="7rem" class="squiggle" />
+    </div>
+
+    <div class="copy">
+      <p class="eyebrow" data-reveal>Sobre mí</p>
+      <h2 id="about-title" class="hello" data-reveal style="--d:1">Soy Alicia<span class="comma">,</span></h2>
+      <p class="lead" data-reveal style="--d:2">
+        y llevo años acompañando a personas que sienten que la comida o su cuerpo ocupan demasiado espacio en su vida.
+      </p>
+      <p data-reveal style="--d:3">
+        Me formé como psicóloga sanitaria y me especialicé en trastornos de la conducta alimentaria porque vi de cerca
+        cuánto sufrimiento hay detrás de algo tan cotidiano como sentarse a comer. Hoy trabajo desde un lugar cálido,
+        cercano y basado en la evidencia, con una mirada feminista y libre de dietas.
+      </p>
+      <ul class="creds" data-reveal style="--d:4">
+        <li><Icon name="check" size={18} /> Psicóloga General Sanitaria colegiada</li>
+        <li><Icon name="check" size={18} /> Máster en Trastornos de la Conducta Alimentaria</li>
+        <li><Icon name="check" size={18} /> Formación en psiconutrición, ACT y DBT</li>
+      </ul>
+      <div class="sign" data-reveal style="--d:5">
+        <span class="signature">Alicia</span>
+        <a href="/sobre-mi" class="link">Mi historia completa <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(3rem, 7vw, 7rem);
+    align-items: center;
+  }
+  .collage {
+    position: relative;
+    padding-right: 18%;
+    padding-bottom: 10%;
+  }
+  .collage :global(.big) {
+    box-shadow: var(--shadow);
+    rotate: -2deg;
+  }
+  .collage :global(.small) {
+    position: absolute;
+    width: 42%;
+    right: 0;
+    bottom: 0;
+    border: 8px solid var(--oat);
+    box-shadow: var(--shadow);
+  }
+  .collage :global(.squiggle) {
+    position: absolute;
+    left: -2rem;
+    bottom: 4%;
+  }
+  .copy {
+    display: grid;
+    gap: 1.4rem;
+    justify-items: start;
+  }
+  .hello {
+    font-size: clamp(3.4rem, 2rem + 6vw, 7.5rem);
+    font-weight: 320;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+  .comma {
+    color: var(--terracotta);
+    font-style: italic;
+  }
+  .lead {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 330;
+    color: var(--ink);
+    font-size: var(--step-2);
+    line-height: 1.3;
+    max-width: 26ch;
+  }
+  .copy > p:not(.lead):not(.eyebrow) {
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+  .creds {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+  .creds li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    font-weight: 500;
+  }
+  .creds :global(.icon) {
+    color: var(--oat);
+    background: var(--sage-ink);
+    border-radius: 50%;
+    padding: 3px;
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .sign {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    margin-top: 0.5rem;
+  }
+  .signature {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--terracotta-ink);
+    rotate: -4deg;
+  }
+  @media (max-width: 56rem) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .collage {
+      max-width: 28rem;
+    }
+  }
+</style>

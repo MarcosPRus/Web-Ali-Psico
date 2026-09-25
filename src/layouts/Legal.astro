@@ -1,0 +1,36 @@
+---
+import Base from "./Base.astro";
+import PageHero from "../components/PageHero.astro";
+interface Props {
+  title: string;
+  updated?: string;
+}
+const { title, updated = "septiembre de 2026" } = Astro.props;
+---
+
+<Base title={title} description={`${title} de alicialozanopsicologia.com`}>
+  <PageHero eyebrow="Información legal" tone="sage" crumbs={[{ label: title }]} compact>
+    {title}
+    <Fragment slot="lead">Última actualización: {updated}.</Fragment>
+  </PageHero>
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <p class="draft">
+        ⚠️ Texto provisional de ejemplo. Debe revisarse y completarse con los datos reales antes de publicar la web.
+      </p>
+      <div class="prose">
+        <slot />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .draft {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    background: #f6e2ac;
+    font-size: 0.92rem;
+    margin-bottom: 2.5rem;
+  }
+</style>

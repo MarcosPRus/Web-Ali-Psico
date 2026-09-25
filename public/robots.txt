@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alicialozanopsicologia.com/sitemap-index.xml

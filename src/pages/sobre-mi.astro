@@ -1,0 +1,369 @@
+---
+import Base from "../layouts/Base.astro";
+import Media from "../components/art/Media.astro";
+import Shape from "../components/art/Shape.astro";
+import SectionHead from "../components/SectionHead.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+
+// PROVISIONAL: sustituir por la formación real de Alicia
+const timeline = [
+  { year: "2014", title: "Grado en Psicología", place: "Universidad de Sevilla" },
+  { year: "2016", title: "Máster en Psicología General Sanitaria", place: "Habilitación sanitaria" },
+  { year: "2017", title: "Máster en Trastornos de la Conducta Alimentaria y Obesidad", place: "Formación especializada" },
+  { year: "2019", title: "Formación en Terapia de Aceptación y Compromiso (ACT)", place: "Terapias contextuales" },
+  { year: "2021", title: "Experta en Psiconutrición y alimentación consciente", place: "Trabajo interdisciplinar" },
+  { year: "Hoy", title: "Formación continua y supervisión clínica", place: "Porque cada persona me enseña algo nuevo" },
+];
+
+// PROVISIONAL: detalles personales para humanizar la página
+const facts = [
+  { t: "Desayuno sin prisa siempre que puedo. Es mi momento sagrado del día.", s: "sun", c: "var(--butter)" },
+  { t: "Tengo más plantas de las que sé cuidar (y alguna ha sobrevivido).", s: "sprig", c: "var(--sage-ink)" },
+  { t: "Leo novelas antes de dormir y subrayo frases que luego acaban en consulta.", s: "leaf", c: "var(--lilac-2)" },
+  { t: "Creo que comer con quienes quieres es una de las mejores cosas de la vida.", s: "flower", c: "var(--rose)" },
+  { t: "Sevillana de corazón: el olor a azahar en marzo me cura cualquier cosa.", s: "star", c: "var(--terracotta)" },
+  { t: "Voy a terapia. Creo que quien acompaña también necesita ser acompañada.", s: "blob", c: "var(--blush)" },
+] as const;
+---
+
+<Base
+  title="Sobre mí"
+  description="Soy Alicia Lozano, psicóloga sanitaria especializada en TCA, imagen corporal y psiconutrición. Conoce mi historia, mi formación y cómo trabajo."
+>
+  <section class="intro">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="container wide">
+      <nav aria-label="Migas de pan" class="crumbs" data-reveal><a href="/">Inicio</a> <span>/</span> <span aria-current="page">Sobre mí</span></nav>
+      <h1 class="hello" data-reveal style="--d:1">Soy Alicia<span class="comma">,</span></h1>
+      <div class="intro-grid">
+        <p class="big" data-reveal style="--d:2">
+          psicóloga sanitaria, especializada en trastornos de la conducta alimentaria e imagen corporal. Y, antes que
+          nada, <em>una persona que cree que todas merecemos una relación tranquila con la comida y con nuestro cuerpo.</em>
+        </p>
+        <div class="intro-side" data-reveal style="--d:3">
+          <p>
+            Acompaño a adolescentes y personas adultas en Tomares, Dos Hermanas, Mairena del Aljarafe y online. Mi
+            trabajo combina rigor científico, perspectiva de género y mucha, mucha escucha.
+          </p>
+          <a href="/contacto" class="btn">Pide tu primera cita <Icon name="arrow" class="arrow" /></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="strip" aria-label="Galería provisional">
+      <Media scene="retrato" ratio="3 / 4" class="s1" alt="Ilustración provisional: retrato de Alicia" loading="eager" />
+      <Media scene="mesa" ratio="3 / 4" class="s2" loading="eager" />
+      <Media scene="jardin" ratio="3 / 4" class="s3" loading="eager" />
+      <Media scene="ventana" ratio="3 / 4" class="s4" loading="eager" />
+      <Media scene="taza" ratio="3 / 4" class="s5" loading="eager" />
+    </div>
+  </section>
+
+  <section class="section story">
+    <div class="container wide story-grid">
+      <div class="story-aside">
+        <p class="eyebrow" data-reveal>Mi historia</p>
+        <h2 data-reveal style="--d:1">Por qué hago <em>lo que hago</em></h2>
+        <Shape name="squiggle" color="var(--terracotta)" size="6rem" class="squiggle" />
+      </div>
+      <div class="prose" data-reveal style="--d:1">
+        <p>
+          Siempre he sentido curiosidad por entender el <em>porqué</em> de las cosas. Por qué pensamos lo que pensamos,
+          por qué sentimos lo que sentimos y por qué, a veces, hacemos cosas que nos hacen daño aunque sepamos que no
+          nos convienen.
+        </p>
+        <p>
+          Durante la carrera empecé a darme cuenta de algo que me removió: muchas de las mujeres que conocía (amigas,
+          compañeras, familiares) vivían en guerra con la comida y con su cuerpo. Dietas eternas, culpa después de
+          comer, fotos borradas, planes cancelados. Y casi siempre se vivía en silencio, como algo normal.
+        </p>
+        <blockquote>No es normal sufrir para comer. Es frecuente, que es muy distinto.</blockquote>
+        <p>
+          Por eso decidí especializarme en <strong>trastornos de la conducta alimentaria</strong>, imagen corporal y
+          psiconutrición. Desde entonces he acompañado a muchas personas en su proceso, y cada una me ha confirmado
+          lo mismo: <strong>la recuperación es posible</strong>, y se construye desde la comprensión, no desde el
+          castigo.
+        </p>
+        <p>
+          Hoy trabajo desde un enfoque integrador basado en la evidencia (terapia cognitivo-conductual, ACT, DBT y
+          terapia centrada en la compasión) y siempre con una mirada crítica hacia la cultura de la dieta y los ideales
+          de belleza que tanto nos pesan.
+        </p>
+        <p>
+          Mi consulta quiere ser eso: un lugar tranquilo donde puedas soltar, entenderte y empezar a vivir con más
+          espacio para todo lo demás.
+        </p>
+        <p class="signature">Alicia</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section training on-dark">
+    <div class="container wide train-grid">
+      <div>
+        <p class="eyebrow" data-reveal>Formación</p>
+        <h2 data-reveal style="--d:1">Aprender <em>nunca se acaba</em></h2>
+        <p class="lead" data-reveal style="--d:2">
+          Psicóloga General Sanitaria colegiada en el Colegio Oficial de Psicología de Andalucía Occidental.
+        </p>
+      </div>
+      <ol class="timeline">
+        {
+          timeline.map((t, i) => (
+            <li data-reveal style={`--d:${i % 3}`}>
+              <span class="year">{t.year}</span>
+              <div>
+                <h3>{t.title}</h3>
+                <p>{t.place}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section facts">
+    <div class="container wide">
+      <SectionHead eyebrow="Fuera de consulta" align="center">
+        Y si todavía quieres <em>saber más de mí</em>…
+      </SectionHead>
+      <ul class="facts-grid">
+        {
+          facts.map((f, i) => (
+            <li data-reveal style={`--d:${i % 3};--rot:${[-1.5, 1, -0.5, 1.5, -1, 0.8][i]}deg`}>
+              <Shape name={f.s} color={f.c} size="3.2rem" />
+              <p>{f.t}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand title="¿Empezamos a conocernos?" />
+</Base>
+
+<style>
+  .intro {
+    position: relative;
+    margin-top: calc(-1 * var(--header-h));
+    padding-top: calc(var(--header-h) + clamp(2rem, 4vw, 3.5rem));
+    overflow: clip;
+  }
+  .intro .bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(50% 60% at 90% 10%, var(--blush), transparent 70%),
+      radial-gradient(40% 50% at 5% 30%, color-mix(in oklab, var(--lilac) 60%, transparent), transparent 70%);
+    z-index: -1;
+  }
+  .crumbs {
+    display: flex;
+    gap: 0.5rem;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+  .crumbs a {
+    text-decoration: none;
+  }
+  .hello {
+    font-size: clamp(4.2rem, 1rem + 13vw, 13rem);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+  }
+  .comma {
+    color: var(--terracotta);
+    font-style: italic;
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 2rem clamp(2rem, 6vw, 6rem);
+    align-items: end;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .big {
+    font-family: var(--serif);
+    font-size: var(--step-2);
+    font-weight: 330;
+    line-height: 1.35;
+    max-width: 34ch;
+  }
+  .big em {
+    color: var(--lilac-ink);
+  }
+  .intro-side {
+    display: grid;
+    gap: 1.4rem;
+    justify-items: start;
+    color: var(--ink-2);
+  }
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(0.5rem, 1.2vw, 1rem);
+    padding: clamp(3rem, 6vw, 5rem) clamp(0.5rem, 1.2vw, 1rem) 0;
+    align-items: end;
+  }
+  .strip :global(.frame) {
+    border-radius: var(--radius-lg);
+  }
+  .strip :global(.s1) {
+    border-radius: var(--arch);
+  }
+  .strip :global(.s2) {
+    translate: 0 -2rem;
+  }
+  .strip :global(.s3) {
+    border-radius: 50% 50% var(--radius-lg) var(--radius-lg) / 30% 30% var(--radius-lg) var(--radius-lg);
+  }
+  .strip :global(.s4) {
+    translate: 0 -3rem;
+  }
+  .strip :global(.s5) {
+    translate: 0 -1rem;
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .story-aside {
+    position: sticky;
+    top: 7rem;
+    display: grid;
+    gap: 1rem;
+  }
+  .story-aside :global(.squiggle) {
+    margin-top: 1rem;
+  }
+  .story .prose {
+    max-width: 38rem;
+  }
+  .story .prose > p:first-child::first-letter {
+    float: left;
+    font-family: var(--serif);
+    font-size: 4.6em;
+    line-height: 0.8;
+    padding: 0.08em 0.12em 0 0;
+    color: var(--terracotta);
+  }
+  .signature {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 3.2rem;
+    color: var(--terracotta-ink);
+    rotate: -4deg;
+    display: inline-block;
+  }
+
+  .training {
+    border-radius: calc(var(--radius-lg) * 1.5);
+    margin-inline: clamp(0.5rem, 1.5vw, 1.5rem);
+  }
+  .train-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: clamp(2rem, 6vw, 6rem);
+  }
+  .train-grid h2 {
+    margin-block: 1rem 1.25rem;
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    display: grid;
+  }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid color-mix(in oklab, var(--oat) 18%, transparent);
+  }
+  .timeline li:last-child {
+    border-bottom: 1px solid color-mix(in oklab, var(--oat) 18%, transparent);
+  }
+  .year {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: var(--step-2);
+    color: var(--blush);
+    line-height: 1.1;
+  }
+  .timeline h3 {
+    font-size: var(--step-1);
+  }
+  .timeline p {
+    color: color-mix(in oklab, var(--oat) 70%, transparent);
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+  }
+
+  .facts-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .facts-grid li {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.75rem;
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--line);
+    rotate: var(--rot);
+    transition: rotate 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.6s;
+  }
+  .facts-grid li:hover {
+    rotate: 0deg;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .facts-grid p {
+    font-family: var(--serif);
+    font-size: var(--step-1);
+    font-weight: 350;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 56rem) {
+    .intro-grid,
+    .story-grid,
+    .train-grid {
+      grid-template-columns: 1fr;
+    }
+    .story-aside {
+      position: static;
+    }
+    .strip {
+      grid-template-columns: repeat(5, 42vw);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+    }
+    .strip > :global(*) {
+      scroll-snap-align: center;
+      translate: none !important;
+    }
+    .facts-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 36rem) {
+    .facts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

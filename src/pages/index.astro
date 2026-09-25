@@ -1,16 +1,197 @@
 ---
-import Layout from "../layouts/MainLayout.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/home/Hero.astro";
+import Marquee from "../components/home/Marquee.astro";
+import Resonates from "../components/home/Resonates.astro";
+import AboutTeaser from "../components/home/AboutTeaser.astro";
+import Approach from "../components/home/Approach.astro";
+import SectionHead from "../components/SectionHead.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import PostCard from "../components/PostCard.astro";
+import Steps from "../components/Steps.astro";
+import Locations from "../components/Locations.astro";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+import Shape from "../components/art/Shape.astro";
+import { CONTACT } from "../consts";
 
-import Hero from "../components/homepage/Hero.astro";
-import Services from "../components/homepage/Services.astro";
-import Story from "../components/homepage/Story.astro";
-import Testimonials from "../components/homepage/Testimonials.astro";
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection("blog", (p) => !p.data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const faqs = [
+  {
+    q: "¿Cuánto dura cada sesión y con qué frecuencia nos vemos?",
+    a: "Las sesiones duran 50 minutos (la primera, 60). Al principio solemos vernos cada semana y, a medida que avanzas, espaciamos las sesiones. Lo decidimos juntas.",
+  },
+  {
+    q: "¿La terapia online funciona igual que la presencial?",
+    a: "Sí. La evidencia muestra que la terapia online es eficaz para muchos problemas, también para los TCA. Puedes incluso combinar ambas modalidades.",
+  },
+  {
+    q: "¿Tengo que tener un diagnóstico para pedir cita?",
+    a: "No. Si la comida o tu cuerpo te están quitando paz, ya es motivo suficiente. En la primera sesión valoramos juntas qué está pasando.",
+  },
+  {
+    q: "¿Trabajas con dietistas-nutricionistas?",
+    a: "Sí. Cuando es necesario me coordino con dietistas-nutricionistas con enfoque no pesocentrista y con otros profesionales sanitarios.",
+  },
+  {
+    q: "¿Atiendes a adolescentes?",
+    a: "Sí, a partir de 14 años. Con menores siempre implicamos a la familia, que tiene un papel muy importante en la recuperación.",
+  },
+  {
+    q: "¿Qué pasa con la confidencialidad?",
+    a: "Todo lo que compartas en consulta es confidencial, según el Código Deontológico y la normativa de protección de datos. Tus datos se guardan de forma segura.",
+  },
+];
 ---
 
-<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<Hero />
-	<Story />	
-	<Services />
-	<Testimonials />
-</Layout>
+<Base>
+  <Hero />
+  <Marquee />
+  <Resonates />
+  <AboutTeaser />
+
+  <section class="section services" id="servicios" aria-labelledby="serv-title">
+    <div class="container wide">
+      <div class="head-row">
+        <SectionHead eyebrow="Cómo te puedo ayudar">
+          <span id="serv-title">Para que la comida vuelva a ser <em>solo comida</em></span>
+        </SectionHead>
+        <a href="/servicios" class="btn ghost" data-reveal>Ver todo <Icon name="arrow" class="arrow" /></a>
+      </div>
+      <div class="cards">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <Approach />
+
+  <section class="section" aria-labelledby="steps-title">
+    <div class="container">
+      <SectionHead eyebrow="Cómo empezamos" align="center">
+        <span id="steps-title">Pedir ayuda es <em>más sencillo</em> de lo que parece</span>
+      </SectionHead>
+      <Steps />
+      <p class="steps-cta" data-reveal>
+        <a href={CONTACT.whatsapp} class="btn" target="_blank" rel="noopener"><Icon name="whatsapp" /> Escríbeme ahora</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section places" aria-labelledby="loc-title">
+    <Shape name="leaf" color="var(--sage)" size="14rem" class="p-leaf" />
+    <div class="container wide">
+      <SectionHead eyebrow="Dónde encontrarme">
+        <span id="loc-title">Tres consultas en Sevilla <em>y una en tu casa</em></span>
+        <Fragment slot="lead">Elige la que te quede más cerca o hazlo online, con el mismo precio y el mismo cuidado.</Fragment>
+      </SectionHead>
+      <Locations />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="blog-title">
+    <div class="container wide">
+      <div class="head-row">
+        <SectionHead eyebrow="Del blog">
+          <span id="blog-title">Lecturas para <em>mirarte con más calma</em></span>
+        </SectionHead>
+        <a href="/blog" class="btn ghost" data-reveal>Todos los artículos <Icon name="arrow" class="arrow" /></a>
+      </div>
+      <div class="posts">
+        {posts.map((p, i) => <PostCard post={p} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-sec" aria-labelledby="faq-title">
+    <div class="container wide faq-grid">
+      <div class="faq-aside">
+        <SectionHead eyebrow="Preguntas frecuentes">
+          <span id="faq-title">Lo que quizá <em>te estás preguntando</em></span>
+        </SectionHead>
+        <p class="muted" data-reveal>
+          ¿No encuentras tu duda? Escríbeme a <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> o por&nbsp;<a href={CONTACT.whatsapp} target="_blank" rel="noopener">WhatsApp</a>.
+        </p>
+      </div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+  }
+  .head-row .btn {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+  .steps-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+  .places {
+    background: var(--sand);
+    overflow: hidden;
+  }
+  .places :global(.p-leaf) {
+    position: absolute;
+    right: -3rem;
+    top: 3rem;
+    rotate: -30deg;
+    opacity: 0.6;
+  }
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .faq-aside {
+    position: sticky;
+    top: 7rem;
+  }
+  .faq-aside a {
+    color: var(--terracotta-ink);
+  }
+  @media (max-width: 60rem) {
+    .cards,
+    .posts {
+      grid-template-columns: 1fr 1fr;
+    }
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+    .faq-aside {
+      position: static;
+    }
+  }
+  @media (max-width: 40rem) {
+    .cards,
+    .posts {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
