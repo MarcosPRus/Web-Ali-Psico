@@ -1,103 +1,80 @@
-> ⭐️ Love this theme? Star it to support my work!
+# Alicia Lozano · Psicología
 
-# HealNet: Cleaning services website landing page
+Web de [alicialozanopsicologia.com](https://alicialozanopsicologia.com), hecha con **Astro** y publicada como web estática en **Cloudflare Pages** (plan gratuito).
 
-A modern, responsive landing page template for digital healthcare platforms. Built with Astro and Tailwind CSS, HealNet helps telemedicine providers, clinics, and healthcare startups showcase their services, doctors, patient testimonials, and online appointment booking with a fast, professional, and conversion-focused design.
+> Todo el contenido que ves (textos, formación, precios, ilustraciones) es **provisional**. Aquí abajo explicamos cómo cambiarlo.
 
-> ⚡ Built with Astro 7, Tailwind CSS 4 & DaisyUI, and Markdown — optimized for performance, SEO, and simplicity.
+## Puesta en marcha
 
-![Template Preview](https://github.com/anastasiiaxfr/HealNet/blob/main/public/SEO/og_1200x630.jpg)
-
-## Demo
-
-- ✨ [Live Demo](https://heal-net-self.vercel.app/)
-- 💨 [PageSpeed Insights Report](https://pagespeed.web.dev/analysis/https-heal-net-self-vercel-app/mc2q4y4luz?form_factor=mobile)
-- [Sitemap.xml](https://heal-net-self.vercel.app/sitemap-index.xml)
-- [Robots.txt](https://heal-net-self.vercel.app/robots.txt)
-- [Schema.org validator](https://search.google.com/test/rich-results/result?id=yGkAk4Ei8qxi6qzOT8nTgA)
-- [RSS](https://heal-net-self.vercel.app/rss.xml)
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 99+/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and meta tags, Open Graph data, JSON-LD schema and PWA
-- ✅ Sitemap, robots.txt support
-- ✅ Markdown & MDX support
-- ✅ Fully responsive and accessible
-- ✅ Easily deploy to Vercel, Netlify, or Cloudflare Pages
-
-Pages:
-
-- home
-- contacts
-- service
-- service detail
-- doctors
-- doctors detail
-- blog
-- blog detail
-- 404 / 500
-
-## PWA support
-
-![pwa](https://github.com/anastasiiaxfr/HealNet/blob/main/public/SEO/3.png)
-
-## Google pages speed
-
-![desktop](https://github.com/anastasiiaxfr/HealNet/blob/main/public/SEO/2.png)
-![mobile](https://github.com/anastasiiaxfr/HealNet/blob/main/public/SEO/1.png)
-
-## Open Graph Card
-
-![Facebook](https://github.com/anastasiiaxfr/HealNet/blob/main/public/SEO/5.png)
-![Telegram](https://github.com/anastasiiaxfr/HealNet/blob/main/public/SEO/4.png)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # genera /dist (lo que publica Cloudflare)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Cloudflare Pages: *Build command* `npm run build`, *Output directory* `dist`, variable `NODE_VERSION=22`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Dónde se cambia cada cosa
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+| Qué | Dónde |
+| --- | --- |
+| Teléfono, email, WhatsApp, Instagram, nº de colegiada | `src/consts.ts` → `CONTACT` |
+| Consultas (direcciones, notas, posición en el mapa) | `src/consts.ts` → `LOCATIONS` |
+| Tarifas | `src/consts.ts` → `PRICES` |
+| Menú | `src/consts.ts` → `NAV` |
+| Servicios (textos, “¿es para ti?”, pasos, FAQ) | `src/content/services/*.md` |
+| Artículos del blog | `src/content/blog/*.md` |
+| Página “Sobre mí” (historia, formación, curiosidades) | `src/pages/sobre-mi.astro` |
+| Portada | `src/pages/index.astro` y `src/components/home/*` |
+| Textos legales | `src/pages/aviso-legal.astro`, `privacidad.astro`, `cookies.astro` |
+| Colores y tipografías | `src/styles/global.css` (variables al principio) |
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Escribir un artículo nuevo
 
-## 🧞 Commands
+Crea `src/content/blog/mi-articulo.md`:
 
-All commands are run from the root of the project, from a terminal:
+```md
+---
+title: "Título del artículo"
+description: "Resumen de una o dos frases (sale en Google y en las tarjetas)."
+pubDate: "2026-10-01"
+category: "Imagen corporal"
+scene: "espejo"               # ilustración provisional (ver lista abajo)
+# heroImage: "/img/blog/mi-foto.jpg"   # foto real, si la hay
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Texto en Markdown…
+```
 
-## 👀 Want to learn more?
+## Cambiar las ilustraciones por fotos reales
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Las imágenes son ilustraciones SVG “recortadas” hechas a medida (`src/components/art/Art.astro`). Pesan casi nada y sirven de marcador de posición. Para poner una foto:
 
-## 🛠 Credits
+1. Guarda la foto en `public/img/` (mejor en `.webp` o `.jpg`, unos 1200 px de ancho).
+2. Donde aparezca `<Media scene="retrato" … />`, añade `src`:
 
-Made with ❤️ by [anastasiiaxfr](https://github.com/anastasiiaxfr/HealNet)
+   ```astro
+   <Media src="/img/alicia-retrato.jpg" alt="Alicia sonriendo en su consulta" shape="arch" />
+   ```
 
-HealNet is inspired by the free [HealNet Theme](https://www.figma.com/community/file/1368740058751542843)
+3. En servicios y blog basta con añadir `heroImage: "/img/…"` al principio del `.md`.
+
+Escenas disponibles: `retrato`, `mesa`, `espejo`, `sol`, `jardin`, `abrazo`, `pantalla`, `jarrones`, `taza`, `ventana`.
+
+## Formulario de contacto
+
+Como la web es estática, el formulario necesita un servicio externo. Recomendado (gratis): **[Web3Forms](https://web3forms.com)**.
+
+1. Pide una *access key* con el email de Alicia.
+2. Pégala en `src/consts.ts` → `FORM_ACCESS_KEY`.
+
+Mientras esté vacía, el formulario abre la aplicación de correo de la persona con el mensaje ya redactado.
+
+## Detalles técnicos
+
+- Sin frameworks de JavaScript: solo unos pocos scripts pequeños (menú, mapa de consultas, frases interactivas, filtro del blog).
+- Tipografías *Fraunces* y *Figtree* alojadas en la propia web, recortadas a los caracteres del español para que carguen rápido.
+- Sin cookies ni rastreadores, así que no hace falta banner de cookies.
+- SEO: sitemap, RSS, Open Graph (`public/og.jpg`) y datos estructurados `Psychologist` para Google.
+- `public/_redirects` redirige las rutas antiguas (`/services/…`) a `/servicios/…`.
+- Accesibilidad: contraste AA, navegación con teclado, “saltar al contenido” y respeto de “reducir movimiento”.
