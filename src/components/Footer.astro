@@ -52,14 +52,6 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <p class="crisis">
-      <Icon name="phone" size={18} />
-      <span>
-        Esta web no es un servicio de urgencias. Si estás pasando por un momento de crisis, llama al <a href="tel:024"
-          >024</a
-        > (atención a la conducta suicida, gratuito y 24 h) o al <a href="tel:112">112</a>.
-      </span>
-    </p>
 
     <div class="bottom">
       <p>© {year} Alicia Lozano · {CONTACT.license}</p>
@@ -171,21 +163,6 @@ const year = new Date().getFullYear();
     display: flex !important;
     flex-wrap: wrap;
     gap: 0.4rem 1.2rem;
-  }
-  .crisis {
-    margin-top: clamp(3rem, 6vw, 5rem);
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-    padding: 1rem 1.25rem;
-    border-radius: var(--radius);
-    background: color-mix(in oklab, var(--oat) 8%, transparent);
-    font-size: 0.92rem;
-    color: color-mix(in oklab, var(--oat) 85%, transparent);
-  }
-  .crisis :global(.icon) {
-    margin-top: 0.2rem;
-    color: var(--blush);
   }
   .bottom {
     display: flex;

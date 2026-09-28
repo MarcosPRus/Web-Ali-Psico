@@ -8,7 +8,7 @@ import Steps from "../../components/Steps.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
 import Shape from "../../components/art/Shape.astro";
-import { PRICES, LOCATIONS } from "../../consts";
+import { PRICE, LOCATIONS } from "../../consts";
 
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -32,40 +32,42 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
   </section>
 
   <section class="section formats">
-    <div class="container wide">
-      <SectionHead eyebrow="Modalidades y tarifas">
-        Presencial u online, <em>tú eliges</em>
-        <Fragment slot="lead">Las sesiones tienen el mismo precio en cualquier modalidad. Emito factura de todas ellas.</Fragment>
-      </SectionHead>
-
-      <div class="prices">
-        {
-          PRICES.map((p, i) => (
-            <article class:list={["price", i === 1 && "hl"]} data-reveal style={`--d:${i}`}>
-              {i === 1 && <Shape name="sun" color="var(--butter)" size="5rem" class="badge" />}
-              <h3>{p.name}</h3>
-              <p class="amount">{p.price}</p>
-              <p class="time"><Icon name="clock" size={16} /> {p.time}</p>
-              <p class="detail">{p.detail}</p>
-            </article>
-          ))
-        }
+    <div class="container wide formats-grid">
+      <div class="formats-copy">
+        <SectionHead eyebrow="Modalidades y tarifas">
+          Presencial u online, <em>tú eliges</em>
+          <Fragment slot="lead">
+            Una sola tarifa, sin letra pequeña: todas las sesiones cuestan lo mismo, estés donde estés.
+          </Fragment>
+        </SectionHead>
+        <ul class="places" data-reveal>
+          {
+            LOCATIONS.map((l) => (
+              <li>
+                <Icon name={l.id === "online" ? "video" : "pin"} size={18} />
+                <strong>{l.name}</strong>
+                <span>{l.id === "online" ? "Videollamada" : l.lines[0]}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="fine muted" data-reveal>
+          Cancelaciones: te pido avisar con al menos 24&nbsp;h de antelación para poder ofrecer el hueco a otra persona.
+        </p>
       </div>
 
-      <ul class="places" data-reveal>
-        {
-          LOCATIONS.map((l) => (
-            <li>
-              <Icon name={l.id === "online" ? "video" : "pin"} size={18} />
-              <strong>{l.name}</strong>
-              <span>{l.id === "online" ? "Videollamada" : l.lines[0]}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="fine muted" data-reveal>
-        Cancelaciones: te pido avisar con al menos 24&nbsp;h de antelación para poder ofrecer el hueco a otra persona.
-      </p>
+      <article class="price" data-reveal style="--d:1" aria-label="Tarifa">
+        <Shape name="sun" color="var(--butter)" size="6.5rem" class="badge" />
+        <p class="kicker">Sesión individual</p>
+        <p class="amount">{PRICE.amount}</p>
+        <p class="time"><Icon name="clock" size={18} /> {PRICE.durationShort} de sesión</p>
+        <ul class="incl">
+          <li><Icon name="check" size={18} /> La primera sesión, también</li>
+          <li><Icon name="check" size={18} /> Mismo precio presencial u online</li>
+          <li><Icon name="check" size={18} /> Tomares, Dos Hermanas o Mairena</li>
+        </ul>
+        <a href="/contacto" class="btn light">Pide tu primera cita <Icon name="arrow" class="arrow" /></a>
+      </article>
     </div>
   </section>
 
@@ -90,55 +92,69 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
   .formats {
     background: var(--sand);
   }
-  .prices {
+  .formats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-    align-items: stretch;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+  }
+  .formats-copy :global(.section-head) {
+    margin-bottom: 2rem;
   }
   .price {
     position: relative;
     display: grid;
-    gap: 0.6rem;
-    align-content: start;
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    background: var(--paper);
-    box-shadow: inset 0 0 0 1px var(--line);
-  }
-  .price.hl {
+    gap: 1rem;
+    justify-items: start;
+    padding: clamp(2rem, 4vw, 3rem);
+    border-radius: calc(var(--radius-lg) * 1.3);
     background: var(--ink);
     color: var(--oat);
+    box-shadow: var(--shadow);
   }
   .price :global(.badge) {
     position: absolute;
-    top: -1.6rem;
-    right: 1.5rem;
+    top: -2.2rem;
+    right: 2rem;
     animation: spin 30s linear infinite;
   }
-  .price h3 {
-    font-size: var(--step-1);
+  .kicker {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blush);
   }
   .amount {
     font-family: var(--serif);
-    font-size: var(--step-4);
-    font-weight: 330;
-    line-height: 1;
-    letter-spacing: -0.03em;
+    font-size: clamp(4rem, 3rem + 5vw, 7rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
   }
   .time {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
     font-weight: 600;
-    font-size: 0.92rem;
   }
-  .detail {
-    color: var(--ink-2);
-    font-size: 0.95rem;
+  .incl {
+    list-style: none;
+    padding: 1.25rem 0 0.5rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid color-mix(in oklab, var(--oat) 18%, transparent);
+    display: grid;
+    gap: 0.6rem;
+    width: 100%;
   }
-  .hl .detail {
-    color: color-mix(in oklab, var(--oat) 75%, transparent);
+  .incl li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: color-mix(in oklab, var(--oat) 85%, transparent);
+  }
+  .incl :global(.icon) {
+    color: var(--blush);
   }
   .places {
     list-style: none;
@@ -146,7 +162,6 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    margin-top: 2rem;
   }
   .places li {
     display: inline-flex;
@@ -171,7 +186,7 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
     .cards {
       grid-template-columns: 1fr 1fr;
     }
-    .prices {
+    .formats-grid {
       grid-template-columns: 1fr;
     }
   }

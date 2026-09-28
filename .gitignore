@@ -23,3 +23,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# fotos originales a tamaño completo (la web usa las versiones optimizadas de public/img/)
+/public/retrato_ali_despacho_casa.jpg
+/public/gatos_pasillo.jpg
+/public/tetera_ceramica.jpg

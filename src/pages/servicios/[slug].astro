@@ -8,7 +8,7 @@ import Faq from "../../components/Faq.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
 import Shape from "../../components/art/Shape.astro";
-import { CONTACT, PRICES } from "../../consts";
+import { CONTACT, PRICE } from "../../consts";
 
 export async function getStaticPaths() {
   const services = await getCollection("services");
@@ -73,10 +73,10 @@ const tone = ({ terracotta: "blush", blush: "blush", lilac: "lilac", sage: "sage
           <Shape name="sun" color="var(--butter)" size="4rem" class="card-sun" />
           <h2>Formato</h2>
           <ul>
-            <li><Icon name="clock" size={18} /> Sesiones de 50 minutos</li>
+            <li><Icon name="clock" size={18} /> Sesiones de {PRICE.duration}</li>
             <li><Icon name="pin" size={18} /> Tomares, Dos Hermanas o Mairena</li>
             <li><Icon name="video" size={18} /> También online</li>
-            <li><Icon name="euro" size={18} /> Desde {PRICES[1].price} la sesión</li>
+            <li><Icon name="euro" size={18} /> {PRICE.amount} la sesión</li>
           </ul>
           <a href="/contacto" class="btn">Reservar <Icon name="arrow" class="arrow" /></a>
           <a href={CONTACT.phoneHref} class="phone">o llama al {CONTACT.phone}</a>

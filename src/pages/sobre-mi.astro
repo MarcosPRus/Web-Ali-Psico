@@ -6,25 +6,40 @@ import SectionHead from "../components/SectionHead.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Icon from "../components/Icon.astro";
 
-// PROVISIONAL: sustituir por la formación real de Alicia
 const timeline = [
-  { year: "2014", title: "Grado en Psicología", place: "Universidad de Sevilla" },
-  { year: "2016", title: "Máster en Psicología General Sanitaria", place: "Habilitación sanitaria" },
-  { year: "2017", title: "Máster en Trastornos de la Conducta Alimentaria y Obesidad", place: "Formación especializada" },
-  { year: "2019", title: "Formación en Terapia de Aceptación y Compromiso (ACT)", place: "Terapias contextuales" },
-  { year: "2021", title: "Experta en Psiconutrición y alimentación consciente", place: "Trabajo interdisciplinar" },
+  { year: "2019", title: "Grado en Psicología", place: "Universidad de Sevilla" }, // PROVISIONAL: confirmar universidad
+  { year: "2021", title: "Máster en Psicología General Sanitaria", place: "Universidad de Granada" },
+  { year: "2022", title: "Experto en Trastornos de la Conducta Alimentaria y Obesidad", place: "Universidad Pablo de Olavide" },
+  {
+    year: "&",
+    title: "Cursos de especialización",
+    place: "Imagen corporal · Terapia de aceptación y compromiso (ACT) · Psiconutrición… Distintas miradas para acompañarte mejor",
+  },
   { year: "Hoy", title: "Formación continua y supervisión clínica", place: "Porque cada persona me enseña algo nuevo" },
 ];
 
-// PROVISIONAL: detalles personales para humanizar la página
-const facts = [
+// Detalles personales. Los que tienen `img` ocupan dos filas en la cuadrícula.
+type Fact = { t: string; s: "sun" | "leaf" | "flower" | "blob" | "star"; c: string; img?: string; alt?: string };
+const facts: Fact[] = [
+  {
+    t: "Tengo dos gatos, por si alguna vez se pasan a saludar durante la consulta online.",
+    s: "blob",
+    c: "var(--blush)",
+    img: "/img/gatos.webp",
+    alt: "Los dos gatos de Alicia, uno blanco y negro y otro negro, sentados en el pasillo",
+  },
   { t: "Desayuno sin prisa siempre que puedo. Es mi momento sagrado del día.", s: "sun", c: "var(--butter)" },
-  { t: "Tengo más plantas de las que sé cuidar (y alguna ha sobrevivido).", s: "sprig", c: "var(--sage-ink)" },
+  { t: "Amante del café: el primero de la mañana no se negocia.", s: "star", c: "var(--terracotta)" },
+  {
+    t: "Soy ceramista aficionada. Mancharme las manos de barro es mi forma favorita de desconectar.",
+    s: "sun",
+    c: "var(--sage)",
+    img: "/img/tetera-ceramica.webp",
+    alt: "Tetera de cerámica blanca con motas negras hecha por Alicia",
+  },
   { t: "Leo novelas antes de dormir y subrayo frases que luego acaban en consulta.", s: "leaf", c: "var(--lilac-2)" },
   { t: "Creo que comer con quienes quieres es una de las mejores cosas de la vida.", s: "flower", c: "var(--rose)" },
-  { t: "Sevillana de corazón: el olor a azahar en marzo me cura cualquier cosa.", s: "star", c: "var(--terracotta)" },
-  { t: "Voy a terapia. Creo que quien acompaña también necesita ser acompañada.", s: "blob", c: "var(--blush)" },
-] as const;
+];
 ---
 
 <Base
@@ -52,7 +67,7 @@ const facts = [
     </div>
 
     <div class="strip" aria-label="Galería provisional">
-      <Media scene="retrato" ratio="3 / 4" class="s1" alt="Ilustración provisional: retrato de Alicia" loading="eager" />
+      <Media src="/img/ali-retrato.webp" ratio="3 / 4" class="s1" alt="Alicia Lozano en su despacho" loading="eager" />
       <Media scene="mesa" ratio="3 / 4" class="s2" loading="eager" />
       <Media scene="jardin" ratio="3 / 4" class="s3" loading="eager" />
       <Media scene="ventana" ratio="3 / 4" class="s4" loading="eager" />
@@ -105,7 +120,7 @@ const facts = [
         <p class="eyebrow" data-reveal>Formación</p>
         <h2 data-reveal style="--d:1">Aprender <em>nunca se acaba</em></h2>
         <p class="lead" data-reveal style="--d:2">
-          Psicóloga General Sanitaria colegiada en el Colegio Oficial de Psicología de Andalucía Occidental.
+          Psicóloga General Sanitaria colegiada, nº&nbsp;AN-11007.
         </p>
       </div>
       <ol class="timeline">
@@ -132,8 +147,16 @@ const facts = [
       <ul class="facts-grid">
         {
           facts.map((f, i) => (
-            <li data-reveal style={`--d:${i % 3};--rot:${[-1.5, 1, -0.5, 1.5, -1, 0.8][i]}deg`}>
-              <Shape name={f.s} color={f.c} size="3.2rem" />
+            <li
+              class:list={[f.img && "has-img"]}
+              data-reveal
+              style={`--d:${i % 4};--rot:${[-1.2, 1, -0.6, 1.4, -1, 0.8][i]}deg`}
+            >
+              {f.img ? (
+                <img src={f.img} alt={f.alt} loading="lazy" decoding="async" />
+              ) : (
+                <Shape name={f.s} color={f.c} size="3.2rem" />
+              )}
               <p>{f.t}</p>
             </li>
           ))
@@ -311,8 +334,24 @@ const facts = [
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
     gap: 1.25rem;
+    align-items: stretch;
+  }
+  .facts-grid li.has-img {
+    grid-row: span 2;
+    padding: 0.75rem 0.75rem 1.5rem;
+    align-content: start;
+  }
+  .facts-grid li.has-img p {
+    padding-inline: 0.75rem;
+  }
+  .facts-grid img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: calc(var(--radius-lg) - 0.5rem);
   }
   .facts-grid li {
     display: grid;
@@ -364,6 +403,9 @@ const facts = [
   @media (max-width: 36rem) {
     .facts-grid {
       grid-template-columns: 1fr;
+    }
+    .facts-grid li.has-img {
+      grid-row: auto;
     }
   }
 </style>

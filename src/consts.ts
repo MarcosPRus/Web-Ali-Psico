@@ -13,10 +13,9 @@ export const CONTACT = {
   phoneHref: "tel:+34655042852",
   whatsapp: "https://wa.me/34655042852?text=" +
     encodeURIComponent("Hola Alicia, me gustaría pedir información sobre la terapia."),
-  instagram: "https://www.instagram.com/", // TODO: usuario real de Instagram
-  instagramHandle: "@alicialozano.psicologia", // TODO
-  // PROVISIONAL: número de colegiada real
-  license: "Psicóloga General Sanitaria · Col. AN-00000",
+  instagram: "https://www.instagram.com/alilozanopsico/",
+  instagramHandle: "@alilozanopsico",
+  license: "Psicóloga General Sanitaria · Nº col. AN-11007",
 };
 
 /**
@@ -92,9 +91,9 @@ export const NAV = [
   { href: "/contacto", label: "Contacto" },
 ];
 
-// PROVISIONAL: tarifas de ejemplo
-export const PRICES = [
-  { name: "Primera sesión", time: "60 min", price: "60 €", detail: "Nos conocemos, me cuentas qué te trae y valoramos juntas cómo seguir." },
-  { name: "Sesión individual", time: "50 min", price: "55 €", detail: "Presencial en cualquiera de las tres consultas u online. Mismo precio." },
-  { name: "Bono 4 sesiones", time: "4 × 50 min", price: "200 €", detail: "Para procesos con frecuencia semanal o quincenal. Válido 3 meses." },
-];
+// Tarifa única: todas las sesiones (también la primera) cuestan lo mismo
+export const PRICE = {
+  amount: "55 €",
+  duration: "60 minutos",
+  durationShort: "1 hora",
+};

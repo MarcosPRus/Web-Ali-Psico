@@ -2,19 +2,20 @@
 import SectionHead from "../SectionHead.astro";
 import Icon from "../Icon.astro";
 const thoughts = [
-  "El lunes empiezo. Esta vez sí.",
+  "Siento que mis emociones me controlan.",
   "Me paso el día pensando en comida.",
-  "Evito salir en las fotos.",
-  "Si como esto, luego lo compenso.",
-  "Cuando estoy nerviosa, como sin parar.",
-  "Me siento culpable después de comer.",
-  "No sé cuándo tengo hambre de verdad.",
-  "Viviré de verdad cuando adelgace.",
-  "Me da miedo comer fuera de casa.",
   "Nunca me siento suficiente.",
+  "Me cuesta poner límites y decir que no.",
+  "Me siento culpable después de comer.",
+  "Me comparo con los demás todo el tiempo.",
+  "La ansiedad no me deja desconectar.",
+  "Evito salir en las fotos.",
+  "En mis relaciones siempre acabo cediendo yo.",
+  "Me hablo fatal cuando algo sale mal.",
+  "Cuando estoy nerviosa, como sin parar.",
 ];
 const tones = ["blush", "lilac", "butter", "sage", "paper"];
-const rot = [-2.5, 1.5, -1, 2.5, -2, 1, -1.5, 2, -3, 1.2];
+const rot = [-2.5, 1.5, -1, 2.5, -2, 1, -1.5, 2, -3, 1.2, -1.8];
 ---
 
 <section class="section resonates" aria-labelledby="res-title">
@@ -41,7 +42,7 @@ const rot = [-2.5, 1.5, -1, 2.5, -2, 1, -1.5, 2, -3, 1.2];
 
     <div class="answer" data-answer aria-live="polite">
       <p class="idle">
-        Si alguna te ha resonado, quiero que sepas dos cosas: <strong>no es falta de fuerza de voluntad</strong>, y&nbsp;<em class="script">se puede salir</em>.
+        Si alguna te ha resonado, quiero que sepas dos cosas: <strong>no significa que haya algo mal en ti</strong>, y&nbsp;<em class="script">se puede trabajar</em>.
       </p>
       <p class="active" hidden>
         <span class="count" data-count>0</span>
@@ -69,7 +70,7 @@ const rot = [-2.5, 1.5, -1, 2.5, -2, 1, -1.5, 2, -3, 1.2];
           ? "frase marcada. Es más común de lo que parece, y se puede trabajar."
           : n < 4
             ? "frases marcadas. No estás sola: son pensamientos muy frecuentes, y se pueden trabajar."
-            : "frases marcadas. Parece que la comida y el cuerpo te están ocupando mucho espacio. Mereces un lugar donde soltarlo.";
+            : "frases marcadas. Parece que estás cargando con bastante. Mereces un espacio donde soltarlo.";
     };
     list.querySelectorAll("button").forEach((b) =>
       b.addEventListener("click", () => {

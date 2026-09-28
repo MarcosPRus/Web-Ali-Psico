@@ -20,7 +20,7 @@ Cloudflare Pages: *Build command* `npm run build`, *Output directory* `dist`, va
 | --- | --- |
 | Teléfono, email, WhatsApp, Instagram, nº de colegiada | `src/consts.ts` → `CONTACT` |
 | Consultas (direcciones, notas, posición en el mapa) | `src/consts.ts` → `LOCATIONS` |
-| Tarifas | `src/consts.ts` → `PRICES` |
+| Tarifa (precio y duración) | `src/consts.ts` → `PRICE` |
 | Menú | `src/consts.ts` → `NAV` |
 | Servicios (textos, “¿es para ti?”, pasos, FAQ) | `src/content/services/*.md` |
 | Artículos del blog | `src/content/blog/*.md` |

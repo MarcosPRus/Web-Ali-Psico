@@ -2,7 +2,6 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Media from "../../components/art/Media.astro";
-import Art from "../../components/art/Art.astro";
 import PostCard from "../../components/PostCard.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
@@ -34,7 +33,7 @@ const related = (await getCollection("blog", (p) => !p.data.draft && p.id !== po
         <p class="lead" data-reveal style="--d:2">{d.description}</p>
         <p class="meta" data-reveal style="--d:3">
           <span class="by">
-            <span class="avatar"><Art scene="retrato" /></span>
+            <img class="avatar" src="/img/ali-avatar.webp" alt="" width="32" height="32" />
             Alicia Lozano
           </span>
           <span>·</span>
@@ -54,7 +53,7 @@ const related = (await getCollection("blog", (p) => !p.data.draft && p.id !== po
       </div>
 
       <aside class="author" aria-label="Sobre la autora">
-        <span class="author-img"><Art scene="retrato" /></span>
+        <img class="author-img" src="/img/ali-avatar.webp" alt="Alicia Lozano" width="80" height="80" loading="lazy" />
         <div>
           <p class="eyebrow">Escrito por</p>
           <p class="name">Alicia Lozano</p>
@@ -137,10 +136,9 @@ const related = (await getCollection("blog", (p) => !p.data.draft && p.id !== po
     overflow: hidden;
     flex: none;
   }
-  .avatar :global(svg),
-  .author-img :global(svg) {
-    width: 100%;
-    height: 100%;
+  .avatar,
+  .author-img {
+    object-fit: cover;
   }
   .cover {
     margin-top: clamp(2rem, 5vw, 3.5rem);
