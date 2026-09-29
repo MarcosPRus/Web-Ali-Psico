@@ -22,7 +22,7 @@ Cloudflare Pages: *Build command* `npm run build`, *Output directory* `dist`, va
 | Consultas (direcciones, notas, posición en el mapa) | `src/consts.ts` → `LOCATIONS` |
 | Tarifa (precio y duración) | `src/consts.ts` → `PRICE` |
 | Menú | `src/consts.ts` → `NAV` |
-| Servicios (textos, “¿es para ti?”, pasos, FAQ) | `src/content/services/*.md` |
+| Servicios (resumen, tres ideas clave y artículo relacionado) | `src/content/services/*.md` |
 | Artículos del blog | `src/content/blog/*.md` |
 | Página “Sobre mí” (historia, formación, curiosidades) | `src/pages/sobre-mi.astro` |
 | Portada | `src/pages/index.astro` y `src/components/home/*` |

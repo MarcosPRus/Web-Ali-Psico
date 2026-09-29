@@ -3,9 +3,9 @@
 // ─────────────────────────────────────────────────────────────
 
 export const SITE_NAME = "Alicia Lozano";
-export const SITE_TITLE = "Alicia Lozano · Psicóloga especialista en TCA e imagen corporal";
+export const SITE_TITLE = "Alicia Lozano · Psicóloga sanitaria en Sevilla y online";
 export const SITE_DESCRIPTION =
-  "Psicóloga sanitaria especializada en trastornos de la conducta alimentaria, imagen corporal y psiconutrición. Consulta presencial en Tomares, Dos Hermanas y Mairena del Aljarafe, y terapia online.";
+  "Psicóloga sanitaria: ansiedad, autoestima, gestión emocional y relaciones, con especialización en trastornos de la conducta alimentaria e imagen corporal. Consulta en Tomares, Dos Hermanas y Mairena del Aljarafe, y terapia online.";
 
 export const CONTACT = {
   email: "alicia.lozano.psicologia@gmail.com",

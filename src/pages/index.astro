@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import Hero from "../components/home/Hero.astro";
 import Marquee from "../components/home/Marquee.astro";
@@ -7,8 +6,7 @@ import Resonates from "../components/home/Resonates.astro";
 import AboutTeaser from "../components/home/AboutTeaser.astro";
 import Approach from "../components/home/Approach.astro";
 import SectionHead from "../components/SectionHead.astro";
-import ServiceCard from "../components/ServiceCard.astro";
-import PostCard from "../components/PostCard.astro";
+import ServicesList from "../components/home/ServicesList.astro";
 import Steps from "../components/Steps.astro";
 import Locations from "../components/Locations.astro";
 import Faq from "../components/Faq.astro";
@@ -17,10 +15,6 @@ import Icon from "../components/Icon.astro";
 import Shape from "../components/art/Shape.astro";
 import { CONTACT } from "../consts";
 
-const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
-const posts = (await getCollection("blog", (p) => !p.data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
 
 const faqs = [
   {
@@ -33,7 +27,7 @@ const faqs = [
   },
   {
     q: "¿Tengo que tener un diagnóstico para pedir cita?",
-    a: "No. Si la comida o tu cuerpo te están quitando paz, ya es motivo suficiente. En la primera sesión valoramos juntas qué está pasando.",
+    a: "No. Si algo te está quitando paz, ya es motivo suficiente para consultarlo. En la primera sesión valoramos juntas qué está pasando.",
   },
   {
     q: "¿Trabajas con dietistas-nutricionistas?",
@@ -56,19 +50,7 @@ const faqs = [
   <Resonates />
   <AboutTeaser />
 
-  <section class="section services" id="servicios" aria-labelledby="serv-title">
-    <div class="container wide">
-      <div class="head-row">
-        <SectionHead eyebrow="Cómo te puedo ayudar">
-          <span id="serv-title">Para que la comida vuelva a ser <em>solo comida</em></span>
-        </SectionHead>
-        <a href="/servicios" class="btn ghost" data-reveal>Ver todo <Icon name="arrow" class="arrow" /></a>
-      </div>
-      <div class="cards">
-        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
-      </div>
-    </div>
-  </section>
+  <ServicesList />
 
   <Approach />
 
@@ -95,20 +77,6 @@ const faqs = [
     </div>
   </section>
 
-  <section class="section" aria-labelledby="blog-title">
-    <div class="container wide">
-      <div class="head-row">
-        <SectionHead eyebrow="Del blog">
-          <span id="blog-title">Lecturas para <em>mirarte con más calma</em></span>
-        </SectionHead>
-        <a href="/blog" class="btn ghost" data-reveal>Todos los artículos <Icon name="arrow" class="arrow" /></a>
-      </div>
-      <div class="posts">
-        {posts.map((p, i) => <PostCard post={p} index={i} />)}
-      </div>
-    </div>
-  </section>
-
   <section class="section faq-sec" aria-labelledby="faq-title">
     <div class="container wide faq-grid">
       <div class="faq-aside">
@@ -127,21 +95,6 @@ const faqs = [
 </Base>
 
 <style>
-  .head-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 1rem 2rem;
-    flex-wrap: wrap;
-  }
-  .head-row .btn {
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  }
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1rem, 2vw, 1.5rem);
-  }
   .steps-cta {
     display: flex;
     justify-content: center;
@@ -158,11 +111,6 @@ const faqs = [
     rotate: -30deg;
     opacity: 0.6;
   }
-  .posts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-  }
   .faq-grid {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
@@ -177,21 +125,11 @@ const faqs = [
     color: var(--terracotta-ink);
   }
   @media (max-width: 60rem) {
-    .cards,
-    .posts {
-      grid-template-columns: 1fr 1fr;
-    }
     .faq-grid {
       grid-template-columns: 1fr;
     }
     .faq-aside {
       position: static;
-    }
-  }
-  @media (max-width: 40rem) {
-    .cards,
-    .posts {
-      grid-template-columns: 1fr;
     }
   }
 </style>

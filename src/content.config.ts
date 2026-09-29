@@ -36,15 +36,18 @@ const services = defineCollection({
   schema: z.object({
     title: z.string(),
     kicker: z.string(),
+    /** Una línea: se usa en la lista de la portada */
     short: z.string(),
-    description: z.string(),
+    /** Resumen de 2-3 frases para la página «Cómo te ayudo» */
+    summary: z.string(),
+    /** Tres ideas clave */
+    points: z.array(z.string()).default([]),
     order: z.number(),
     scene: z.enum(scenes),
     heroImage: z.string().optional(),
     accent: z.enum(["terracotta", "lilac", "sage", "blush", "butter", "wine"]).default("terracotta"),
-    signs: z.array(z.string()).default([]),
-    approach: z.array(z.object({ title: z.string(), text: z.string() })).default([]),
-    faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    /** Slug del artículo del blog con la información ampliada (opcional) */
+    post: z.string().optional(),
   }),
 });
 

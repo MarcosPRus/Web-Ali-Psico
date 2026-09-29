@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import PageHero from "../../components/PageHero.astro";
 import SectionHead from "../../components/SectionHead.astro";
-import ServiceCard from "../../components/ServiceCard.astro";
+import Media from "../../components/art/Media.astro";
 import Steps from "../../components/Steps.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
@@ -15,19 +15,44 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
 
 <Base
   title="Cómo te puedo ayudar"
-  description="Terapia psicológica para TCA, imagen corporal, psiconutrición, ansiedad y familias. Presencial en Tomares, Dos Hermanas y Mairena, y online."
+  description="Terapia psicológica para ansiedad, autoestima, relaciones, TCA, imagen corporal y familias. Presencial en Tomares, Dos Hermanas y Mairena, y online."
 >
   <PageHero eyebrow="Servicios" scene="jarrones" tone="lilac" crumbs={[{ label: "Cómo te ayudo" }]}>
     Cómo te puedo <em>ayudar</em>
     <Fragment slot="lead">
-      Cada historia es distinta, pero casi todas empiezan igual: con la sensación de que la comida o el cuerpo ocupan
-      demasiado espacio. Estas son las áreas en las que trabajo.
+      Cada historia es distinta y cada proceso también. Estas son las áreas en las que trabajo; si lo tuyo no encaja del
+      todo en ninguna, escríbeme y lo vemos.
     </Fragment>
   </PageHero>
 
   <section class="section" style="padding-top:0">
-    <div class="container wide cards">
-      {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+    <div class="container wide areas">
+      {
+        services.map((s, i) => (
+          <article class="area" id={s.id} data-reveal style={`--d:${i % 2}`}>
+            <Media scene={s.data.scene} src={s.data.heroImage} ratio="1 / 1" class="thumb" />
+            <div class="body">
+              <p class="kicker">{s.data.kicker}</p>
+              <h2>{s.data.title}</h2>
+              <p class="summary">{s.data.summary}</p>
+              {s.data.points.length > 0 && (
+                <ul class="points">
+                  {s.data.points.map((pt) => (
+                    <li>
+                      <Icon name="check" size={16} /> {pt}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {s.data.post && (
+                <a class="link" href={`/blog/${s.data.post}`}>
+                  Leer más en el blog <Icon name="arrow" size={16} />
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
     </div>
   </section>
 
@@ -84,10 +109,71 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
 </Base>
 
 <style>
-  .cards {
+  .areas {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: clamp(1rem, 2vw, 1.5rem);
+  }
+  .area {
+    display: grid;
+    grid-template-columns: clamp(7rem, 12vw, 10rem) 1fr;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    align-items: start;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border-radius: calc(var(--radius-lg) + 0.5rem);
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1px var(--line);
+    scroll-margin-top: 7rem;
+    transition: box-shadow 0.5s var(--ease), background-color 0.4s;
+  }
+  .area:hover,
+  .area:target {
+    background: #fff;
+    box-shadow: var(--shadow);
+  }
+  .area :global(.thumb) {
+    border-radius: var(--radius);
+  }
+  .body {
+    display: grid;
+    gap: 0.6rem;
+    justify-items: start;
+  }
+  .area .kicker {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta-ink);
+  }
+  .area h2 {
+    font-size: var(--step-2);
+  }
+  .summary {
+    color: var(--ink-2);
+    font-size: 0.98rem;
+  }
+  .points {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+    margin-block: 0.2rem 0.4rem;
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+  .points li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .points :global(.icon) {
+    color: var(--sage-ink);
+    margin-top: 0.25rem;
+  }
+  .area .link {
+    color: var(--terracotta-ink);
+    font-size: 0.95rem;
   }
   .formats {
     background: var(--sand);
@@ -183,16 +269,19 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
     font-size: 0.92rem;
   }
   @media (max-width: 60rem) {
-    .cards {
-      grid-template-columns: 1fr 1fr;
+    .areas {
+      grid-template-columns: 1fr;
     }
     .formats-grid {
       grid-template-columns: 1fr;
     }
   }
   @media (max-width: 40rem) {
-    .cards {
+    .area {
       grid-template-columns: 1fr;
+    }
+    .area :global(.thumb) {
+      aspect-ratio: 16 / 9 !important;
     }
   }
 </style>
