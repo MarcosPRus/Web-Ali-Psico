@@ -28,11 +28,12 @@ const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4"];
   }
   h3 a {
     text-decoration: none;
-    background: linear-gradient(currentColor 0 0) 0 100% / 0 2px no-repeat;
+    background: var(--trazo-fino) 0 100% / 0 7px no-repeat;
+    padding-bottom: 0.2em;
     transition: background-size 0.5s var(--ease);
   }
   .post:hover h3 a {
-    background-size: 100% 2px;
+    background-size: 100% 7px;
   }
   h3 a::after {
     content: "";
