@@ -31,10 +31,10 @@ Regla: en la web no hay líneas ni bordes rectos.
 - Datos clave: línea de 2 px encima (`.rule`).
 
 ## Maddy y Furi (`Silueta.astro`)
-Son siluetas negras, sin cara dibujada, siempre decorativas.
-- **Furi** (`gato="furi"`) se sienta sobre el retrato de la portada y sobre el bloque de formación. Mueve la cola, parpadea y gira una oreja.
+Ilustraciones planas y redondas, dibujadas a mano en SVG, siempre decorativas. Cabeza grande, cuerpo de pera y cola que sale por detrás del cuerpo: monas, no inquietantes.
+- **Furi** (`gato="furi"`) se sienta sobre el retrato de la portada y sobre el bloque de formación. Negro entero, ojos grandes amarillo verdoso con brillo. Mueve la cola (más rápido al pasar el ratón) y parpadea.
 - **Furi asomado** (`pose="asomado"`) aparece donde da miedo dar el paso: «Primer paso» y el formulario.
-- **Maddy** (`gato="maddy"`) duerme sobre la cornisa del bloque azul y del pie, respirando y con la cola colgando.
+- **Maddy** (`gato="maddy"`) esmoquin: negra con hocico, babero y patitas blancas, mechones en las mejillas y nariz rosa. Duerme con los ojos cerrados sobre la cornisa del bloque azul y del pie, respirando y con la cola colgando.
 
 Con «reducir movimiento» activado, ninguna animación se mueve.
 
