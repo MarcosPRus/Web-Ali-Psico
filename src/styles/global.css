@@ -59,8 +59,9 @@
   --forma-2: 1.75rem 2.5rem 1.5rem 2.25rem / 2.5rem 1.5rem 2.25rem 1.75rem;
   --forma-3: 2.5rem 1.5rem 2.25rem 1.75rem / 1.5rem 2.25rem 1.75rem 2.5rem;
   --forma-4: 1.5rem 2.25rem 1.75rem 2.5rem / 2.25rem 1.75rem 2.5rem 1.5rem;
-  /* retrato: arco del jarrón, irregular */
-  --forma-arco: 7.5rem 6rem 1.1rem 1.6rem / 6.9rem 7.75rem 1.4rem 1rem;
+  /* retrato y fotos en arco: recorte SVG dibujado a mano (ver Base.astro) */
+  --arco: url(#arco-mano);
+  --arco-inv: url(#arco-mano-inv);
   /* píldoras (botones, campos) */
   --forma-pill: 1.9em 1.5em 1.75em 1.6em / 1.6em 1.9em 1.5em 1.75em;
   --forma-campo: 1.25rem 1rem 1.1rem 1.4rem / 1.1rem 1.4rem 1rem 1.25rem;
@@ -394,6 +395,12 @@ h3 em {
 }
 
 /* ─── Fotos ─────────────────────────────────────────────── */
+.recortes {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
 .foto {
   margin: 0;
 }

@@ -253,13 +253,13 @@ const taller = [
     aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: 50% 22%;
-    border-radius: var(--forma-arco);
+    clip-path: var(--arco);
     background: var(--hueso);
   }
   /* Furi, sentado en lo alto del retrato */
   .hero-foto :global(.hero-furi) {
-    right: 3.5rem;
-    top: 0.6rem;
+    right: 6.5rem;
+    top: 0.45rem;
   }
   .datos {
     list-style: none;
@@ -434,11 +434,11 @@ const taller = [
   }
   .f-arco {
     aspect-ratio: 4 / 5;
-    border-radius: 45% 45% 1.25rem 1.75rem / 36% 36% 1.5rem 1.25rem;
+    clip-path: var(--arco);
   }
   .f-arco-inv {
     aspect-ratio: 4 / 5;
-    border-radius: 1.75rem 1.25rem 45% 45% / 1.5rem 1.25rem 36% 36%;
+    clip-path: var(--arco-inv);
   }
   .taller figcaption {
     text-align: center;

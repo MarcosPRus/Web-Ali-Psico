@@ -20,7 +20,7 @@
 ## Formas
 - Bloques de color: `--forma-bloque` y `--forma-bloque-b`, separados del borde de la pantalla (`.bloque`).
 - Tarjetas: `--forma-1` a `--forma-4`, que se alternan para que ninguna vecina se repita.
-- Retrato: `--forma-arco`. Botones y campos: `--forma-pill` y `--forma-campo`. Números e iconos: `--mota`.
+- Retrato y fotos en arco: recortes SVG dibujados a mano (`--arco`, `--arco-inv`, definidos en `Base.astro`): cima descentrada, lados que ondulan, base que no es recta. Botones y campos: `--forma-pill` y `--forma-campo`. Números e iconos: `--mota`.
 - Datos clave: línea de 2 px encima (`.rule`).
 
 ## Maddy y Furi (`Silueta.astro`)
