@@ -15,11 +15,12 @@ interface Props {
 }
 const { src, alt = "", category, ratio = "4 / 3", forma = "--forma-1", class: className, loading = "lazy" } = Astro.props;
 const tonos = ["cobalto", "celadon", "hueso"];
+const pieza = ({ "--forma-1": 1, "--forma-2": 2, "--forma-3": 3, "--forma-4": 1, "--forma-bloque": 1, "--forma-bloque-b": 2 } as Record<string, number>)[forma] ?? 1;
 const hash = [...category].reduce((a, c) => a + c.charCodeAt(0), 0);
 const tono = tonos[hash % tonos.length];
 ---
 
-<figure class:list={["portada", `t-${tono}`, className]} style={`aspect-ratio:${ratio};border-radius:var(${forma})`}>
+<figure class:list={["portada", `t-${tono}`, `pieza-${pieza}`, className]} style={`aspect-ratio:${ratio}`}>
   {
     src ? (
       <img src={src} alt={alt} loading={loading} decoding="async" />

@@ -7,7 +7,7 @@ import Silueta from "../components/Silueta.astro";
 <Base title="Página no encontrada">
   <section class="section nf">
     <div class="container">
-      <div class="panel on-celadon">
+      <div class="panel on-celadon sin-fondo">
         <Silueta gato="maddy" size="clamp(9rem, 18vw, 13rem)" class="nf-maddy" />
         <p class="eyebrow">Error 404</p>
         <h1>Esta página se ha quedado <em>dormida</em>.</h1>
@@ -22,6 +22,15 @@ import Silueta from "../components/Silueta.astro";
 </Base>
 
 <style>
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--celadon);
+    -webkit-mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
+  }
   .nf {
     padding-top: clamp(7rem, 12vw, 10rem);
   }
@@ -31,7 +40,8 @@ import Silueta from "../components/Silueta.astro";
     gap: 1.4rem;
     justify-items: start;
     padding: clamp(2.5rem, 6vw, 5rem);
-    border-radius: var(--forma-bloque);
+    isolation: isolate;
+    background: transparent;
   }
   .panel :global(.nf-maddy) {
     right: clamp(2rem, 10vw, 8rem);

@@ -101,24 +101,33 @@ const rot = [-1.5, 1, -0.6, 1.5, -1.2, 0.6, -1, 1.2, -1.8, 0.8, -1.1];
     gap: 0.6rem;
     min-height: 3.25rem;
     padding: 0.8rem 1.35rem;
-    border-radius: var(--forma-pill);
     font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem);
     font-weight: 500;
     line-height: 1.25;
     letter-spacing: -0.01em;
-    background: var(--blanco);
-    box-shadow: inset 0 0 0 1.5px var(--tinta);
-    transition: transform 0.45s var(--ease), background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    background: var(--o-pill-1) 0 0 / 100% 100% no-repeat, var(--bg-c, var(--blanco));
+    -webkit-mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+    transition: transform 0.45s var(--ease), background-color 0.3s, color 0.3s;
   }
   li:nth-child(3n) button {
-    border-radius: 1.5em 1.9em 1.6em 1.75em / 1.9em 1.5em 1.75em 1.6em;
+    background-image: var(--o-pill-2);
+    -webkit-mask-image: var(--m-pill-2);
+    mask-image: var(--m-pill-2);
   }
   li:nth-child(3n + 1) button {
-    border-radius: 1.75em 1.6em 1.9em 1.5em / 1.5em 1.75em 1.6em 1.9em;
+    background-image: var(--o-pill-3);
+    -webkit-mask-image: var(--m-pill-3);
+    mask-image: var(--m-pill-3);
+  }
+  button:focus-visible {
+    -webkit-mask: none;
+    mask: none;
+    border-radius: var(--forma-pill);
   }
   button:hover {
     transform: translateY(-3px) rotate(calc(var(--rot) * -1));
-    background: var(--hueso);
+    --bg-c: var(--hueso);
   }
   .check {
     display: grid;
@@ -133,9 +142,9 @@ const rot = [-1.5, 1, -0.6, 1.5, -1.2, 0.6, -1, 1.2, -1.8, 0.8, -1.1];
     transition: width 0.4s var(--ease), margin 0.4s var(--ease);
   }
   button[aria-pressed="true"] {
-    background: var(--cobalto);
+    background-image: none;
+    background-color: var(--cobalto);
     color: var(--blanco);
-    box-shadow: none;
   }
   button[aria-pressed="true"] .check {
     width: 1.6rem;

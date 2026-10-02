@@ -40,7 +40,6 @@ const faqs = [
   },
 ];
 
-const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4", "--forma-2", "--forma-1"];
 
 const taller = [
   { src: "/img/taller/cuenco-maddy.webp", alt: "Cuenco verde hecho por Alicia, con MADDY y un corazón estampados en el fondo", pie: "El cuenco de Maddy", forma: "mota", baja: false },
@@ -104,7 +103,7 @@ const taller = [
       <ul class="esp-grid">
         {
           services.map((s, i) => (
-            <li data-reveal style={`--d:${i % 3};border-radius:var(${formas[i]})`}>
+            <li class={`pieza-${(i % 3) + 1}`} data-reveal style={`--d:${i % 3}`}>
               <a href={`/servicios#${s.id}`}>
                 <span class="mota-num" style={i % 2 ? "border-radius:var(--mota-b)" : undefined}>
                   {String(i + 1).padStart(2, "0")}
@@ -374,14 +373,15 @@ const taller = [
     width: 100%;
     display: grid;
     grid-template-columns: 10rem 1fr;
-    border-top: 2px solid var(--tinta);
+    padding-top: 2px;
+    background: var(--trazo) 0 0 / 100% 9px no-repeat;
     font-size: var(--t-sm);
   }
   .ficha dt,
   .ficha dd {
     margin: 0;
     padding: 0.75rem 0;
-    border-bottom: 1px solid var(--linea);
+    background: var(--trazo-fino) 0 100% / 100% 7px no-repeat;
   }
   .ficha dt {
     color: var(--gris);

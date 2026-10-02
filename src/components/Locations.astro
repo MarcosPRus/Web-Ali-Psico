@@ -146,26 +146,34 @@ const sevilla = { x: px(56), y: py(33) };
     display: grid;
     text-align: left;
     gap: 0.1rem;
-    padding: 0.95rem 1.15rem;
-    border-radius: var(--forma-1);
-    box-shadow: inset 0 0 0 1.5px var(--tinta);
-    transition: background-color 0.3s, color 0.3s, border-radius 0.5s var(--ease);
+    padding: 0.95rem 1.25rem;
+    background: var(--o-pill-1) 0 0 / 100% 100% no-repeat, var(--bg-c, transparent);
+    -webkit-mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+    transition: background-color 0.3s, color 0.3s;
   }
-  .tabs button:nth-child(2) {
-    border-radius: var(--forma-2);
+  .tabs button:nth-child(2),
+  .tabs button:nth-child(4) {
+    background-image: var(--o-pill-2);
+    -webkit-mask-image: var(--m-pill-2);
+    mask-image: var(--m-pill-2);
   }
   .tabs button:nth-child(3) {
-    border-radius: var(--forma-3);
-  }
-  .tabs button:nth-child(4) {
-    border-radius: var(--forma-4);
+    background-image: var(--o-pill-3);
+    -webkit-mask-image: var(--m-pill-3);
+    mask-image: var(--m-pill-3);
   }
   .tabs button:hover {
-    background: var(--hueso);
+    --bg-c: var(--hueso);
   }
   .tabs button[aria-pressed="true"] {
-    background: var(--tinta);
+    background-image: none;
+    background-color: var(--tinta);
     color: var(--blanco);
+  }
+  .tabs button:focus-visible {
+    -webkit-mask: none;
+    mask: none;
   }
   .tabs .n {
     font-size: 1.2rem;
@@ -181,7 +189,8 @@ const sevilla = { x: px(56), y: py(33) };
     display: flex;
     gap: 1.1rem;
     padding: 1.6rem;
-    border-radius: var(--forma-2);
+    -webkit-mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
     background: var(--hueso);
     animation: pop 0.5s var(--ease);
   }
@@ -227,11 +236,19 @@ const sevilla = { x: px(56), y: py(33) };
   }
   .map {
     position: relative;
-    border-radius: var(--forma-bloque-b);
+    -webkit-mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
     background: var(--blanco);
-    box-shadow: inset 0 0 0 1.5px var(--tinta);
     overflow: hidden;
     aspect-ratio: 400 / 340;
+  }
+  /* contorno dibujado a mano por encima del mapa */
+  .map::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--o-forma-2) 0 0 / 100% 100% no-repeat;
   }
   .map svg {
     width: 100%;

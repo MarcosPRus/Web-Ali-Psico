@@ -43,7 +43,6 @@ const facts: Fact[] = [
   { t: "Leo novelas antes de dormir y subrayo frases que luego acaban en consulta." },
   { t: "Creo que comer con quienes quieres es una de las mejores cosas de la vida." },
 ];
-const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4", "--forma-1", "--forma-2"];
 ---
 
 <Base
@@ -148,7 +147,7 @@ const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4", "--forma-1",
       <ul class="facts-grid">
         {
           facts.map((f, i) => (
-            <li class:list={[f.img && "has-img"]} data-reveal style={`--d:${i % 4};border-radius:var(${formas[i]})`}>
+            <li class:list={[f.img && "has-img", `pieza-${(i % 3) + 1}`]} data-reveal style={`--d:${i % 4}`}>
               {f.img && <img src={f.img} alt={f.alt} loading="lazy" decoding="async" />}
               <p>{f.t}</p>
             </li>
@@ -283,14 +282,14 @@ const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4", "--forma-1",
     grid-column: 7 / span 6;
     list-style: none;
     padding: 0;
-    border-top: 2px solid var(--blanco);
+    background: var(--trazo-blanco) 0 0 / 100% 9px no-repeat;
   }
   .timeline li {
     display: grid;
     grid-template-columns: 4.5rem 1fr;
     gap: 1rem;
     padding: 1.25rem 0;
-    border-bottom: 1px solid rgb(255 255 255 / 0.3);
+    background: var(--trazo-blanco-fino) 0 100% / 100% 7px no-repeat;
   }
   .year {
     font-weight: 700;

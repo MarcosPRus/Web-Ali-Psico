@@ -113,19 +113,20 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
   .areas {
     list-style: none;
     padding: 0;
-    border-top: 2px solid var(--tinta);
+    background: var(--trazo) 0 0 / 100% 9px no-repeat;
   }
   .area {
     display: grid;
     grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr);
     gap: 1rem var(--col-gap);
     padding-block: clamp(2rem, 4vw, 3rem);
-    border-bottom: 1px solid var(--linea);
+    background: var(--trazo-fino) 0 100% / 100% 7px no-repeat;
     scroll-margin-top: 7rem;
   }
   .area:target {
-    background: linear-gradient(var(--celadon), var(--celadon)) no-repeat;
-    border-radius: var(--forma-2);
+    background-color: var(--celadon);
+    -webkit-mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
     padding-inline: 1.25rem;
   }
   .area-head {
@@ -194,7 +195,7 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
   .places li {
     display: grid;
     padding-top: 0.75rem;
-    border-top: 2px solid var(--blanco);
+    background: var(--trazo-blanco) 0 0 / 100% 9px no-repeat;
   }
   .places span {
     color: var(--cobalto-suave);
@@ -212,7 +213,8 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
     padding: clamp(1.75rem, 3vw, 2.5rem);
     background: var(--blanco);
     color: var(--tinta);
-    border-radius: var(--forma-3);
+    -webkit-mask: var(--m-forma-3) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-3) 0 0 / 100% 100% no-repeat;
   }
   .price .eyebrow {
     color: var(--cobalto);
@@ -233,7 +235,7 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
     list-style: none;
     padding: 0.9rem 0 0.5rem;
     width: 100%;
-    border-top: 2px solid var(--tinta);
+    background: var(--trazo) 0 0 / 100% 9px no-repeat;
     display: grid;
     gap: 0.4rem;
   }

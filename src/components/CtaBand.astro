@@ -10,7 +10,7 @@ const { title } = Astro.props;
 
 <section class="cta" aria-labelledby="cta-title">
   <div class="container">
-    <div class="panel on-celadon" data-reveal>
+    <div class="panel on-celadon sin-fondo" data-reveal>
       <Silueta gato="furi" pose="asomado" size="clamp(4.5rem, 8vw, 6rem)" class="furi" />
       <div class="copy">
         <p class="eyebrow">Primer paso</p>
@@ -32,6 +32,15 @@ const { title } = Astro.props;
 </section>
 
 <style>
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--celadon);
+    -webkit-mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
+  }
   .cta {
     padding-top: clamp(5rem, 9vw, 8rem);
   }
@@ -43,7 +52,8 @@ const { title } = Astro.props;
     row-gap: 2rem;
     align-items: end;
     padding: clamp(2.5rem, 6vw, 5rem);
-    border-radius: var(--forma-bloque-b);
+    isolation: isolate;
+    background: transparent;
   }
   /* Furi se asoma por el borde: tímido, pero curioso */
   .panel :global(.furi) {

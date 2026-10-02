@@ -17,7 +17,14 @@
 ## Tipografía
 *Schibsted Grotesk*, de 400 a 700. Titulares grandes, en peso 500 y con interletrado apretado. La palabra clave de cada titular va en `<em>`, que se muestra en cobalto y sin cursiva. Los antetítulos van en mayúsculas, en 700 y en cobalto.
 
-## Formas
+## Formas: ninguna recta
+Regla: en la web no hay líneas ni bordes rectos.
+- **Líneas separadoras:** pinceladas SVG de grosor variable que ondulan (`--trazo`, `--trazo-fino`, `--trazo-blanco`…), puestas como `background` en lugar de `border`.
+- **Píldoras** (botones, frases, filtros, pestañas, campos): máscara SVG con los bordes de arriba y abajo ondulados (`--m-pill-1..3`) y contorno a juego (`--o-pill-1..3`). Las variantes se alternan.
+- **Tarjetas y bloques:** máscara SVG irregular (`--m-forma-1..3`, clases `.pieza-1..3`). En los bloques que llevan un gato encima, la máscara va en un `::before` para no recortarlo.
+- **Franja superior y pie:** borde ondulado (`--m-franja`, `--m-pie`).
+- **Foco con teclado:** el control pierde la máscara para que el anillo de foco se vea entero.
+
 - Bloques de color: `--forma-bloque` y `--forma-bloque-b`, separados del borde de la pantalla (`.bloque`).
 - Tarjetas: `--forma-1` a `--forma-4`, que se alternan para que ninguna vecina se repita.
 - Retrato y fotos en arco: recortes SVG dibujados a mano (`--arco`, `--arco-inv`, definidos en `Base.astro`): cima descentrada, lados que ondulan, base que no es recta. Botones y campos: `--forma-pill` y `--forma-campo`. Números e iconos: `--mota`.

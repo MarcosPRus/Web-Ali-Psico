@@ -111,7 +111,7 @@ const fmt = (d: Date) => d.toLocaleDateString("es-ES", { day: "numeric", month: 
     align-items: center;
     padding-bottom: clamp(3rem, 6vw, 4.5rem);
     margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
-    border-bottom: 2px solid var(--tinta);
+    background: var(--trazo) 0 100% / 100% 9px no-repeat;
   }
   .featured :global(.f-img) {
     grid-column: 1 / span 6;
@@ -150,21 +150,34 @@ const fmt = (d: Date) => d.toLocaleDateString("es-ES", { day: "numeric", month: 
   .filters button {
     min-height: 2.75rem;
     padding: 0 1.1rem;
-    border-radius: var(--forma-pill);
-    box-shadow: inset 0 0 0 1.5px var(--tinta);
+    background: var(--o-pill-1) 0 0 / 100% 100% no-repeat, var(--bg-c, transparent);
+    -webkit-mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
     font-size: var(--t-sm);
     font-weight: 500;
     transition: background-color 0.25s, color 0.25s;
   }
-  .filters button:nth-child(even) {
-    border-radius: 1.5em 1.9em 1.6em 1.75em / 1.9em 1.5em 1.75em 1.6em;
+  .filters button:nth-child(3n) {
+    background-image: var(--o-pill-2);
+    -webkit-mask-image: var(--m-pill-2);
+    mask-image: var(--m-pill-2);
+  }
+  .filters button:nth-child(3n + 1) {
+    background-image: var(--o-pill-3);
+    -webkit-mask-image: var(--m-pill-3);
+    mask-image: var(--m-pill-3);
   }
   .filters button:hover {
-    background: var(--hueso);
+    --bg-c: var(--hueso);
   }
   .filters button[aria-pressed="true"] {
-    background: var(--tinta);
+    background-image: none;
+    background-color: var(--tinta);
     color: var(--blanco);
+  }
+  .filters button:focus-visible {
+    -webkit-mask: none;
+    mask: none;
   }
   .grid {
     display: grid;

@@ -69,6 +69,34 @@
   --mota: 55% 45% 60% 40% / 50% 60% 40% 50%;
   --mota-b: 46% 54% 42% 58% / 52% 40% 60% 48%;
 
+
+  /* ─── Trazos y contornos dibujados a mano (SVG) ───────── */
+  /* líneas: pincelada de grosor variable en lugar de un borde recto */
+  --trazo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cpath d='M0.0,3.69 C37.5,3.69 37.5,6.04 75.0,6.04 C112.5,6.04 112.5,5.95 150.0,5.95 C187.5,5.95 187.5,3.26 225.0,3.26 C262.5,3.26 262.5,5.00 300.0,5.00 C337.5,5.00 337.5,4.43 375.0,4.43 C412.5,4.43 412.5,5.19 450.0,5.19 C487.5,5.19 487.5,6.23 525.0,6.23 C562.5,6.23 562.5,3.03 600.0,3.03 L600.0,5.08 C562.5,5.08 562.5,8.54 525.0,8.54 C487.5,8.54 487.5,8.26 450.0,8.26 C412.5,8.26 412.5,7.08 375.0,7.08 C337.5,7.08 337.5,6.96 300.0,6.96 C262.5,6.96 262.5,6.39 225.0,6.39 C187.5,6.39 187.5,8.58 150.0,8.58 C112.5,8.58 112.5,9.29 75.0,9.29 C37.5,9.29 37.5,4.80 0.0,4.80 Z' fill='%23111111'/%3E%3C/svg%3E");
+  --trazo-b: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cpath d='M0.0,4.43 C37.5,4.43 37.5,3.29 75.0,3.29 C112.5,3.29 112.5,5.67 150.0,5.67 C187.5,5.67 187.5,2.64 225.0,2.64 C262.5,2.64 262.5,4.56 300.0,4.56 C337.5,4.56 337.5,4.28 375.0,4.28 C412.5,4.28 412.5,2.73 450.0,2.73 C487.5,2.73 487.5,4.57 525.0,4.57 C562.5,4.57 562.5,2.75 600.0,2.75 L600.0,4.81 C562.5,4.81 562.5,7.50 525.0,7.50 C487.5,7.50 487.5,5.03 450.0,5.03 C412.5,5.03 412.5,6.43 375.0,6.43 C337.5,6.43 337.5,7.79 300.0,7.79 C262.5,7.79 262.5,5.25 225.0,5.25 C187.5,5.25 187.5,7.77 150.0,7.77 C112.5,7.77 112.5,5.36 75.0,5.36 C37.5,5.36 37.5,5.88 0.0,5.88 Z' fill='%23111111'/%3E%3C/svg%3E");
+  --trazo-fino: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cpath d='M0.0,4.28 C37.5,4.28 37.5,3.10 75.0,3.10 C112.5,3.10 112.5,4.65 150.0,4.65 C187.5,4.65 187.5,3.55 225.0,3.55 C262.5,3.55 262.5,3.16 300.0,3.16 C337.5,3.16 337.5,4.71 375.0,4.71 C412.5,4.71 412.5,6.80 450.0,6.80 C487.5,6.80 487.5,6.29 525.0,6.29 C562.5,6.29 562.5,6.59 600.0,6.59 L600.0,7.96 C562.5,7.96 562.5,8.60 525.0,8.60 C487.5,8.60 487.5,9.22 450.0,9.22 C412.5,9.22 412.5,6.35 375.0,6.35 C337.5,6.35 337.5,4.68 300.0,4.68 C262.5,4.68 262.5,5.14 225.0,5.14 C187.5,5.14 187.5,6.35 150.0,6.35 C112.5,6.35 112.5,5.09 75.0,5.09 C37.5,5.09 37.5,5.19 0.0,5.19 Z' fill='%23c4c4c4'/%3E%3C/svg%3E");
+  --trazo-blanco: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cpath d='M0.0,7.39 C37.5,7.39 37.5,6.72 75.0,6.72 C112.5,6.72 112.5,2.77 150.0,2.77 C187.5,2.77 187.5,2.70 225.0,2.70 C262.5,2.70 262.5,6.33 300.0,6.33 C337.5,6.33 337.5,5.60 375.0,5.60 C412.5,5.60 412.5,5.07 450.0,5.07 C487.5,5.07 487.5,3.37 525.0,3.37 C562.5,3.37 562.5,5.67 600.0,5.67 L600.0,7.35 C562.5,7.35 562.5,6.79 525.0,6.79 C487.5,6.79 487.5,8.56 450.0,8.56 C412.5,8.56 412.5,8.67 375.0,8.67 C337.5,8.67 337.5,8.89 300.0,8.89 C262.5,8.89 262.5,5.32 225.0,5.32 C187.5,5.32 187.5,4.97 150.0,4.97 C112.5,4.97 112.5,9.58 75.0,9.58 C37.5,9.58 37.5,8.98 0.0,8.98 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  --trazo-blanco-fino: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cpath d='M0.0,6.01 C37.5,6.01 37.5,5.97 75.0,5.97 C112.5,5.97 112.5,6.65 150.0,6.65 C187.5,6.65 187.5,7.17 225.0,7.17 C262.5,7.17 262.5,6.32 300.0,6.32 C337.5,6.32 337.5,7.03 375.0,7.03 C412.5,7.03 412.5,2.72 450.0,2.72 C487.5,2.72 487.5,5.13 525.0,5.13 C562.5,5.13 562.5,7.64 600.0,7.64 L600.0,8.62 C562.5,8.62 562.5,6.54 525.0,6.54 C487.5,6.54 487.5,4.75 450.0,4.75 C412.5,4.75 412.5,9.03 375.0,9.03 C337.5,9.03 337.5,7.99 300.0,7.99 C262.5,7.99 262.5,9.08 225.0,9.08 C187.5,9.08 187.5,8.18 150.0,8.18 C112.5,8.18 112.5,8.36 75.0,8.36 C37.5,8.36 37.5,7.17 0.0,7.17 Z' fill='rgba%28255,255,255,0.45%29'/%3E%3C/svg%3E");
+  --trazo-gris: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 12' preserveAspectRatio='none'%3E%3Cpath d='M0.0,4.10 C37.5,4.10 37.5,4.47 75.0,4.47 C112.5,4.47 112.5,4.03 150.0,4.03 C187.5,4.03 187.5,4.87 225.0,4.87 C262.5,4.87 262.5,5.26 300.0,5.26 C337.5,5.26 337.5,2.44 375.0,2.44 C412.5,2.44 412.5,2.57 450.0,2.57 C487.5,2.57 487.5,6.15 525.0,6.15 C562.5,6.15 562.5,3.86 600.0,3.86 L600.0,5.83 C562.5,5.83 562.5,9.09 525.0,9.09 C487.5,9.09 487.5,4.76 450.0,4.76 C412.5,4.76 412.5,5.39 375.0,5.39 C337.5,5.39 337.5,7.95 300.0,7.95 C262.5,7.95 262.5,8.12 225.0,8.12 C187.5,8.12 187.5,6.72 150.0,6.72 C112.5,6.72 112.5,7.96 75.0,7.96 C37.5,7.96 37.5,5.38 0.0,5.38 Z' fill='%233a3a3a'/%3E%3C/svg%3E");
+  --m-pill-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M22,4 C60,1.5 130,3.5 176,2.5 C192,3 199,16 198.5,30 C198,45 190,57 172,57.5 C120,59 70,56.5 26,58 C9,57 1.5,45 1.5,30 C1.5,14 8,4.5 22,4 Z' fill='%23000'/%3E%3C/svg%3E");
+  --o-pill-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M22,4 C60,1.5 130,3.5 176,2.5 C192,3 199,16 198.5,30 C198,45 190,57 172,57.5 C120,59 70,56.5 26,58 C9,57 1.5,45 1.5,30 C1.5,14 8,4.5 22,4 Z' fill='none' stroke='%23111111' stroke-width='3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --m-pill-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M26,2.5 C80,4 140,1.5 172,3.5 C190,4.5 198.5,15 198,29 C197.5,46 188,56 170,56.5 C130,58.5 60,55.5 28,57.5 C10,57.5 1.5,46 2,31 C2.5,15 10,3 26,2.5 Z' fill='%23000'/%3E%3C/svg%3E");
+  --o-pill-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M26,2.5 C80,4 140,1.5 172,3.5 C190,4.5 198.5,15 198,29 C197.5,46 188,56 170,56.5 C130,58.5 60,55.5 28,57.5 C10,57.5 1.5,46 2,31 C2.5,15 10,3 26,2.5 Z' fill='none' stroke='%23111111' stroke-width='3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --m-pill-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M24,3.5 C70,2 120,4.5 174,2 C191,2 199,15 198.5,31 C198,47 189,58 174,57 C110,55.5 75,58.5 24,57 C8,56.5 1.5,44 1.5,29 C1.5,14 9,4 24,3.5 Z' fill='%23000'/%3E%3C/svg%3E");
+  --o-pill-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M24,3.5 C70,2 120,4.5 174,2 C191,2 199,15 198.5,31 C198,47 189,58 174,57 C110,55.5 75,58.5 24,57 C8,56.5 1.5,44 1.5,29 C1.5,14 9,4 24,3.5 Z' fill='none' stroke='%23111111' stroke-width='3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --o-pill-1-cobalto: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M22,4 C60,1.5 130,3.5 176,2.5 C192,3 199,16 198.5,30 C198,45 190,57 172,57.5 C120,59 70,56.5 26,58 C9,57 1.5,45 1.5,30 C1.5,14 8,4.5 22,4 Z' fill='none' stroke='%232b45a6' stroke-width='4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --o-pill-1-gris: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M22,4 C60,1.5 130,3.5 176,2.5 C192,3 199,16 198.5,30 C198,45 190,57 172,57.5 C120,59 70,56.5 26,58 C9,57 1.5,45 1.5,30 C1.5,14 8,4.5 22,4 Z' fill='none' stroke='%23555555' stroke-width='2.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --m-forma-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath d='M70,8 C300,0 650,14 930,6 C975,6 995,40 994,90 C990,250 1000,400 992,520 C990,575 960,594 900,592 C650,600 350,588 90,596 C35,597 6,570 7,515 C10,380 0,230 6,80 C8,30 30,10 70,8 Z' fill='%23000'/%3E%3C/svg%3E");
+  --o-forma-1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath d='M70,8 C300,0 650,14 930,6 C975,6 995,40 994,90 C990,250 1000,400 992,520 C990,575 960,594 900,592 C650,600 350,588 90,596 C35,597 6,570 7,515 C10,380 0,230 6,80 C8,30 30,10 70,8 Z' fill='none' stroke='%23111111' stroke-width='3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --m-forma-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath d='M90,5 C350,12 620,2 920,9 C970,10 994,35 992,95 C988,260 998,380 994,500 C992,570 965,592 910,595 C680,588 330,598 80,592 C30,591 5,566 8,505 C12,360 2,240 5,95 C6,35 35,6 90,5 Z' fill='%23000'/%3E%3C/svg%3E");
+  --o-forma-2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath d='M90,5 C350,12 620,2 920,9 C970,10 994,35 992,95 C988,260 998,380 994,500 C992,570 965,592 910,595 C680,588 330,598 80,592 C30,591 5,566 8,505 C12,360 2,240 5,95 C6,35 35,6 90,5 Z' fill='none' stroke='%23111111' stroke-width='3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --m-forma-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath d='M60,10 C320,4 600,10 940,4 C982,4 996,45 993,110 C989,280 999,410 990,530 C987,578 955,596 890,594 C620,598 380,590 70,595 C28,595 4,568 6,520 C9,370 1,220 7,70 C9,28 25,11 60,10 Z' fill='%23000'/%3E%3C/svg%3E");
+  --o-forma-3: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath d='M60,10 C320,4 600,10 940,4 C982,4 996,45 993,110 C989,280 999,410 990,530 C987,578 955,596 890,594 C620,598 380,590 70,595 C28,595 4,568 6,520 C9,370 1,220 7,70 C9,28 25,11 60,10 Z' fill='none' stroke='%23111111' stroke-width='3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --o-pill-2-cobalto: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M26,2.5 C80,4 140,1.5 172,3.5 C190,4.5 198.5,15 198,29 C197.5,46 188,56 170,56.5 C130,58.5 60,55.5 28,57.5 C10,57.5 1.5,46 2,31 C2.5,15 10,3 26,2.5 Z' fill='none' stroke='%232b45a6' stroke-width='4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --o-forma-2-cobalto: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' preserveAspectRatio='none'%3E%3Cpath d='M90,5 C350,12 620,2 920,9 C970,10 994,35 992,95 C988,260 998,380 994,500 C992,570 965,592 910,595 C680,588 330,598 80,592 C30,591 5,566 8,505 C12,360 2,240 5,95 C6,35 35,6 90,5 Z' fill='none' stroke='%232b45a6' stroke-width='4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+  --m-pie: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C0,25 25,8 80,7 C330,16 620,1 920,9 C972,10 1000,32 1000,72 V1000 H0 Z' fill='%23000'/%3E%3C/svg%3E");
+  --m-franja: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 40' preserveAspectRatio='none'%3E%3Cpath d='M0,0 H1000 V26 C860,36 700,30 540,35 C380,40 220,31 0,38 Z' fill='%23000'/%3E%3C/svg%3E");
+
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --sombra: 0 1px 2px rgb(17 17 17 / 0.05), 0 18px 40px -22px rgb(17 17 17 / 0.28);
 
@@ -247,12 +275,30 @@ h3 em {
 /* Bloque de color con bordes de pieza: se separa del borde de la pantalla */
 .bloque {
   position: relative;
+  isolation: isolate;
   margin-inline: clamp(0.5rem, 1.5vw, 1rem);
   padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
-  border-radius: var(--forma-bloque);
 }
-.bloque.b {
-  border-radius: var(--forma-bloque-b);
+.sin-fondo,
+.bloque.on-cobalto,
+.bloque.on-celadon {
+  background: transparent;
+}
+.bloque::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--cobalto);
+  -webkit-mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
+  mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
+}
+.bloque.on-celadon::before {
+  background: var(--celadon);
+}
+.bloque.b::before {
+  -webkit-mask-image: var(--m-forma-2);
+  mask-image: var(--m-forma-2);
 }
 .on-cobalto {
   background: var(--cobalto);
@@ -278,8 +324,8 @@ h3 em {
 }
 /* línea fuerte encima de un dato */
 .rule {
-  border-top: 2px solid currentColor;
   padding-top: 0.9rem;
+  background: var(--trazo) 0 0 / 100% 9px no-repeat;
 }
 .visually-hidden {
   position: absolute !important;
@@ -297,7 +343,8 @@ h3 em {
   background: var(--tinta);
   color: var(--blanco);
   padding: 0.6rem 1rem;
-  border-radius: var(--forma-pill);
+  -webkit-mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+  mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
   transition: top 0.2s;
 }
 .skip-link:focus {
@@ -314,20 +361,26 @@ h3 em {
   gap: 0.6em;
   min-height: 3.375rem;
   padding: 0 1.8rem;
-  border-radius: var(--forma-pill);
   background: var(--bg);
   color: var(--fg);
+  -webkit-mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+  mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
   font-size: var(--t-base);
   font-weight: 700;
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 0.25s, color 0.25s, border-radius 0.5s var(--ease), translate 0.3s var(--ease);
+  transition: background-color 0.25s, color 0.25s, rotate 0.4s var(--ease), translate 0.3s var(--ease);
 }
 .btn:hover {
   --bg: var(--cobalto-hondo);
-  border-radius: 1.5em 1.9em 1.6em 1.75em / 1.9em 1.5em 1.75em 1.6em;
   translate: 0 -2px;
+  rotate: -1deg;
+}
+/* con teclado, la máscara se retira para que el anillo de foco se vea entero */
+.btn:focus-visible {
+  -webkit-mask: none;
+  mask: none;
 }
 .btn .arrow {
   transition: transform 0.3s var(--ease);
@@ -344,7 +397,9 @@ h3 em {
 .btn.ghost {
   --bg: transparent;
   --fg: var(--tinta);
-  box-shadow: inset 0 0 0 2px var(--tinta);
+  background: var(--o-pill-2) 0 0 / 100% 100% no-repeat, var(--bg);
+  -webkit-mask-image: var(--m-pill-2);
+  mask-image: var(--m-pill-2);
 }
 .btn.ghost:hover {
   --bg: var(--tinta);
@@ -378,6 +433,29 @@ h3 em {
 }
 .on-cobalto .link {
   color: var(--blanco);
+}
+
+/* Superficies con borde de pieza: ningún lado es recto.
+   La máscara se pone en un ::before para no recortar a Maddy y Furi. */
+.pieza-1,
+.pieza-2,
+.pieza-3 {
+  -webkit-mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
+  mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
+}
+.pieza-2 {
+  -webkit-mask-image: var(--m-forma-2);
+  mask-image: var(--m-forma-2);
+}
+.pieza-3 {
+  -webkit-mask-image: var(--m-forma-3);
+  mask-image: var(--m-forma-3);
+}
+/* Contorno dibujado a mano para controles con borde (frases, filtros, pestañas…) */
+.contorno {
+  background: var(--o-pill-1) 0 0 / 100% 100% no-repeat, var(--bg-c, transparent);
+  -webkit-mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
+  mask: var(--m-pill-1) 0 0 / 100% 100% no-repeat;
 }
 
 /* número dentro de una mota */
@@ -557,7 +635,8 @@ h3 em {
   margin-block: 2em;
   padding: 1.6rem 1.8rem;
   background: var(--celadon);
-  border-radius: var(--forma-1);
+  -webkit-mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
+  mask: var(--m-forma-1) 0 0 / 100% 100% no-repeat;
   font-size: clamp(1.375rem, 1.15rem + 0.9vw, 1.875rem);
   line-height: 1.25;
   font-weight: 500;
@@ -566,10 +645,12 @@ h3 em {
 }
 .prose hr {
   border: 0;
-  border-top: 1px solid var(--linea);
+  height: 7px;
+  background: var(--trazo-fino) 0 0 / 100% 100% no-repeat;
   margin-block: 2.5em;
 }
 .prose img {
   width: 100%;
-  border-radius: var(--forma-2);
+  -webkit-mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
+  mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
 }

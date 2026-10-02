@@ -28,9 +28,9 @@ const { title, updated = "septiembre de 2026" } = Astro.props;
 <style>
   .draft {
     padding: 1rem 1.25rem;
-    border-radius: var(--forma-2);
-    background: var(--hueso);
-    box-shadow: inset 0 0 0 1.5px var(--tinta);
+    background: var(--o-forma-2) 0 0 / 100% 100% no-repeat, var(--hueso);
+    -webkit-mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-2) 0 0 / 100% 100% no-repeat;
     font-size: 0.92rem;
     margin-bottom: 2.5rem;
   }

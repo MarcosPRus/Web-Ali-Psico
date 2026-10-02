@@ -73,7 +73,18 @@ const year = new Date().getFullYear();
     position: relative;
     margin-top: clamp(4rem, 8vw, 7rem);
     padding-top: clamp(4rem, 7vw, 6rem);
-    border-radius: 4.5rem 6rem 0 0 / 2.5rem 3.5rem 0 0;
+    isolation: isolate;
+    background: transparent;
+  }
+  /* la base de la web: borde superior que ondula, sin rectas */
+  .site-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--tinta);
+    -webkit-mask: var(--m-pie) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-pie) 0 0 / 100% 100% no-repeat;
   }
   .site-footer :global(.f-maddy) {
     right: clamp(2rem, 10vw, 9rem);
@@ -127,7 +138,7 @@ const year = new Date().getFullYear();
     color: var(--cobalto-suave);
     margin-bottom: 1rem;
     padding-top: 0.9rem;
-    border-top: 2px solid #333;
+    background: var(--trazo-gris) 0 0 / 100% 9px no-repeat;
   }
   .col-title:not(:first-child) {
     margin-top: 2rem;
@@ -158,8 +169,9 @@ const year = new Date().getFullYear();
   .crisis {
     margin-top: 3.5rem;
     padding: 1rem 1.25rem;
-    border-radius: var(--forma-3);
     background: #1e1e1e;
+    -webkit-mask: var(--m-forma-3) 0 0 / 100% 100% no-repeat;
+    mask: var(--m-forma-3) 0 0 / 100% 100% no-repeat;
     color: #d6d6d6;
     font-size: var(--t-sm);
   }
