@@ -40,3 +40,6 @@ Con «reducir movimiento» activado, ninguna animación se mueve.
 
 ## Movimiento
 Los bloques aparecen suavemente al hacer scroll. Los botones cambian de forma al pasar el ratón. Las tarjetas suben un poco. Las frases de «¿Te suena?», el mapa de consultas y las preguntas frecuentes son interactivos.
+
+## Logo
+Firma «AL» de un solo trazo, en blanco, sobre una mota cobalto de «canto rodado», con un lado más plano y un hombro más alto (`src/components/Logo.astro`). Sobre fondo cobalto, como en el menú móvil, se invierte: mota blanca y trazo cobalto. Los iconos de `public/favicon/` llevan la misma marca.

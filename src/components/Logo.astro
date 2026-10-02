@@ -1,25 +1,68 @@
 ---
+/**
+ * Logo: firma «AL» trazada a mano, de un solo trazo, dentro de una mota
+ * de canto rodado en cobalto. Al lado, el nombre.
+ * `sobre="cobalto"` invierte la marca (mota blanca, trazo cobalto) para fondos azules.
+ */
 interface Props {
   class?: string;
   tone?: "ink" | "light";
+  sobre?: "claro" | "cobalto";
 }
-const { class: className, tone = "ink" } = Astro.props;
+const { class: className, tone = "ink", sobre = "claro" } = Astro.props;
 ---
 
-<span class:list={["logo", `tone-${tone}`, className]}>
-  <span class="name">Alicia Lozano</span>
-  <span class="role">— Psicóloga</span>
+<span class:list={["logo", `tone-${tone}`, `sobre-${sobre}`, className]}>
+  <svg class="marca" viewBox="0 0 300 200" aria-hidden="true">
+    <path class="mota" d="M132,16 C190,4 262,22 282,66 C298,100 286,146 252,170 C214,196 140,196 92,184 C46,172 12,144 13,104 C14,62 72,28 132,16 Z" />
+    <path class="trazo" d="M66,152 C78,114 92,78 105,48 C118,80 130,114 143,151" />
+    <path class="trazo" d="M143,151 C134,124 116,110 94,113 C76,116 72,128 84,129 C108,131 146,108 176,58 C175,92 172,128 176,148 C182,160 206,154 244,140 C254,136 260,128 258,120" />
+  </svg>
+  <span class="words">
+    <span class="name">Alicia Lozano</span>
+    <span class="role">— Psicóloga</span>
+  </span>
 </span>
 
 <style>
   .logo {
     display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .marca {
+    width: 3.6rem;
+    height: 2.4rem;
+    flex: none;
+    transition: rotate 0.5s var(--ease);
+  }
+  :global(a:hover) > .logo .marca {
+    rotate: -4deg;
+  }
+  .mota {
+    fill: var(--cobalto);
+  }
+  .trazo {
+    fill: none;
+    stroke: var(--blanco);
+    stroke-width: 14;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .sobre-cobalto .mota {
+    fill: var(--blanco);
+  }
+  .sobre-cobalto .trazo {
+    stroke: var(--cobalto);
+  }
+  .words {
+    display: inline-flex;
     align-items: baseline;
     gap: 0.4rem;
     font-size: 1.25rem;
-    line-height: 1;
     letter-spacing: -0.02em;
-    white-space: nowrap;
   }
   .name {
     font-weight: 700;
@@ -31,9 +74,16 @@ const { class: className, tone = "ink" } = Astro.props;
   .tone-light .role {
     color: #bdbdbd;
   }
+  .sobre-cobalto .role {
+    color: var(--cobalto-suave);
+  }
   @media (max-width: 26rem) {
     .role {
       display: none;
+    }
+    .marca {
+      width: 3rem;
+      height: 2rem;
     }
   }
 </style>
