@@ -27,7 +27,10 @@ Cloudflare Pages: *Build command* `npm run build`, *Output directory* `dist`, va
 | Página “Sobre mí” (historia, formación, curiosidades) | `src/pages/sobre-mi.astro` |
 | Portada | `src/pages/index.astro` y `src/components/home/*` |
 | Textos legales | `src/pages/aviso-legal.astro`, `privacidad.astro`, `cookies.astro` |
-| Colores y tipografías | `src/styles/global.css` (variables al principio) |
+| Colores, tipografía y formas | `src/styles/global.css` (variables al principio). Guía en [`DISENO.md`](DISENO.md) |
+| Siluetas de Maddy y Furi | `src/components/Silueta.astro` |
+| Franja de información práctica | `src/components/InfoBar.astro` (lee `CONTACT` y `PRICE`) |
+| Fotos de cerámica y de los gatos | `public/img/taller/` y `public/img/gatos/` |
 
 ### Escribir un artículo nuevo
 
@@ -39,27 +42,15 @@ title: "Título del artículo"
 description: "Resumen de una o dos frases (sale en Google y en las tarjetas)."
 pubDate: "2026-10-01"
 category: "Imagen corporal"
-scene: "espejo"               # ilustración provisional (ver lista abajo)
 # heroImage: "/img/blog/mi-foto.jpg"   # foto real, si la hay
 ---
 
 Texto en Markdown…
 ```
 
-## Cambiar las ilustraciones por fotos reales
+## Fotos de los artículos
 
-Las imágenes son ilustraciones SVG “recortadas” hechas a medida (`src/components/art/Art.astro`). Pesan casi nada y sirven de marcador de posición. Para poner una foto:
-
-1. Guarda la foto en `public/img/` (mejor en `.webp` o `.jpg`, unos 1200 px de ancho).
-2. Donde aparezca `<Media scene="retrato" … />`, añade `src`:
-
-   ```astro
-   <Media src="/img/alicia-retrato.jpg" alt="Alicia sonriendo en su consulta" shape="arch" />
-   ```
-
-3. En servicios y blog basta con añadir `heroImage: "/img/…"` al principio del `.md`.
-
-Escenas disponibles: `retrato`, `mesa`, `espejo`, `sol`, `jardin`, `abrazo`, `pantalla`, `jarrones`, `taza`, `ventana`.
+Los artículos sin foto muestran una portada de color con su categoría. Para poner una foto, guárdala en `public/img/` (mejor `.webp`, unos 1200 px de ancho) y añade `heroImage: "/img/…"` al principio del `.md`.
 
 ## Formulario de contacto
 
@@ -73,7 +64,7 @@ Mientras esté vacía, el formulario abre la aplicación de correo de la persona
 ## Detalles técnicos
 
 - Sin frameworks de JavaScript: solo unos pocos scripts pequeños (menú, mapa de consultas, frases interactivas, filtro del blog).
-- Tipografías *Fraunces* y *Figtree* alojadas en la propia web, recortadas a los caracteres del español para que carguen rápido.
+- Una sola tipografía, *Schibsted Grotesk* (variable), alojada en la propia web y recortada a los caracteres del español.
 - Sin cookies ni rastreadores, así que no hace falta banner de cookies.
 - SEO: sitemap, RSS, Open Graph (`public/og.jpg`) y datos estructurados `Psychologist` para Google.
 - `public/_redirects` redirige las rutas antiguas (`/services/…`) a `/servicios/…`.

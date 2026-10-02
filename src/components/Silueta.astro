@@ -1,0 +1,155 @@
+---
+/**
+ * Maddy y Furi como siluetas que viven en las cornisas de la web.
+ * Siempre decorativas (aria-hidden). El padre las coloca con `class`/`style`;
+ * la base de la silueta es su borde inferior: se apoya sobre la cornisa.
+ *
+ *   <Silueta gato="furi" />                 sentado, mueve la cola y parpadea
+ *   <Silueta gato="maddy" />                tumbada, respira y deja la cola colgando
+ *   <Silueta gato="furi" pose="asomado" />  solo orejas y ojos asomando por un borde
+ *
+ * Furi: negro entero, orejas grandes, ojos amarillo verdoso; nervioso → cola rápida.
+ * Maddy: pelo largo, más grande, ojos cerrados; serena → respiración y cola lenta.
+ */
+interface Props {
+  gato: "furi" | "maddy";
+  pose?: "sentado" | "tumbada" | "asomado";
+  size?: string;
+  class?: string;
+  style?: string;
+}
+const { gato, pose = gato === "furi" ? "sentado" : "tumbada", size, class: className, style = "" } = Astro.props;
+const w = size ?? (pose === "tumbada" ? "12rem" : pose === "asomado" ? "5.5rem" : "5.75rem");
+---
+
+<span class:list={["silueta", `s-${pose}`, className]} style={`--w:${w};${style}`} aria-hidden="true">
+  {
+    pose === "sentado" && (
+      <>
+        <svg class="cuerpo" viewBox="0 0 100 130">
+          <g class="oreja-i">
+            <path d="M27 44 L25 8 Q26 4 30 7 L48 32 Z" />
+          </g>
+          <path d="M73 44 L75 8 Q74 4 70 7 L52 32 Z" />
+          <path d="M18 130 C16 96 30 70 50 68 C70 70 84 96 82 130 Z" />
+          <ellipse cx="50" cy="50" rx="25" ry="22" />
+          <g class="ojos">
+            <ellipse cx="41" cy="47" rx="3.6" ry="4.2" />
+            <ellipse cx="59" cy="47" rx="3.6" ry="4.2" />
+          </g>
+        </svg>
+        <svg class="cola" viewBox="0 0 40 120">
+          <path d="M6 4 C 10 40, 2 70, 14 100 C 18 110, 26 112, 30 106" />
+        </svg>
+      </>
+    )
+  }
+  {
+    pose === "tumbada" && (
+      <>
+        <svg class="cuerpo" viewBox="0 -6 200 70">
+          <g class="respira">
+            <path d="M26 64 C 24 44, 46 30, 86 28 C 126 25, 168 30, 184 50 C 190 57, 189 62, 186 64 Z" />
+            <path d="M60 31 l6 -5 l5 5 l6 -6 l5 6 l6 -5 l5 5 v6 h-33 z" />
+          </g>
+          <path d="M14 26 L16 2 Q17 -1 20 2 L32 18 Z" />
+          <path d="M40 16 L50 -2 Q52 -4 54 0 L56 22 Z" />
+          <ellipse cx="34" cy="40" rx="25" ry="21" />
+          <path class="parpado" d="M26 40 q4 3 8 0 M38 40 q4 3 8 0" />
+        </svg>
+        <svg class="cola" viewBox="0 0 30 110">
+          <path d="M8 4 C 2 34, 18 58, 10 86 C 8 94, 12 100, 18 100" />
+        </svg>
+      </>
+    )
+  }
+  {
+    pose === "asomado" && (
+      <svg class="cuerpo" viewBox="0 0 100 64">
+        <g class="oreja-i">
+          <path d="M24 46 L22 6 Q23 2 27 5 L46 30 Z" />
+        </g>
+        <path d="M76 46 L78 6 Q77 2 73 5 L54 30 Z" />
+        <path d="M18 64 C18 40 32 28 50 28 C68 28 82 40 82 64 Z" />
+        <g class="ojos">
+          <ellipse cx="40" cy="48" rx="4" ry="4.8" />
+          <ellipse cx="60" cy="48" rx="4" ry="4.8" />
+        </g>
+        <ellipse class="pata" cx="30" cy="62" rx="9" ry="5" />
+        <ellipse class="pata" cx="70" cy="62" rx="9" ry="5" />
+      </svg>
+    )
+  }
+</span>
+
+<style>
+  .silueta {
+    position: absolute;
+    display: block;
+    width: var(--w);
+    pointer-events: none;
+    z-index: 3;
+  }
+  svg {
+    display: block;
+    overflow: visible;
+    fill: var(--tinta);
+  }
+  .cuerpo {
+    width: 100%;
+    height: auto;
+  }
+  .ojos {
+    fill: var(--ojo);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: parpadeo 5.5s ease-in-out infinite;
+  }
+  .oreja-i {
+    transform-box: fill-box;
+    transform-origin: 80% 100%;
+    animation: oreja 8s ease-in-out infinite;
+  }
+  .parpado {
+    fill: none;
+    stroke: var(--hueso);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+  .respira {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: respira 4.5s ease-in-out infinite;
+  }
+  .cola {
+    position: absolute;
+    fill: none;
+    stroke: var(--tinta);
+    stroke-linecap: round;
+  }
+  /* Furi sentado: la cola cuelga por el lado derecho, nerviosa */
+  .s-sentado .cola {
+    width: 37%;
+    left: 70%;
+    top: 86%;
+    stroke-width: 9;
+    transform-origin: 15% 3%;
+    animation: cola 3.6s ease-in-out infinite;
+  }
+  /* Maddy tumbada: cola gorda colgando de la cornisa, tranquila */
+  .s-tumbada .cola {
+    width: 14%;
+    left: 90%;
+    top: 84%;
+    stroke-width: 13;
+    transform-origin: 27% 4%;
+    animation: cola-lenta 6s ease-in-out infinite;
+  }
+  .s-asomado .pata {
+    fill: var(--tinta);
+  }
+  /* al pasar el ratón por la zona, Furi mueve más rápido la cola */
+  :global(:hover) > .s-sentado .cola {
+    animation-duration: 1.6s;
+  }
+</style>

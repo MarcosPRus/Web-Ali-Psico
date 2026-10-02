@@ -23,9 +23,9 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     category: z.string().default("Reflexiones"),
-    /** Ilustración provisional */
-    scene: z.enum(scenes).default("taza"),
-    /** Foto real (ruta en /public). Si existe, sustituye a la ilustración */
+    /** (obsoleto) ilustración del diseño anterior; ya no se usa */
+    scene: z.enum(scenes).optional(),
+    /** Foto (ruta en /public). Sin foto, la portada es un bloque de color con la categoría */
     heroImage: z.string().optional(),
     draft: z.boolean().default(false),
   }),
@@ -43,7 +43,7 @@ const services = defineCollection({
     /** Tres ideas clave */
     points: z.array(z.string()).default([]),
     order: z.number(),
-    scene: z.enum(scenes),
+    scene: z.enum(scenes).optional(),
     heroImage: z.string().optional(),
     accent: z.enum(["terracotta", "lilac", "sage", "blush", "butter", "wine"]).default("terracotta"),
     /** Slug del artículo del blog con la información ampliada (opcional) */

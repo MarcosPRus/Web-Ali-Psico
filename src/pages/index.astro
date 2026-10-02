@@ -1,20 +1,17 @@
 ---
+import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
-import Hero from "../components/home/Hero.astro";
-import Marquee from "../components/home/Marquee.astro";
 import Resonates from "../components/home/Resonates.astro";
-import AboutTeaser from "../components/home/AboutTeaser.astro";
-import Approach from "../components/home/Approach.astro";
 import SectionHead from "../components/SectionHead.astro";
-import ServicesList from "../components/home/ServicesList.astro";
 import Steps from "../components/Steps.astro";
 import Locations from "../components/Locations.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Icon from "../components/Icon.astro";
-import Shape from "../components/art/Shape.astro";
+import Silueta from "../components/Silueta.astro";
 import { CONTACT } from "../consts";
 
+const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
 
 const faqs = [
   {
@@ -42,33 +39,159 @@ const faqs = [
     a: "Todo lo que compartas en consulta es confidencial, según el Código Deontológico y la normativa de protección de datos. Tus datos se guardan de forma segura.",
   },
 ];
+
+const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4", "--forma-2", "--forma-1"];
+
+const taller = [
+  { src: "/img/taller/cuenco-maddy.webp", alt: "Cuenco verde hecho por Alicia, con MADDY y un corazón estampados en el fondo", pie: "El cuenco de Maddy", forma: "mota", baja: false },
+  { src: "/img/gatos/maddy-retrato.webp", alt: "Maddy, la gata blanca y negra de pelo largo de Alicia", pie: "Maddy, la mayor", forma: "arco", baja: true },
+  { src: "/img/gatos/furi-dormido.webp", alt: "Furi, el gato negro de Alicia, durmiendo estirado sobre una manta blanca", pie: "Furi, el pequeño", forma: "mota-b", baja: false },
+  { src: "/img/taller/cuenco-flores-caladas.webp", alt: "Cuenco verde agua con el borde ondulado y flores caladas, hecho por Alicia", pie: "Cuenco con flores caladas", forma: "arco-inv", baja: true },
+];
 ---
 
 <Base>
-  <Hero />
-  <Marquee />
-  <Resonates />
-  <AboutTeaser />
-
-  <ServicesList />
-
-  <Approach />
-
-  <section class="section" aria-labelledby="steps-title">
+  <!-- ─── Portada ───────────────────────────────────────── -->
+  <section class="hero">
     <div class="container">
-      <SectionHead eyebrow="Cómo empezamos" align="center">
-        <span id="steps-title">Pedir ayuda es <em>más sencillo</em> de lo que parece</span>
-      </SectionHead>
-      <Steps />
-      <p class="steps-cta" data-reveal>
-        <a href={CONTACT.whatsapp} class="btn" target="_blank" rel="noopener"><Icon name="whatsapp" /> Escríbeme ahora</a>
+      <div class="g12 hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-reveal>Psicóloga sanitaria · Sevilla y online</p>
+          <h1 data-reveal style="--d:1">Psicología para dejar de pelearte con la comida y con tu cuerpo.</h1>
+          <p class="lead" data-reveal style="--d:2">
+            Soy Alicia Lozano. Te acompaño cuando la ansiedad, la autoestima o la relación con la comida pesan más de la
+            cuenta. Sin juicios y a tu ritmo.
+          </p>
+          <div class="hero-cta" data-reveal style="--d:3">
+            <a href="/contacto" class="btn">Pide tu primera cita <Icon name="arrow" class="arrow" /></a>
+            <a href={CONTACT.whatsapp} class="btn ghost" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-foto" data-reveal style="--d:2">
+          <Silueta gato="furi" class="hero-furi" />
+          <img
+            src="/img/ali-retrato.webp"
+            alt="Alicia Lozano, psicóloga, sonriendo en su despacho"
+            width="1000"
+            height="1250"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+
+      <ul class="datos">
+        <li class="rule" data-reveal><strong>TCA e imagen corporal</strong><span>Especialidad</span></li>
+        <li class="rule" data-reveal style="--d:1"><strong>Desde 14 años</strong><span>Adolescentes y personas adultas</span></li>
+        <li class="rule" data-reveal style="--d:2"><strong>Presencial y online</strong><span>Mismo precio, mismo cuidado</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <Resonates />
+
+  <!-- ─── Especialidades: bloque cobalto con Maddy en la cornisa ─ -->
+  <section class="bloque on-cobalto especialidades" aria-labelledby="esp-title">
+    <Silueta gato="maddy" class="esp-maddy" />
+    <div class="container">
+      <div class="g12 esp-head">
+        <h2 id="esp-title" data-reveal>En qué te puedo ayudar</h2>
+        <p class="lead" data-reveal style="--d:1">
+          Terapia individual con un enfoque integrador y basado en la evidencia: terapia cognitivo-conductual, ACT, DBT y
+          terapia centrada en la compasión.
+        </p>
+      </div>
+      <ul class="esp-grid">
+        {
+          services.map((s, i) => (
+            <li data-reveal style={`--d:${i % 3};border-radius:var(${formas[i]})`}>
+              <a href={`/servicios#${s.id}`}>
+                <span class="mota-num" style={i % 2 ? "border-radius:var(--mota-b)" : undefined}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3>{s.data.title}</h3>
+                <p>{s.data.short}</p>
+                <span class="ir" aria-hidden="true"><Icon name="arrow" size={20} /></span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="esp-more" data-reveal>
+        <a href="/servicios" class="btn light">Cómo trabajo y tarifas <Icon name="arrow" class="arrow" /></a>
       </p>
     </div>
   </section>
 
-  <section class="section places" aria-labelledby="loc-title">
-    <Shape name="leaf" color="var(--sage)" size="14rem" class="p-leaf" />
-    <div class="container wide">
+  <!-- ─── Sobre mí ──────────────────────────────────────── -->
+  <section class="section sobre" aria-labelledby="sobre-title">
+    <div class="container g12">
+      <figure class="foto sobre-foto" data-reveal>
+        <img
+          src="/img/taller/portalapices-made-with-love.webp"
+          alt="Portalápices de cerámica blanco salpicado de azul cobalto, con la frase made with love grabada, hecho por Alicia"
+          width="1000"
+          height="770"
+          loading="lazy"
+        />
+        <figcaption>Made with love. Portalápices de Alicia, de donde sale el azul de esta web.</figcaption>
+      </figure>
+      <div class="sobre-copy">
+        <p class="eyebrow" data-reveal>Sobre mí</p>
+        <h2 id="sobre-title" data-reveal style="--d:1">Psicóloga general sanitaria, especializada en <em>TCA</em>.</h2>
+        <p class="lead" data-reveal style="--d:2">
+          Me especialicé en trastornos de la conducta alimentaria porque vi de cerca cuánto sufrimiento hay detrás de algo
+          tan cotidiano como sentarse a comer. Trabajo con perspectiva de género y una mirada crítica hacia la cultura de
+          la dieta.
+        </p>
+        <dl class="ficha" data-reveal style="--d:3">
+          <dt>Colegiada</dt><dd>Nº AN-11007</dd>
+          <dt>Especialización</dt><dd>Experto en TCA · Imagen corporal · ACT · Psiconutrición</dd>
+          <dt>Enfoque</dt><dd>Integrador, basado en la evidencia</dd>
+        </dl>
+        <a href="/sobre-mi" class="link" data-reveal style="--d:4">Mi historia completa <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Cómo empezamos ────────────────────────────────── -->
+  <section class="section pasos" aria-labelledby="pasos-title">
+    <div class="container">
+      <SectionHead eyebrow="Cómo empezamos">
+        <span id="pasos-title">Pedir ayuda es <em>más sencillo</em> de lo que parece</span>
+      </SectionHead>
+      <Steps />
+    </div>
+  </section>
+
+  <!-- ─── Fuera de consulta: celadón ────────────────────── -->
+  <section class="bloque b on-celadon taller" aria-labelledby="taller-title">
+    <div class="container">
+      <div class="taller-head">
+        <h2 id="taller-title" data-reveal>Fuera de consulta: barro, Maddy y Furi.</h2>
+        <p data-reveal style="--d:1">
+          Hago cerámica. Ninguna pieza sale perfecta, y aprender a quererlas así se parece mucho a lo que hacemos en
+          terapia.
+        </p>
+      </div>
+      <ul class="taller-grid">
+        {
+          taller.map((t, i) => (
+            <li class:list={[t.baja && "baja"]} data-reveal style={`--d:${i}`}>
+              <figure class="foto">
+                <img class={`f-${t.forma}`} src={t.src} alt={t.alt} loading="lazy" width="600" height="750" />
+                <figcaption>{t.pie}</figcaption>
+              </figure>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── Consultas ─────────────────────────────────────── -->
+  <section class="section" aria-labelledby="loc-title">
+    <div class="container">
       <SectionHead eyebrow="Dónde encontrarme">
         <span id="loc-title">Tres consultas en Sevilla <em>y una en tu casa</em></span>
         <Fragment slot="lead">Elige la que te quede más cerca o hazlo online, con el mismo precio y el mismo cuidado.</Fragment>
@@ -77,17 +200,22 @@ const faqs = [
     </div>
   </section>
 
+  <!-- ─── Preguntas frecuentes ──────────────────────────── -->
   <section class="section faq-sec" aria-labelledby="faq-title">
-    <div class="container wide faq-grid">
+    <div class="container g12">
       <div class="faq-aside">
         <SectionHead eyebrow="Preguntas frecuentes">
           <span id="faq-title">Lo que quizá <em>te estás preguntando</em></span>
         </SectionHead>
         <p class="muted" data-reveal>
-          ¿No encuentras tu duda? Escríbeme a <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> o por&nbsp;<a href={CONTACT.whatsapp} target="_blank" rel="noopener">WhatsApp</a>.
+          ¿No encuentras tu duda? Escríbeme a <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> o por&nbsp;<a
+            href={CONTACT.whatsapp}
+            target="_blank"
+            rel="noopener">WhatsApp</a
+          >.
         </p>
       </div>
-      <Faq items={faqs} />
+      <div class="faq-list"><Faq items={faqs} /></div>
     </div>
   </section>
 
@@ -95,41 +223,286 @@ const faqs = [
 </Base>
 
 <style>
-  .steps-cta {
-    display: flex;
-    justify-content: center;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
+  /* Portada */
+  .hero {
+    padding-top: clamp(2.5rem, 5vw, 4.5rem);
   }
-  .places {
-    background: var(--sand);
-    overflow: hidden;
+  .hero-grid {
+    align-items: end;
+    row-gap: 3rem;
   }
-  .places :global(.p-leaf) {
-    position: absolute;
-    right: -3rem;
-    top: 3rem;
-    rotate: -30deg;
-    opacity: 0.6;
-  }
-  .faq-grid {
+  .hero-copy {
+    grid-column: 1 / span 7;
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: clamp(2rem, 6vw, 6rem);
+    gap: 1.75rem;
+    justify-items: start;
+    padding-bottom: 0.5rem;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .hero-foto {
+    grid-column: 8 / span 5;
+    position: relative;
+    padding-top: 5.5rem;
+  }
+  .hero-foto img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 22%;
+    border-radius: var(--forma-arco);
+    background: var(--hueso);
+  }
+  /* Furi, sentado en lo alto del retrato */
+  .hero-foto :global(.hero-furi) {
+    right: 3.5rem;
+    top: 0.6rem;
+  }
+  .datos {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--col-gap);
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+  .datos li {
+    display: grid;
+    gap: 0.2rem;
+  }
+  .datos strong {
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .datos span {
+    color: var(--gris);
+    font-size: var(--t-sm);
+  }
+
+  /* Especialidades */
+  .especialidades {
+    margin-top: clamp(4rem, 8vw, 6rem);
+  }
+  .especialidades :global(.esp-maddy) {
+    right: clamp(3rem, 12vw, 10rem);
+    bottom: calc(100% - 0.4rem);
+  }
+  .esp-head {
+    row-gap: 1.25rem;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+    align-items: end;
+  }
+  .esp-head h2 {
+    grid-column: 1 / span 6;
+  }
+  .esp-head .lead {
+    grid-column: 8 / span 5;
+  }
+  .esp-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .esp-grid li {
+    background: rgb(255 255 255 / 0.08);
+    transition: background-color 0.3s, transform 0.4s var(--ease);
+  }
+  .esp-grid li:hover {
+    background: rgb(255 255 255 / 0.15);
+    transform: translateY(-4px);
+  }
+  .esp-grid a {
+    position: relative;
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    height: 100%;
+    padding: 1.75rem 1.75rem 2rem;
+    text-decoration: none;
+  }
+  .esp-grid .mota-num {
+    margin-bottom: 1rem;
+  }
+  .esp-grid p {
+    color: var(--cobalto-suave);
+    font-size: var(--t-sm);
+  }
+  .ir {
+    position: absolute;
+    top: 1.85rem;
+    right: 1.75rem;
+    transition: transform 0.35s var(--ease);
+  }
+  .esp-grid li:hover .ir {
+    transform: translateX(4px);
+  }
+  .esp-more {
+    margin-top: 2.5rem;
+  }
+
+  /* Sobre mí */
+  .sobre .g12 {
+    align-items: center;
+    row-gap: 2.5rem;
+  }
+  .sobre-foto {
+    grid-column: 1 / span 5;
+  }
+  .sobre-foto img {
+    aspect-ratio: 1;
+    border-radius: var(--mota-b);
+  }
+  .sobre-foto figcaption {
+    text-align: center;
+  }
+  .sobre-copy {
+    grid-column: 7 / span 6;
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+  .sobre-copy .lead {
+    max-width: none;
+  }
+  .ficha {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    border-top: 2px solid var(--tinta);
+    font-size: var(--t-sm);
+  }
+  .ficha dt,
+  .ficha dd {
+    margin: 0;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--linea);
+  }
+  .ficha dt {
+    color: var(--gris);
+  }
+
+  .pasos {
+    padding-top: 0;
+  }
+
+  /* Fuera de consulta */
+  .taller-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .taller-head h2 {
+    max-width: 14ch;
+  }
+  .taller-head p {
+    max-width: 26rem;
+    font-size: var(--t-lg);
+  }
+  .taller-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--col-gap);
+    align-items: start;
+  }
+  .taller-grid .baja {
+    margin-top: 2rem;
+  }
+  .taller-grid img {
+    transition: border-radius 0.8s var(--ease), transform 0.6s var(--ease);
+  }
+  .taller-grid li:hover img {
+    transform: rotate(-1.5deg) scale(1.02);
+  }
+  .f-mota {
+    aspect-ratio: 1;
+    border-radius: var(--mota);
+  }
+  .f-mota-b {
+    aspect-ratio: 1;
+    border-radius: var(--mota-b);
+  }
+  .f-arco {
+    aspect-ratio: 4 / 5;
+    border-radius: 45% 45% 1.25rem 1.75rem / 36% 36% 1.5rem 1.25rem;
+  }
+  .f-arco-inv {
+    aspect-ratio: 4 / 5;
+    border-radius: 1.75rem 1.25rem 45% 45% / 1.5rem 1.25rem 36% 36%;
+  }
+  .taller figcaption {
+    text-align: center;
+    font-size: var(--t-sm);
+    color: var(--tinta);
+  }
+
+  /* Preguntas */
+  .faq-sec {
+    padding-top: 0;
+  }
+  .faq-sec .g12 {
+    row-gap: 1rem;
     align-items: start;
   }
   .faq-aside {
+    grid-column: 1 / span 5;
     position: sticky;
     top: 7rem;
   }
   .faq-aside a {
-    color: var(--terracotta-ink);
+    color: var(--cobalto);
   }
+  .faq-list {
+    grid-column: 7 / span 6;
+  }
+
   @media (max-width: 60rem) {
-    .faq-grid {
-      grid-template-columns: 1fr;
+    .hero-copy,
+    .hero-foto,
+    .sobre-foto,
+    .sobre-copy,
+    .faq-aside,
+    .faq-list,
+    .esp-head h2,
+    .esp-head .lead {
+      grid-column: 1 / -1;
+    }
+    .hero-foto {
+      max-width: 26rem;
+    }
+    .sobre-foto {
+      max-width: 22rem;
     }
     .faq-aside {
       position: static;
+    }
+    .esp-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .taller-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 40rem) {
+    .datos,
+    .esp-grid {
+      grid-template-columns: 1fr;
+    }
+    .datos {
+      row-gap: 1.25rem;
+    }
+    .ficha {
+      grid-template-columns: 7.5rem 1fr;
     }
   }
 </style>

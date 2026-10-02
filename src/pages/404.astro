@@ -1,42 +1,48 @@
 ---
 import Base from "../layouts/Base.astro";
-import Media from "../components/art/Media.astro";
 import Icon from "../components/Icon.astro";
+import Silueta from "../components/Silueta.astro";
 ---
 
 <Base title="Página no encontrada">
   <section class="section nf">
-    <div class="container narrow wrap">
-      <Media scene="ventana" shape="arch" ratio="4 / 5" class="art" />
-      <p class="eyebrow">Error 404</p>
-      <h1>Esta página se ha ido <em>a dar un paseo</em></h1>
-      <p class="lead">No pasa nada: a veces perderse también es parte del camino. Te ayudo a volver.</p>
-      <div class="btns">
-        <a class="btn" href="/">Volver al inicio <Icon name="arrow" class="arrow" /></a>
-        <a class="btn ghost" href="/contacto">Contactar</a>
+    <div class="container">
+      <div class="panel on-celadon">
+        <Silueta gato="maddy" size="clamp(9rem, 18vw, 13rem)" class="nf-maddy" />
+        <p class="eyebrow">Error 404</p>
+        <h1>Esta página se ha quedado <em>dormida</em>.</h1>
+        <p class="lead">Como Maddy en su cornisa: no hay quien la despierte. No pasa nada, a veces perderse también es parte del camino.</p>
+        <div class="btns">
+          <a class="btn" href="/">Volver al inicio <Icon name="arrow" class="arrow" /></a>
+          <a class="btn ghost" href="/contacto">Contactar</a>
+        </div>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .wrap {
-    display: grid;
-    justify-items: center;
-    text-align: center;
-    gap: 1.25rem;
+  .nf {
+    padding-top: clamp(7rem, 12vw, 10rem);
   }
-  .wrap :global(.art) {
-    width: 12rem;
-    margin-bottom: 1rem;
+  .panel {
+    position: relative;
+    display: grid;
+    gap: 1.4rem;
+    justify-items: start;
+    padding: clamp(2.5rem, 6vw, 5rem);
+    border-radius: var(--forma-bloque);
+  }
+  .panel :global(.nf-maddy) {
+    right: clamp(2rem, 10vw, 8rem);
+    bottom: calc(100% - 0.4rem);
   }
   h1 {
-    font-size: var(--step-4);
+    max-width: 14ch;
   }
   .btns {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-    justify-content: center;
   }
 </style>

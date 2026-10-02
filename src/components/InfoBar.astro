@@ -1,0 +1,45 @@
+---
+import { CONTACT, PRICE } from "../consts";
+---
+
+<div class="infobar">
+  <div class="container row">
+    <span class="sitios">Tomares · Dos Hermanas · Mairena del Aljarafe · Online</span>
+    <span class="precio">Sesiones de {PRICE.duration.replace("minutos", "min")} · {PRICE.amount}</span>
+    <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+  </div>
+</div>
+
+<style>
+  .infobar {
+    position: relative;
+    z-index: 51;
+    background: var(--cobalto);
+    color: var(--blanco);
+    font-size: 0.875rem;
+    border-radius: 0 0 1.75rem 2.5rem / 0 0 0.9rem 1.1rem;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 0.6rem;
+  }
+  a {
+    font-weight: 500;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 52rem) {
+    .sitios {
+      display: none;
+    }
+  }
+  @media (max-width: 36rem) {
+    .row {
+      font-size: 0.8125rem;
+    }
+  }
+</style>

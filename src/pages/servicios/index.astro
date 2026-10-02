@@ -3,11 +3,10 @@ import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import PageHero from "../../components/PageHero.astro";
 import SectionHead from "../../components/SectionHead.astro";
-import Media from "../../components/art/Media.astro";
 import Steps from "../../components/Steps.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Icon from "../../components/Icon.astro";
-import Shape from "../../components/art/Shape.astro";
+import Silueta from "../../components/Silueta.astro";
 import { PRICE, LOCATIONS } from "../../consts";
 
 const services = (await getCollection("services")).sort((a, b) => a.data.order - b.data.order);
@@ -17,7 +16,7 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
   title="Cómo te puedo ayudar"
   description="Terapia psicológica para ansiedad, autoestima, relaciones, TCA, imagen corporal y familias. Presencial en Tomares, Dos Hermanas y Mairena, y online."
 >
-  <PageHero eyebrow="Servicios" scene="jarrones" tone="lilac" crumbs={[{ label: "Cómo te ayudo" }]}>
+  <PageHero eyebrow="Especialidades" crumbs={[{ label: "Cómo te ayudo" }]}>
     Cómo te puedo <em>ayudar</em>
     <Fragment slot="lead">
       Cada historia es distinta y cada proceso también. Estas son las áreas en las que trabajo; si lo tuyo no encaja del
@@ -25,80 +24,82 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
     </Fragment>
   </PageHero>
 
-  <section class="section" style="padding-top:0">
-    <div class="container wide areas">
-      {
-        services.map((s, i) => (
-          <article class="area" id={s.id} data-reveal style={`--d:${i % 2}`}>
-            <Media scene={s.data.scene} src={s.data.heroImage} ratio="1 / 1" class="thumb" />
-            <div class="body">
-              <p class="kicker">{s.data.kicker}</p>
-              <h2>{s.data.title}</h2>
-              <p class="summary">{s.data.summary}</p>
-              {s.data.points.length > 0 && (
-                <ul class="points">
-                  {s.data.points.map((pt) => (
-                    <li>
-                      <Icon name="check" size={16} /> {pt}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {s.data.post && (
-                <a class="link" href={`/blog/${s.data.post}`}>
-                  Leer más en el blog <Icon name="arrow" size={16} />
-                </a>
-              )}
-            </div>
-          </article>
-        ))
-      }
+  <section class="areas-sec">
+    <div class="container">
+      <ol class="areas">
+        {
+          services.map((s, i) => (
+            <li class="area" id={s.id} data-reveal>
+              <span class="mota-num" style={i % 2 ? "border-radius:var(--mota-b)" : undefined}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div class="area-head">
+                <p class="eyebrow">{s.data.kicker}</p>
+                <h2>{s.data.title}</h2>
+              </div>
+              <div class="area-body">
+                <p class="summary">{s.data.summary}</p>
+                {s.data.points.length > 0 && (
+                  <ul class="points">
+                    {s.data.points.map((pt) => (
+                      <li>{pt}</li>
+                    ))}
+                  </ul>
+                )}
+                {s.data.post && (
+                  <a class="link" href={`/blog/${s.data.post}`}>
+                    Leer más en el blog <Icon name="arrow" size={16} />
+                  </a>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </section>
 
-  <section class="section formats">
-    <div class="container wide formats-grid">
-      <div class="formats-copy">
-        <SectionHead eyebrow="Modalidades y tarifas">
-          Presencial u online, <em>tú eliges</em>
-          <Fragment slot="lead">
-            Una sola tarifa, sin letra pequeña: todas las sesiones cuestan lo mismo, estés donde estés.
-          </Fragment>
-        </SectionHead>
-        <ul class="places" data-reveal>
+  <section class="bloque on-cobalto tarifas" aria-labelledby="tar-title">
+    <Silueta gato="maddy" class="tar-maddy" />
+    <div class="container g12">
+      <div class="tar-copy">
+        <p class="eyebrow" data-reveal>Modalidades y tarifas</p>
+        <h2 id="tar-title" data-reveal style="--d:1">Presencial u online, <em>tú eliges</em></h2>
+        <p class="lead" data-reveal style="--d:2">
+          Una sola tarifa, sin letra pequeña: todas las sesiones cuestan lo mismo, estés donde estés.
+        </p>
+        <ul class="places" data-reveal style="--d:3">
           {
             LOCATIONS.map((l) => (
               <li>
-                <Icon name={l.id === "online" ? "video" : "pin"} size={18} />
                 <strong>{l.name}</strong>
-                <span>{l.id === "online" ? "Videollamada" : l.lines[0]}</span>
+                <span>{l.id === "online" ? "Videollamada segura" : l.lines[0]}</span>
               </li>
             ))
           }
         </ul>
-        <p class="fine muted" data-reveal>
+        <p class="fine" data-reveal>
           Cancelaciones: te pido avisar con al menos 24&nbsp;h de antelación para poder ofrecer el hueco a otra persona.
         </p>
       </div>
 
       <article class="price" data-reveal style="--d:1" aria-label="Tarifa">
-        <Shape name="sun" color="var(--butter)" size="6.5rem" class="badge" />
-        <p class="kicker">Sesión individual</p>
+        <p class="eyebrow">Sesión individual</p>
         <p class="amount">{PRICE.amount}</p>
-        <p class="time"><Icon name="clock" size={18} /> {PRICE.durationShort} de sesión</p>
+        <p class="time"><Icon name="clock" size={18} /> {PRICE.duration}</p>
         <ul class="incl">
-          <li><Icon name="check" size={18} /> La primera sesión, también</li>
-          <li><Icon name="check" size={18} /> Mismo precio presencial u online</li>
-          <li><Icon name="check" size={18} /> Tomares, Dos Hermanas o Mairena</li>
+          <li>La primera sesión, también</li>
+          <li>Mismo precio presencial u online</li>
+          <li>Tomares, Dos Hermanas o Mairena</li>
         </ul>
-        <a href="/contacto" class="btn light">Pide tu primera cita <Icon name="arrow" class="arrow" /></a>
+        <a href="/contacto" class="btn">Pide tu primera cita <Icon name="arrow" class="arrow" /></a>
       </article>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <SectionHead eyebrow="Cómo empezamos" align="center">
+      <SectionHead eyebrow="Cómo empezamos">
         Tres pasos <em>sin prisa</em>
       </SectionHead>
       <Steps />
@@ -110,178 +111,142 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
 
 <style>
   .areas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1rem, 2vw, 1.5rem);
+    list-style: none;
+    padding: 0;
+    border-top: 2px solid var(--tinta);
   }
   .area {
     display: grid;
-    grid-template-columns: clamp(7rem, 12vw, 10rem) 1fr;
-    gap: clamp(1.25rem, 2.5vw, 2rem);
-    align-items: start;
-    padding: clamp(1rem, 2vw, 1.5rem);
-    border-radius: calc(var(--radius-lg) + 0.5rem);
-    background: var(--paper);
-    box-shadow: inset 0 0 0 1px var(--line);
+    grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr);
+    gap: 1rem var(--col-gap);
+    padding-block: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--linea);
     scroll-margin-top: 7rem;
-    transition: box-shadow 0.5s var(--ease), background-color 0.4s;
   }
-  .area:hover,
   .area:target {
-    background: #fff;
-    box-shadow: var(--shadow);
+    background: linear-gradient(var(--celadon), var(--celadon)) no-repeat;
+    border-radius: var(--forma-2);
+    padding-inline: 1.25rem;
   }
-  .area :global(.thumb) {
-    border-radius: var(--radius);
-  }
-  .body {
+  .area-head {
     display: grid;
     gap: 0.6rem;
-    justify-items: start;
-  }
-  .area .kicker {
-    font-size: var(--step--1);
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--terracotta-ink);
+    align-content: start;
   }
   .area h2 {
-    font-size: var(--step-2);
+    font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem);
+    letter-spacing: -0.035em;
+  }
+  .area-body {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
   }
   .summary {
-    color: var(--ink-2);
-    font-size: 0.98rem;
+    font-size: var(--t-lg);
   }
   .points {
     list-style: none;
     padding: 0;
     display: grid;
-    gap: 0.35rem;
-    margin-block: 0.2rem 0.4rem;
-    font-size: 0.93rem;
-    font-weight: 500;
+    gap: 0.45rem;
+    color: var(--gris);
   }
   .points li {
     display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
-  }
-  .points :global(.icon) {
-    color: var(--sage-ink);
-    margin-top: 0.25rem;
-  }
-  .area .link {
-    color: var(--terracotta-ink);
-    font-size: 0.95rem;
-  }
-  .formats {
-    background: var(--sand);
-  }
-  .formats-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: clamp(2rem, 6vw, 6rem);
-    align-items: center;
-  }
-  .formats-copy :global(.section-head) {
-    margin-bottom: 2rem;
-  }
-  .price {
-    position: relative;
-    display: grid;
-    gap: 1rem;
-    justify-items: start;
-    padding: clamp(2rem, 4vw, 3rem);
-    border-radius: calc(var(--radius-lg) * 1.3);
-    background: var(--ink);
-    color: var(--oat);
-    box-shadow: var(--shadow);
-  }
-  .price :global(.badge) {
-    position: absolute;
-    top: -2.2rem;
-    right: 2rem;
-    animation: spin 30s linear infinite;
-  }
-  .kicker {
-    font-size: var(--step--1);
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--blush);
-  }
-  .amount {
-    font-family: var(--serif);
-    font-size: clamp(4rem, 3rem + 5vw, 7rem);
-    font-weight: 300;
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-  }
-  .time {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-  }
-  .incl {
-    list-style: none;
-    padding: 1.25rem 0 0.5rem;
-    margin-top: 0.25rem;
-    border-top: 1px solid color-mix(in oklab, var(--oat) 18%, transparent);
-    display: grid;
     gap: 0.6rem;
-    width: 100%;
+    align-items: baseline;
   }
-  .incl li {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: color-mix(in oklab, var(--oat) 85%, transparent);
+  .points li::before {
+    content: "";
+    flex: none;
+    width: 0.6rem;
+    height: 0.5rem;
+    border-radius: var(--mota);
+    background: var(--cobalto);
+    translate: 0 -0.1em;
   }
-  .incl :global(.icon) {
-    color: var(--blush);
+
+  .tarifas {
+    margin-top: clamp(5rem, 9vw, 8rem);
+  }
+  .tarifas :global(.tar-maddy) {
+    left: clamp(3rem, 10vw, 8rem);
+    bottom: calc(100% - 0.4rem);
+  }
+  .tarifas .g12 {
+    row-gap: 3rem;
+    align-items: start;
+  }
+  .tar-copy {
+    grid-column: 1 / span 6;
+    display: grid;
+    gap: 1.25rem;
   }
   .places {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem var(--col-gap);
+    margin-top: 0.5rem;
   }
   .places li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.1rem;
-    border-radius: 999px;
-    background: var(--paper);
-    font-size: 0.95rem;
-  }
-  .places :global(.icon) {
-    color: var(--terracotta-ink);
+    display: grid;
+    padding-top: 0.75rem;
+    border-top: 2px solid var(--blanco);
   }
   .places span {
-    color: var(--ink-2);
+    color: var(--cobalto-suave);
+    font-size: var(--t-sm);
   }
   .fine {
-    margin-top: 1.5rem;
-    font-size: 0.92rem;
+    font-size: var(--t-sm);
+    color: var(--cobalto-suave);
   }
-  @media (max-width: 60rem) {
-    .areas {
-      grid-template-columns: 1fr;
-    }
-    .formats-grid {
-      grid-template-columns: 1fr;
-    }
+  .price {
+    grid-column: 8 / span 5;
+    display: grid;
+    gap: 0.9rem;
+    justify-items: start;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    background: var(--blanco);
+    color: var(--tinta);
+    border-radius: var(--forma-3);
   }
-  @media (max-width: 40rem) {
+  .price .eyebrow {
+    color: var(--cobalto);
+  }
+  .amount {
+    font-size: clamp(4rem, 3rem + 4vw, 6.5rem);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+  }
+  .time {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: var(--gris);
+  }
+  .incl {
+    list-style: none;
+    padding: 0.9rem 0 0.5rem;
+    width: 100%;
+    border-top: 2px solid var(--tinta);
+    display: grid;
+    gap: 0.4rem;
+  }
+  @media (max-width: 56rem) {
     .area {
-      grid-template-columns: 1fr;
+      grid-template-columns: 3.25rem 1fr;
     }
-    .area :global(.thumb) {
-      aspect-ratio: 16 / 9 !important;
+    .area-body {
+      grid-column: 2;
+    }
+    .tar-copy,
+    .price {
+      grid-column: 1 / -1;
     }
   }
 </style>

@@ -1,16 +1,18 @@
 ---
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
-import Shape from "./art/Shape.astro";
+import InfoBar from "./InfoBar.astro";
+import Silueta from "./Silueta.astro";
 import { NAV, CONTACT } from "../consts";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isActive = (href: string) => path === href || path.startsWith(href + "/");
 ---
 
+<InfoBar />
 <header class="site-header" data-header>
-  <div class="container wide bar">
-    <a href="/" class="brand">
+  <div class="container bar">
+    <a href="/" class="brand" aria-label="Alicia Lozano, psicóloga: inicio">
       <Logo />
     </a>
 
@@ -26,22 +28,20 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
           ))
         }
       </ul>
+      <a href="/contacto" class="btn dark small">Pedir cita</a>
     </nav>
 
-    <div class="actions">
-      <a href="/contacto" class="btn small">Pide tu primera cita</a>
-      <button class="burger" popovertarget="mobile-menu" aria-label="Abrir menú">
-        <Icon name="menu" size={26} />
-      </button>
-    </div>
+    <button class="burger" popovertarget="mobile-menu" aria-label="Abrir menú">
+      <Icon name="menu" size={24} />
+    </button>
   </div>
 </header>
 
-<div id="mobile-menu" popover class="mobile-menu" data-menu>
+<div id="mobile-menu" popover class="mobile-menu on-cobalto" data-menu>
   <div class="mm-top container">
-    <a href="/" class="brand"><Logo /></a>
+    <a href="/" class="brand"><Logo tone="light" /></a>
     <button class="burger close" popovertarget="mobile-menu" popovertargetaction="hide" aria-label="Cerrar menú">
-      <Icon name="close" size={26} />
+      <Icon name="close" size={24} />
     </button>
   </div>
   <nav class="container mm-nav" aria-label="Menú móvil">
@@ -59,21 +59,22 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
     </ul>
   </nav>
   <div class="container mm-foot">
-    <a href={CONTACT.whatsapp} class="btn" target="_blank" rel="noopener">
-      <Icon name="whatsapp" /> Escríbeme por WhatsApp
-    </a>
-    <p class="muted">
+    <div class="mm-cornisa">
+      <Silueta gato="maddy" size="9rem" class="mm-maddy" />
+      <a href={CONTACT.whatsapp} class="btn light" target="_blank" rel="noopener">
+        <Icon name="whatsapp" /> Escríbeme por WhatsApp
+      </a>
+    </div>
+    <p>
       <a href={CONTACT.phoneHref}>{CONTACT.phone}</a><br />
       <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
     </p>
   </div>
-  <Shape name="sun" color="var(--butter)" size="18rem" class="mm-sun" />
-  <Shape name="leaf" color="var(--lilac)" size="12rem" class="mm-leaf" />
 </div>
 
 <script>
   const header = document.querySelector("[data-header]");
-  const onScroll = () => header?.classList.toggle("is-scrolled", window.scrollY > 24);
+  const onScroll = () => header?.classList.toggle("is-scrolled", window.scrollY > 40);
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -92,68 +93,76 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
     position: sticky;
     top: 0;
     z-index: 50;
-    transition: background-color 0.4s var(--ease), box-shadow 0.4s var(--ease), backdrop-filter 0.4s;
+    background: rgb(255 255 255 / 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: box-shadow 0.3s;
   }
   .site-header.is-scrolled {
-    background: color-mix(in oklab, var(--oat) 82%, transparent);
-    backdrop-filter: blur(14px) saturate(1.4);
-    -webkit-backdrop-filter: blur(14px) saturate(1.4);
-    box-shadow: 0 1px 0 var(--line);
+    box-shadow: 0 1px 0 var(--linea);
   }
   .bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    padding-block: 1.1rem;
-    transition: padding 0.4s var(--ease);
+    min-height: 5rem;
+    transition: min-height 0.3s var(--ease);
   }
   .is-scrolled .bar {
-    padding-block: 0.7rem;
+    min-height: 4.25rem;
   }
   .brand {
     text-decoration: none;
   }
-  .nav ul {
-    display: flex;
-    gap: 0.35rem;
-    list-style: none;
-    padding: 0.35rem;
-    border-radius: 999px;
-    background: color-mix(in oklab, var(--paper) 55%, transparent);
-    box-shadow: inset 0 0 0 1px var(--line);
-  }
-  .nav a {
-    display: block;
-    padding: 0.55rem 1.05rem;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .nav a:hover {
-    background: var(--sand);
-  }
-  .nav a[aria-current="page"] {
-    background: var(--ink);
-    color: var(--oat);
-  }
-  .actions {
+  .nav {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 2rem;
+  }
+  .nav ul {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+    padding: 0;
+  }
+  .nav ul a {
+    position: relative;
+    font-size: var(--t-sm);
+    font-weight: 500;
+    text-decoration: none;
+    padding-block: 0.4rem;
+  }
+  /* subrayado que se dibuja como una pincelada */
+  .nav ul a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px 1px 3px 1px;
+    background: var(--cobalto);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+  }
+  .nav ul a:hover::after,
+  .nav ul a[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+  .nav ul a[aria-current="page"] {
+    color: var(--cobalto);
   }
   .burger {
     display: none;
     width: 3rem;
     height: 3rem;
     place-items: center;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1.5px var(--ink);
+    border-radius: var(--mota);
+    box-shadow: inset 0 0 0 2px currentColor;
   }
-
-  @media (max-width: 62rem) {
+  @media (max-width: 54rem) {
     .nav {
       display: none;
     }
@@ -161,13 +170,8 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
       display: grid;
     }
   }
-  @media (max-width: 30rem) {
-    .actions .btn {
-      display: none;
-    }
-  }
 
-  /* Menú móvil (popover nativo, sin librerías) */
+  /* Menú móvil: un bloque cobalto a pantalla completa */
   .mobile-menu {
     position: fixed;
     inset: 0;
@@ -178,13 +182,11 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
     margin: 0;
     padding: 0;
     border: 0;
-    background: var(--blush);
-    color: var(--ink);
     overflow: hidden;
     display: none;
     flex-direction: column;
     opacity: 0;
-    transition: opacity 0.4s var(--ease), display 0.4s allow-discrete, overlay 0.4s allow-discrete;
+    transition: opacity 0.35s var(--ease), display 0.35s allow-discrete, overlay 0.35s allow-discrete;
   }
   .mobile-menu:popover-open {
     display: flex;
@@ -199,69 +201,58 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-block: 1.1rem;
-    position: relative;
-    z-index: 2;
+    min-height: 5rem;
+  }
+  .mm-top .brand {
+    color: var(--blanco);
   }
   .mm-nav {
     flex: 1;
     display: flex;
     align-items: center;
-    position: relative;
-    z-index: 2;
   }
   .mm-nav ul {
     list-style: none;
     padding: 0;
   }
   .mm-nav a {
-    font-family: var(--serif);
-    font-size: clamp(2.4rem, 11vw, 4rem);
-    font-weight: 350;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
+    font-size: clamp(2.5rem, 12vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
     text-decoration: none;
-    display: inline-block;
   }
   .mm-nav a[aria-current="page"] {
-    font-style: italic;
-    color: var(--terracotta-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.15em;
   }
   .mobile-menu:popover-open .mm-nav li {
-    animation: mm-in 0.7s var(--ease) both;
-    animation-delay: calc(var(--i) * 60ms + 80ms);
+    animation: mm-in 0.6s var(--ease) both;
+    animation-delay: calc(var(--i) * 55ms + 60ms);
   }
   @keyframes mm-in {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
     }
   }
   .mm-foot {
     padding-bottom: 2rem;
     display: grid;
     gap: 1.25rem;
-    justify-items: start;
+  }
+  .mm-cornisa {
     position: relative;
-    z-index: 2;
+    justify-self: start;
+    margin-top: 4rem;
   }
-  .mm-foot a:not(.btn) {
+  .mobile-menu :global(.mm-maddy) {
+    left: calc(100% - 7.2rem);
+    bottom: calc(100% - 0.3rem);
+  }
+  .mm-foot p a {
     text-decoration: none;
-  }
-  .mm-foot p {
-    color: var(--ink);
-  }
-  .mobile-menu :global(.mm-sun) {
-    position: absolute;
-    right: -5rem;
-    top: 18%;
-    opacity: 0.9;
-    animation: spin 60s linear infinite;
-  }
-  .mobile-menu :global(.mm-leaf) {
-    position: absolute;
-    right: 1rem;
-    bottom: 22%;
-    transform: rotate(-30deg);
+    color: var(--cobalto-suave);
   }
 </style>

@@ -4,7 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import SectionHead from "../components/SectionHead.astro";
 import Locations from "../components/Locations.astro";
 import Icon from "../components/Icon.astro";
-import Shape from "../components/art/Shape.astro";
+import Silueta from "../components/Silueta.astro";
 import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
 ---
 
@@ -12,7 +12,7 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   title="Contacto"
   description="Pide tu primera cita con Alicia Lozano, psicóloga en Tomares, Dos Hermanas, Mairena del Aljarafe y online. WhatsApp, teléfono o formulario."
 >
-  <PageHero eyebrow="Contacto" tone="sage" crumbs={[{ label: "Contacto" }]} compact>
+  <PageHero eyebrow="Contacto" crumbs={[{ label: "Contacto" }]}>
     Hablemos. <em>Sin prisa y sin compromiso.</em>
     <Fragment slot="lead">
       Cuéntame un poco qué te trae (o solo di hola) y te responderé personalmente en menos de 48&nbsp;h laborables.
@@ -22,7 +22,7 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   <section class="section" style="padding-top:0">
     <div class="container wide grid">
       <div class="form-card" data-reveal>
-        <Shape name="flower" color="var(--lilac)" size="5rem" class="deco float" style="--t:9s" />
+        <Silueta gato="furi" pose="asomado" size="clamp(4.5rem, 8vw, 5.5rem)" class="deco" />
         <form
           data-form
           data-key={FORM_ACCESS_KEY}
@@ -101,13 +101,14 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
           <Icon name="arrow-up-right" size={18} class="go" />
         </a>
         <div class="note" data-reveal style="--d:4">
-          <p class="script">“Escribir ya es un primer paso. Y no tienes que tenerlo claro para darlo.”</p>
+          <p>«Escribir ya es un primer paso. Y no tienes que tenerlo claro para darlo.»</p>
+          <p class="firma">— Alicia (y Furi, que también es tímido)</p>
         </div>
       </aside>
     </div>
   </section>
 
-  <section class="section places">
+  <section class="section">
     <div class="container wide">
       <SectionHead eyebrow="Consultas">
         Ven a verme <em>o conéctate</em>
@@ -167,21 +168,21 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
 <style>
   .grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: clamp(1.5rem, 4vw, 3.5rem);
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
     align-items: start;
   }
   .form-card {
     position: relative;
+    margin-top: 3rem;
     padding: clamp(1.5rem, 4vw, 3rem);
-    border-radius: calc(var(--radius-lg) * 1.3);
-    background: #fff;
-    box-shadow: var(--shadow);
+    border-radius: var(--forma-bloque-b);
+    background: var(--hueso);
   }
+  /* Furi se asoma por el borde del formulario: escribir da un poco de miedo, también a él */
   .form-card :global(.deco) {
-    position: absolute;
-    right: -1.5rem;
-    top: -2rem;
+    right: clamp(2rem, 6vw, 4rem);
+    bottom: calc(100% - 0.35rem);
   }
   form {
     display: grid;
@@ -198,24 +199,25 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   }
   label > span,
   legend {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: var(--t-sm);
+    font-weight: 700;
   }
   small {
     font-weight: 400;
-    color: var(--ink-2);
+    color: var(--gris);
   }
   input[type="text"],
   input[type="email"],
   input[type="tel"],
   textarea {
     width: 100%;
+    min-height: 3.375rem;
     padding: 0.9rem 1.1rem;
     border: 0;
-    border-radius: 0.9rem;
-    background: var(--oat);
-    box-shadow: inset 0 0 0 1px var(--line);
-    transition: box-shadow 0.3s, background-color 0.3s;
+    border-radius: var(--forma-campo);
+    background: var(--blanco);
+    box-shadow: inset 0 0 0 1.5px transparent;
+    transition: box-shadow 0.25s;
     font-size: 1rem;
   }
   textarea {
@@ -224,13 +226,12 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   }
   input::placeholder,
   textarea::placeholder {
-    color: color-mix(in oklab, var(--ink-2) 75%, transparent);
+    color: #757575;
   }
   input:focus,
   textarea:focus {
     outline: none;
-    background: #fff;
-    box-shadow: inset 0 0 0 2px var(--terracotta);
+    box-shadow: inset 0 0 0 2px var(--cobalto);
   }
   fieldset {
     border: 0;
@@ -253,66 +254,71 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
     cursor: pointer;
   }
   .pill span {
-    display: inline-block;
-    padding: 0.6rem 1.05rem;
-    border-radius: 999px;
-    background: var(--oat);
-    box-shadow: inset 0 0 0 1px var(--line);
-    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 1.1rem;
+    border-radius: var(--forma-pill);
+    background: var(--blanco);
+    box-shadow: inset 0 0 0 1.5px var(--tinta);
+    font-size: var(--t-sm);
     font-weight: 500;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.25s, color 0.25s;
   }
   .pill input:checked + span {
-    background: var(--ink);
-    color: var(--oat);
+    background: var(--tinta);
+    color: var(--blanco);
   }
   .pill input:focus-visible + span {
-    outline: 2px solid var(--terracotta-ink);
+    outline: 3px solid var(--cobalto);
     outline-offset: 2px;
   }
   .consent {
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
-    font-size: 0.9rem;
-    color: var(--ink-2);
+    font-size: var(--t-sm);
+    color: var(--gris);
   }
   .consent input {
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
     width: 1.1rem;
     height: 1.1rem;
     flex: none;
   }
   .consent a {
-    color: var(--terracotta-ink);
+    color: var(--cobalto);
   }
   form .btn {
     justify-self: start;
   }
   .status {
     min-height: 1.5em;
-    font-weight: 500;
-    color: var(--sage-ink);
+    font-weight: 700;
+    color: var(--celadon-ink);
   }
   .side {
     display: grid;
-    gap: 0.9rem;
+    gap: 0.75rem;
+    margin-top: 3rem;
   }
   .quick {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.1rem 1.25rem;
-    border-radius: var(--radius-lg);
-    background: var(--paper);
-    box-shadow: inset 0 0 0 1px var(--line);
+    min-height: 4.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--forma-1);
+    box-shadow: inset 0 0 0 1.5px var(--tinta);
     text-decoration: none;
-    transition: transform 0.5s var(--ease), box-shadow 0.5s, background-color 0.3s;
+    transition: background-color 0.25s, transform 0.4s var(--ease);
+  }
+  .quick:nth-child(3) {
+    border-radius: var(--forma-3);
   }
   .quick:hover {
-    transform: translateY(-3px);
-    background: #fff;
-    box-shadow: var(--shadow);
+    background: var(--hueso);
+    transform: translateY(-2px);
   }
   .quick > span:nth-child(2) {
     display: grid;
@@ -320,56 +326,65 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
     min-width: 0;
   }
   .quick small {
-    font-size: 0.85rem;
+    font-size: var(--t-xs);
   }
   .mail {
     overflow-wrap: anywhere;
-    font-size: 0.95rem;
+    font-size: var(--t-sm);
   }
   .ico {
     display: grid;
     place-items: center;
     width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background: var(--blush);
-    color: var(--terracotta-ink);
+    height: 2.8rem;
+    border-radius: var(--mota);
+    background: var(--hueso);
     flex: none;
   }
   .wa {
-    background: var(--ink);
-    color: var(--oat);
+    background: var(--cobalto);
+    color: var(--blanco);
+    box-shadow: none;
+    border-radius: var(--forma-2);
   }
   .wa:hover {
-    background: var(--wine);
+    background: var(--cobalto-hondo);
   }
   .wa small {
-    color: color-mix(in oklab, var(--oat) 70%, transparent);
+    color: var(--cobalto-suave);
   }
   .wa .ico {
-    background: var(--terracotta);
-    color: #fff;
+    background: var(--blanco);
+    color: var(--cobalto);
   }
   .quick :global(.go) {
-    opacity: 0.6;
+    opacity: 0.7;
   }
   .note {
     margin-top: 0.75rem;
     padding: 1.5rem;
-    border-radius: var(--radius-lg);
-    background: var(--lilac);
-    font-size: var(--step-1);
+    border-radius: var(--forma-4);
+    background: var(--celadon);
+    font-size: var(--t-lg);
+    font-weight: 500;
     line-height: 1.35;
+    letter-spacing: -0.01em;
   }
-  .places {
-    background: var(--sand);
+  .firma {
+    margin-top: 0.75rem;
+    font-size: var(--t-sm);
+    font-weight: 400;
+    color: var(--celadon-ink);
   }
   @media (max-width: 60rem) {
     .grid {
       grid-template-columns: 1fr;
     }
+    .side {
+      margin-top: 0;
+    }
   }
-  @media (max-width: 36rem) {
+  @media (max-width: 34rem) {
     .row {
       grid-template-columns: 1fr;
     }

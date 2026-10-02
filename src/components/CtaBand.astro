@@ -1,7 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import Media from "./art/Media.astro";
-import Shape from "./art/Shape.astro";
+import Silueta from "./Silueta.astro";
 import { CONTACT } from "../consts";
 interface Props {
   title?: string;
@@ -9,34 +8,24 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<section class="cta section" aria-labelledby="cta-title">
-  <div class="container wide">
-    <div class="panel" data-reveal>
+<section class="cta" aria-labelledby="cta-title">
+  <div class="container">
+    <div class="panel on-celadon" data-reveal>
+      <Silueta gato="furi" pose="asomado" size="clamp(4.5rem, 8vw, 6rem)" class="furi" />
       <div class="copy">
         <p class="eyebrow">Primer paso</p>
-        <h2 id="cta-title">
-          {title ? title : <>El primer paso puede ser <em>un mensaje</em>.</>}
-        </h2>
+        <h2 id="cta-title">{title ? title : <>El primer paso puede ser <em>un mensaje</em>.</>}</h2>
+      </div>
+      <div class="side">
         <p class="lead">
-          Escríbeme sin compromiso. Te respondo personalmente en menos de 48&nbsp;h laborables y, si quieres, hacemos una
-          llamada breve para conocernos.
+          Escríbeme sin compromiso. Te respondo personalmente en menos de 48&nbsp;h laborables y, si quieres, hacemos
+          una llamada breve para conocernos.
         </p>
         <div class="buttons">
-          <a class="btn" href={CONTACT.whatsapp} target="_blank" rel="noopener">
-            <Icon name="whatsapp" /> WhatsApp
-          </a>
-          <a class="btn ghost" href="/contacto">
-            Formulario de contacto <Icon name="arrow" class="arrow" />
-          </a>
+          <a class="btn" href={CONTACT.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" /> WhatsApp</a>
+          <a class="btn ghost" href="/contacto">Formulario <Icon name="arrow" class="arrow" /></a>
         </div>
-        <p class="alt">
-          O llámame al <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-        </p>
-      </div>
-      <div class="art">
-        <Media scene="sol" shape="arch" ratio="4 / 5" alt="" />
-        <Shape name="star" color="var(--terracotta)" size="4.5rem" class="star float" style="--t:7s" />
-        <Shape name="sprig" color="var(--sage-ink)" size="5rem" class="sprig float" style="--t:11s;--r:-10deg" />
+        <p class="alt">O llámame al <a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
       </div>
     </div>
   </div>
@@ -44,71 +33,46 @@ const { title } = Astro.props;
 
 <style>
   .cta {
-    padding-bottom: calc(var(--section) + 1rem);
+    padding-top: clamp(5rem, 9vw, 8rem);
   }
   .panel {
     position: relative;
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    align-items: center;
-    gap: clamp(2rem, 5vw, 5rem);
-    padding: clamp(2rem, 6vw, 5.5rem);
-    border-radius: calc(var(--radius-lg) * 1.4);
-    background: var(--blush);
-    overflow: hidden;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: 2rem;
+    align-items: end;
+    padding: clamp(2.5rem, 6vw, 5rem);
+    border-radius: var(--forma-bloque-b);
   }
-  .panel::before {
-    content: "";
-    position: absolute;
-    width: 40rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--rose);
-    opacity: 0.35;
-    left: -18rem;
-    bottom: -26rem;
+  /* Furi se asoma por el borde: tímido, pero curioso */
+  .panel :global(.furi) {
+    left: clamp(2rem, 8vw, 6rem);
+    bottom: calc(100% - 0.35rem);
   }
   .copy {
-    position: relative;
+    grid-column: 1 / span 6;
     display: grid;
-    gap: 1.4rem;
-    justify-items: start;
+    gap: 1.25rem;
   }
-  .copy .lead {
-    color: var(--ink);
-    max-width: 34ch;
+  .side {
+    grid-column: 8 / span 5;
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
   }
   .buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
   }
-  .alt {
-    color: var(--ink);
-  }
-  .art {
-    position: relative;
-    max-width: 22rem;
-    justify-self: center;
-    width: 100%;
-  }
-  .art :global(.star) {
-    position: absolute;
-    top: -1.2rem;
-    right: -1.2rem;
-  }
-  .art :global(.sprig) {
-    position: absolute;
-    bottom: 1rem;
-    left: -2.4rem;
+  .ghost {
+    --bg: transparent;
   }
   @media (max-width: 52rem) {
-    .panel {
-      grid-template-columns: 1fr;
-    }
-    .art {
-      max-width: 16rem;
-      grid-row: 1;
+    .copy,
+    .side {
+      grid-column: 1 / -1;
     }
   }
 </style>

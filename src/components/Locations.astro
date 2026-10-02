@@ -60,15 +60,15 @@ const sevilla = { x: px(56), y: py(33) };
   <div class="map" aria-hidden="true">
     <svg viewBox={`0 0 ${W} ${H}`}>
       {/* colinas del Aljarafe */}
-      <path d="M-10 90 C 40 60, 110 70, 150 110 C 170 160, 150 250, 90 300 C 50 330, 0 330, -10 320 Z" fill="var(--sage)" opacity=".5" />
-      <path d="M-10 150 C 30 130, 90 140, 110 180 C 120 230, 80 280, 30 300 L -10 300 Z" fill="var(--sage)" opacity=".45" />
+      <path d="M-10 90 C 40 60, 110 70, 150 110 C 170 160, 150 250, 90 300 C 50 330, 0 330, -10 320 Z" fill="var(--celadon)" opacity=".9" />
+      <path d="M-10 150 C 30 130, 90 140, 110 180 C 120 230, 80 280, 30 300 L -10 300 Z" fill="#bcd7c9" opacity=".7" />
       {/* campiña */}
-      <circle cx="330" cy="290" r="90" fill="var(--butter)" opacity=".35" />
+      <circle cx="330" cy="290" r="90" fill="var(--hueso)" />
       {/* Guadalquivir */}
       <path
         d="M205 -10 C 190 40, 176 70, 196 110 C 214 146, 170 170, 180 210 C 190 250, 150 280, 170 350"
         fill="none"
-        stroke="var(--lilac-2)"
+        stroke="var(--cobalto-suave)"
         stroke-width="16"
         stroke-linecap="round"
       />
@@ -81,9 +81,9 @@ const sevilla = { x: px(56), y: py(33) };
       </g>
       {/* Sevilla */}
       <g transform={`translate(${sevilla.x} ${sevilla.y})`}>
-        <circle r="30" fill="var(--paper)" opacity=".8" />
-        <path d="M-4 10 V -14 L 0 -20 L 4 -14 V 10 Z M-6 10 H 6 V 13 H -6 Z" fill="var(--wine)" />
-        <circle cy="-22" r="2.4" fill="var(--butter)" />
+        <circle r="30" fill="var(--blanco)" />
+        <path d="M-4 10 V -14 L 0 -20 L 4 -14 V 10 Z M-6 10 H 6 V 13 H -6 Z" fill="var(--tinta)" />
+        <circle cy="-22" r="2.4" fill="var(--cobalto)" />
         <text y="28" class="city" text-anchor="middle">Sevilla</text>
       </g>
       {/* pines */}
@@ -91,16 +91,16 @@ const sevilla = { x: px(56), y: py(33) };
         l.id === "online" ? (
           <g class="pin" data-pin={l.id} transform={`translate(${px(l.x)} ${py(l.y)})`}>
             <circle class="pulse" r="22" />
-            <circle r="22" fill="var(--paper)" stroke="var(--lilac-ink)" stroke-width="2" stroke-dasharray="3 4" />
-            <rect x="-10" y="-7" width="13" height="14" rx="3" fill="var(--lilac-ink)" />
-            <path d="M4 -3 L 11 -7 V 7 L 4 3 Z" fill="var(--lilac-ink)" />
+            <circle r="22" fill="var(--blanco)" stroke="var(--cobalto)" stroke-width="2" stroke-dasharray="3 4" />
+            <rect x="-10" y="-7" width="13" height="14" rx="3" fill="var(--cobalto)" />
+            <path d="M4 -3 L 11 -7 V 7 L 4 3 Z" fill="var(--cobalto)" />
             <text y="40" text-anchor="middle" class="label">Online</text>
           </g>
         ) : (
           <g class="pin" data-pin={l.id} transform={`translate(${px(l.x)} ${py(l.y)})`}>
             <circle class="pulse" cy="-26" r="16" />
             <path class="drop" d="M0 0 C -12 -14, -14 -20, -14 -26 A 14 14 0 0 1 14 -26 C 14 -20, 12 -14, 0 0 Z" />
-            <circle cy="-26" r="5" fill="var(--paper)" />
+            <circle cy="-26" r="5" fill="var(--blanco)" />
             <text y="18" text-anchor="middle" class="label">{l.name}</text>
           </g>
         ),
@@ -140,42 +140,50 @@ const sevilla = { x: px(56), y: py(33) };
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.6rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
   .tabs button {
     display: grid;
     text-align: left;
-    gap: 0.15rem;
-    padding: 1rem 1.15rem;
-    border-radius: var(--radius);
-    background: var(--paper);
-    box-shadow: inset 0 0 0 1px var(--line);
-    transition: background-color 0.35s, color 0.35s, transform 0.4s var(--ease);
+    gap: 0.1rem;
+    padding: 0.95rem 1.15rem;
+    border-radius: var(--forma-1);
+    box-shadow: inset 0 0 0 1.5px var(--tinta);
+    transition: background-color 0.3s, color 0.3s, border-radius 0.5s var(--ease);
+  }
+  .tabs button:nth-child(2) {
+    border-radius: var(--forma-2);
+  }
+  .tabs button:nth-child(3) {
+    border-radius: var(--forma-3);
+  }
+  .tabs button:nth-child(4) {
+    border-radius: var(--forma-4);
   }
   .tabs button:hover {
-    transform: translateY(-2px);
+    background: var(--hueso);
   }
   .tabs button[aria-pressed="true"] {
-    background: var(--ink);
-    color: var(--oat);
+    background: var(--tinta);
+    color: var(--blanco);
   }
   .tabs .n {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    line-height: 1.1;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
   }
   .tabs .a {
-    font-size: 0.85rem;
-    opacity: 0.7;
+    font-size: var(--t-xs);
+    opacity: 0.75;
   }
   .detail {
     display: flex;
     gap: 1.1rem;
     padding: 1.6rem;
-    border-radius: var(--radius-lg);
-    background: #fff;
-    box-shadow: var(--shadow);
-    animation: pop 0.6s var(--ease);
+    border-radius: var(--forma-2);
+    background: var(--hueso);
+    animation: pop 0.5s var(--ease);
   }
   .detail[hidden] {
     display: none;
@@ -188,7 +196,7 @@ const sevilla = { x: px(56), y: py(33) };
   @keyframes pop {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(8px);
     }
   }
   .ico {
@@ -196,14 +204,17 @@ const sevilla = { x: px(56), y: py(33) };
     display: grid;
     place-items: center;
     width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background: var(--blush);
-    color: var(--terracotta-ink);
+    height: 2.8rem;
+    border-radius: var(--mota);
+    background: var(--cobalto);
+    color: var(--blanco);
   }
   .detail h3 {
-    font-size: var(--step-2);
     margin-bottom: 0.6rem;
+  }
+  .detail h3 em {
+    font-style: normal;
+    color: var(--cobalto);
   }
   address {
     font-style: normal;
@@ -211,14 +222,14 @@ const sevilla = { x: px(56), y: py(33) };
   }
   .note {
     margin-block: 0.8rem 1rem;
-    color: var(--ink-2);
-    font-size: 0.95rem;
+    color: var(--gris);
+    font-size: var(--t-sm);
   }
   .map {
     position: relative;
-    border-radius: calc(var(--radius-lg) * 1.4);
-    background: var(--oat);
-    box-shadow: inset 0 0 0 1px var(--line);
+    border-radius: var(--forma-bloque-b);
+    background: var(--blanco);
+    box-shadow: inset 0 0 0 1.5px var(--tinta);
     overflow: hidden;
     aspect-ratio: 400 / 340;
   }
@@ -227,50 +238,43 @@ const sevilla = { x: px(56), y: py(33) };
     height: 100%;
   }
   .map .river {
-    font-family: var(--serif);
-    font-style: italic;
     font-size: 11px;
-    fill: var(--lilac-ink);
-    opacity: 0.8;
+    font-weight: 500;
+    fill: var(--cobalto);
   }
   .map .city {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 15px;
-    fill: var(--wine);
+    font-size: 14px;
+    font-weight: 700;
+    fill: var(--tinta);
   }
   .pin {
     cursor: pointer;
   }
   .pin .drop {
-    fill: var(--terracotta);
+    fill: var(--tinta);
     transition: fill 0.3s;
   }
   .pin .label {
     font-family: var(--sans);
     font-size: 11.5px;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    fill: var(--ink);
+    fill: var(--tinta);
   }
   .pin .pulse {
-    fill: var(--terracotta);
+    fill: var(--cobalto);
     opacity: 0;
     transform-box: fill-box;
     transform-origin: center;
   }
-  .pin[data-pin="online"] .pulse {
-    fill: var(--lilac-2);
-  }
   .pin.on .drop {
-    fill: var(--wine);
+    fill: var(--cobalto);
   }
   .pin.on .pulse {
     animation: pulse 2s var(--ease) infinite;
   }
   @keyframes pulse {
     0% {
-      opacity: 0.45;
+      opacity: 0.4;
       transform: scale(0.6);
     }
     100% {

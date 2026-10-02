@@ -1,35 +1,25 @@
 ---
-import Shape from "./art/Shape.astro";
 const steps = [
   {
     title: "Escríbeme",
-    text: "Por WhatsApp, correo o el formulario. Cuéntame solo lo que te apetezca; con un “hola” basta.",
-    shape: "blob",
-    color: "var(--blush)",
+    text: "Por WhatsApp, correo o el formulario. Cuéntame solo lo que te apetezca; con un «hola» basta.",
   },
   {
     title: "Hablamos 15 minutos",
     text: "Una llamada breve y gratuita para resolver dudas y ver si encajamos. Sin compromiso.",
-    shape: "sun",
-    color: "var(--butter)",
   },
   {
     title: "Primera sesión",
     text: "Presencial en Tomares, Dos Hermanas o Mairena, u online. Empezamos a entender tu historia.",
-    shape: "flower",
-    color: "var(--lilac)",
   },
-] as const;
+];
 ---
 
 <ol class="steps">
   {
     steps.map((s, i) => (
       <li data-reveal style={`--d:${i}`}>
-        <div class="badge">
-          <Shape name={s.shape} color={s.color} size="5.5rem" class="bg" />
-          <span>{i + 1}</span>
-        </div>
+        <span class="mota-num">{i + 1}</span>
         <h3>{s.title}</h3>
         <p>{s.text}</p>
       </li>
@@ -42,69 +32,31 @@ const steps = [
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.5rem, 4vw, 3.5rem);
-    position: relative;
-  }
-  .steps::before {
-    content: "";
-    position: absolute;
-    top: 2.75rem;
-    left: 8%;
-    right: 8%;
-    border-top: 2px dashed color-mix(in oklab, var(--ink) 22%, transparent);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--col-gap);
+    counter-reset: paso;
   }
   li {
-    position: relative;
     display: grid;
     gap: 0.75rem;
-    justify-items: center;
-    text-align: center;
+    align-content: start;
+    padding-top: 1.25rem;
+    border-top: 2px solid var(--tinta);
   }
-  .badge {
-    position: relative;
-    width: 5.5rem;
-    height: 5.5rem;
-    display: grid;
-    place-items: center;
-    margin-bottom: 0.5rem;
-  }
-  .badge :global(.bg) {
-    position: absolute;
-    inset: 0;
-    transition: transform 1s var(--ease);
-  }
-  li:hover .badge :global(.bg) {
-    transform: rotate(60deg) scale(1.08);
-  }
-  .badge span {
-    position: relative;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 2rem;
+  li:nth-child(2) .mota-num {
+    border-radius: var(--mota-b);
   }
   h3 {
-    font-size: var(--step-2);
+    margin-top: 0.5rem;
   }
   p {
-    color: var(--ink-2);
-    max-width: 30ch;
+    color: var(--gris);
+    max-width: 34ch;
   }
   @media (max-width: 48rem) {
     .steps {
       grid-template-columns: 1fr;
-    }
-    .steps::before {
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      right: auto;
-      border-top: 0;
-      border-left: 2px dashed color-mix(in oklab, var(--ink) 22%, transparent);
-    }
-    li {
-      background: var(--oat);
-      padding-block: 0.5rem;
+      row-gap: 2rem;
     }
   }
 </style>

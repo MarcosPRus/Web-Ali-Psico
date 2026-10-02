@@ -1,20 +1,20 @@
 ---
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
-import Shape from "./art/Shape.astro";
+import Silueta from "./Silueta.astro";
 import { CONTACT, LOCATIONS, NAV } from "../consts";
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer on-dark">
-  <Shape name="sun" color="var(--terracotta)" size="22rem" class="f-sun" />
-  <div class="container wide">
-    <div class="top">
+<footer class="site-footer on-tinta">
+  <Silueta gato="maddy" size="clamp(8rem, 14vw, 11rem)" class="f-maddy" />
+  <div class="container">
+    <div class="top g12">
       <div class="about">
-        <a href="/"><Logo tone="light" /></a>
+        <a href="/" class="brand"><Logo tone="light" /></a>
         <p class="muted">
-          Psicología sanitaria en Sevilla y online. Un espacio para entenderte y hacer las paces contigo, con
-          cercanía, evidencia y sin juicios.
+          Psicología sanitaria en Sevilla y online. Especializada en trastornos de la conducta alimentaria e imagen
+          corporal.
         </p>
         <div class="social">
           <a href={CONTACT.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>
@@ -24,7 +24,7 @@ const year = new Date().getFullYear();
         </div>
       </div>
 
-      <div class="col">
+      <div class="col consultas">
         <h2 class="col-title">Consultas</h2>
         <ul>
           {
@@ -46,55 +46,57 @@ const year = new Date().getFullYear();
           <li><a href={CONTACT.whatsapp} target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
         <h2 class="col-title">Explora</h2>
-        <ul class="inline">
+        <ul>
           {NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
         </ul>
       </div>
     </div>
 
+    <p class="crisis">
+      Si estás en una situación de crisis, llama al <a href="tel:024">024</a> (atención a la conducta suicida, gratuito
+      y 24 h) o al <a href="tel:112">112</a>.
+    </p>
 
     <div class="bottom">
       <p>© {year} Alicia Lozano · {CONTACT.license}</p>
-      <ul class="inline">
+      <ul>
         <li><a href="/aviso-legal">Aviso legal</a></li>
         <li><a href="/privacidad">Privacidad</a></li>
         <li><a href="/cookies">Cookies</a></li>
       </ul>
     </div>
   </div>
-  <p class="giant" aria-hidden="true"><span data-t="Alicia"></span> <em data-t="Lozano"></em></p>
 </footer>
 
 <style>
   .site-footer {
     position: relative;
-    overflow: hidden;
-    padding-top: clamp(4rem, 8vw, 7rem);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    margin-top: -2rem;
-    z-index: 1;
+    margin-top: clamp(4rem, 8vw, 7rem);
+    padding-top: clamp(4rem, 7vw, 6rem);
+    border-radius: 4.5rem 6rem 0 0 / 2.5rem 3.5rem 0 0;
   }
-  .site-footer :global(.f-sun) {
-    position: absolute;
-    right: -6rem;
-    top: -7rem;
-    opacity: 0.35;
-    animation: spin 80s linear infinite;
+  .site-footer :global(.f-maddy) {
+    right: clamp(2rem, 10vw, 9rem);
+    bottom: calc(100% - 0.4rem);
   }
   .top {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
+    row-gap: 3rem;
   }
   .about {
+    grid-column: 1 / span 5;
     display: grid;
-    gap: 1.4rem;
+    gap: 1.25rem;
     align-content: start;
     max-width: 26rem;
   }
-  .about a {
+  .brand {
     text-decoration: none;
+  }
+  .col {
+    grid-column: span 3;
+  }
+  .consultas {
+    grid-column: 7 / span 3;
   }
   .social {
     display: flex;
@@ -103,25 +105,29 @@ const year = new Date().getFullYear();
   .social a {
     display: grid;
     place-items: center;
-    width: 2.8rem;
-    height: 2.8rem;
-    border-radius: 50%;
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--oat) 30%, transparent);
-    transition: background-color 0.3s, color 0.3s, transform 0.4s var(--ease);
+    width: 2.9rem;
+    height: 2.75rem;
+    border-radius: var(--mota);
+    box-shadow: inset 0 0 0 1px #555;
+    transition: background-color 0.25s, color 0.25s, border-radius 0.5s var(--ease);
+  }
+  .social a:nth-child(2n) {
+    border-radius: var(--mota-b);
   }
   .social a:hover {
-    background: var(--blush);
-    color: var(--wine);
-    transform: translateY(-3px);
+    background: var(--blanco);
+    color: var(--tinta);
+    border-radius: 50%;
   }
   .col-title {
-    font-family: var(--sans);
-    font-size: var(--step--1);
-    font-weight: 600;
-    letter-spacing: 0.14em;
+    font-size: var(--t-sm);
+    font-weight: 700;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--blush);
+    color: var(--cobalto-suave);
     margin-bottom: 1rem;
+    padding-top: 0.9rem;
+    border-top: 2px solid #333;
   }
   .col-title:not(:first-child) {
     margin-top: 2rem;
@@ -130,82 +136,66 @@ const year = new Date().getFullYear();
     list-style: none;
     padding: 0;
     display: grid;
-    gap: 0.7rem;
+    gap: 0.6rem;
   }
   .col li {
     display: grid;
   }
   .col li span {
-    color: color-mix(in oklab, var(--oat) 70%, transparent);
-    font-size: 0.95rem;
-  }
-  .col strong {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 1.2rem;
+    color: #bdbdbd;
+    font-size: var(--t-sm);
   }
   .site-footer a {
     text-decoration-color: transparent;
-    transition: color 0.3s, text-decoration-color 0.3s;
+    transition: text-decoration-color 0.25s;
   }
   .site-footer a:hover {
     text-decoration-color: currentColor;
   }
-  .site-footer a:hover {
-    color: var(--blush);
-  }
   .email {
     word-break: break-all;
   }
-  ul.inline {
-    list-style: none;
-    padding: 0;
-    display: flex !important;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.2rem;
+  .crisis {
+    margin-top: 3.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--forma-3);
+    background: #1e1e1e;
+    color: #d6d6d6;
+    font-size: var(--t-sm);
+  }
+  .crisis a {
+    color: var(--blanco);
+    font-weight: 700;
+    text-decoration-color: currentColor !important;
   }
   .bottom {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 1rem;
-    padding-block: 2rem 1rem;
-    font-size: 0.9rem;
-    color: color-mix(in oklab, var(--oat) 70%, transparent);
+    padding-block: 2rem;
+    font-size: var(--t-xs);
+    color: #bdbdbd;
   }
-  .giant {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(4rem, 17.5vw, 20rem);
-    line-height: 0.8;
-    letter-spacing: -0.05em;
-    white-space: nowrap;
-    text-align: center;
-    color: color-mix(in oklab, var(--oat) 9%, transparent);
-    margin-bottom: -0.12em;
-    user-select: none;
-  }
-  .giant [data-t]::before {
-    content: attr(data-t);
-  }
-  .giant em {
-    color: color-mix(in oklab, var(--blush) 22%, transparent);
+  .bottom ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.25rem;
   }
   @media (max-width: 56rem) {
-    .top {
-      grid-template-columns: 1fr 1fr;
-    }
     .about {
       grid-column: 1 / -1;
     }
+    .consultas,
+    .col {
+      grid-column: span 6;
+    }
   }
   @media (max-width: 34rem) {
-    .site-footer :global(.f-sun) {
-      right: -13rem;
-      opacity: 0.25;
-    }
-    .top {
-      grid-template-columns: 1fr;
+    .consultas,
+    .col {
+      grid-column: 1 / -1;
     }
   }
 </style>

@@ -1,5 +1,4 @@
 ---
-import paths from "./logo-paths.json";
 interface Props {
   class?: string;
   tone?: "ink" | "light";
@@ -8,49 +7,33 @@ const { class: className, tone = "ink" } = Astro.props;
 ---
 
 <span class:list={["logo", `tone-${tone}`, className]}>
-  <svg class="mark" viewBox="0 0 120 120" aria-hidden="true">
-    <path d={paths.sun} fill="var(--terracotta)" />
-    <path d={paths.a} fill="var(--paper)" />
-  </svg>
-  <span class="words">
-    <span class="name">Alicia Lozano</span>
-    <span class="role">Psicología</span>
-  </span>
+  <span class="name">Alicia Lozano</span>
+  <span class="role">— Psicóloga</span>
 </span>
 
 <style>
   .logo {
     display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-size: 1.25rem;
     line-height: 1;
-  }
-  .mark {
-    width: 2.6rem;
-    height: 2.6rem;
-    transition: transform 0.9s var(--ease);
-  }
-  :global(a:hover) > .logo .mark {
-    transform: rotate(-40deg);
-  }
-  .words {
-    display: grid;
-    gap: 0.3rem;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
   }
   .name {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    font-weight: 420;
-    letter-spacing: -0.02em;
+    font-weight: 700;
   }
   .role {
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--ink-2);
+    font-weight: 400;
+    color: var(--gris);
   }
   .tone-light .role {
-    color: var(--blush);
+    color: #bdbdbd;
+  }
+  @media (max-width: 26rem) {
+    .role {
+      display: none;
+    }
   }
 </style>

@@ -28,17 +28,10 @@ const { items, name = "faq" } = Astro.props;
 <style>
   .faq {
     display: grid;
-    gap: 0.75rem;
+    border-top: 2px solid var(--tinta);
   }
   details {
-    border-radius: var(--radius);
-    background: var(--paper);
-    box-shadow: inset 0 0 0 1px var(--line);
-    transition: background-color 0.4s, box-shadow 0.4s;
-  }
-  details[open] {
-    background: #fff;
-    box-shadow: var(--shadow);
+    border-bottom: 1px solid var(--linea);
   }
   summary {
     list-style: none;
@@ -46,12 +39,16 @@ const { items, name = "faq" } = Astro.props;
     justify-content: space-between;
     align-items: center;
     gap: 1.25rem;
-    padding: 1.25rem 1.4rem;
+    padding: 1.35rem 0;
     cursor: pointer;
-    font-family: var(--serif);
-    font-size: var(--step-1);
-    font-weight: 400;
+    font-size: var(--t-lg);
+    font-weight: 500;
     line-height: 1.3;
+    letter-spacing: -0.01em;
+    transition: color 0.25s;
+  }
+  summary:hover {
+    color: var(--cobalto);
   }
   summary::-webkit-details-marker {
     display: none;
@@ -60,20 +57,22 @@ const { items, name = "faq" } = Astro.props;
     display: grid;
     place-items: center;
     flex: none;
-    width: 2.4rem;
-    height: 2.4rem;
-    border-radius: 50%;
-    background: var(--sand);
-    transition: transform 0.5s var(--ease), background-color 0.3s;
+    width: 2.5rem;
+    height: 2.3rem;
+    border-radius: var(--mota);
+    box-shadow: inset 0 0 0 1.5px currentColor;
+    transition: transform 0.5s var(--ease), background-color 0.3s, color 0.3s;
   }
   details[open] .toggle {
     transform: rotate(135deg);
-    background: var(--blush);
+    background: var(--cobalto);
+    color: var(--blanco);
+    box-shadow: none;
   }
   .answer {
-    padding: 0 1.4rem 1.4rem;
-    color: var(--ink-2);
-    max-width: 60ch;
+    padding: 0 3.5rem 1.5rem 0;
+    color: var(--gris);
+    max-width: 62ch;
   }
   @supports (interpolate-size: allow-keywords) {
     details {

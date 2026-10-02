@@ -1,0 +1,87 @@
+---
+/**
+ * Portada de un artículo: su foto si la tiene; si no, un bloque de color
+ * con la categoría, como una etiqueta de taller. El color se elige por la
+ * categoría para que cada tema tenga siempre el mismo.
+ */
+interface Props {
+  src?: string;
+  alt?: string;
+  category: string;
+  ratio?: string;
+  forma?: string;
+  class?: string;
+  loading?: "lazy" | "eager";
+}
+const { src, alt = "", category, ratio = "4 / 3", forma = "--forma-1", class: className, loading = "lazy" } = Astro.props;
+const tonos = ["cobalto", "celadon", "hueso"];
+const hash = [...category].reduce((a, c) => a + c.charCodeAt(0), 0);
+const tono = tonos[hash % tonos.length];
+---
+
+<figure class:list={["portada", `t-${tono}`, className]} style={`aspect-ratio:${ratio};border-radius:var(${forma})`}>
+  {
+    src ? (
+      <img src={src} alt={alt} loading={loading} decoding="async" />
+    ) : (
+      <span class="etiqueta" aria-hidden="true">
+        <span class="mota" />
+        {category}
+      </span>
+    )
+  }
+</figure>
+
+<style>
+  .portada {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    display: grid;
+    align-items: end;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .t-cobalto {
+    background: var(--cobalto);
+    color: var(--blanco);
+  }
+  .t-celadon {
+    background: var(--celadon);
+    color: var(--tinta);
+  }
+  .t-hueso {
+    background: var(--hueso);
+    color: var(--tinta);
+  }
+  .etiqueta {
+    display: grid;
+    gap: 0.75rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    transition: transform 0.6s var(--ease);
+  }
+  .mota {
+    width: 2.2rem;
+    height: 1.9rem;
+    border-radius: var(--mota);
+    background: currentColor;
+    opacity: 0.9;
+  }
+  .t-cobalto .mota {
+    background: var(--cobalto-suave);
+  }
+  .t-celadon .mota {
+    background: var(--celadon-ink);
+  }
+  .t-hueso .mota {
+    background: var(--cobalto);
+  }
+</style>
