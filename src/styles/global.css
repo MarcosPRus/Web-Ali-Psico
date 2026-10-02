@@ -1,63 +1,106 @@
 /* ════════════════════════════════════════════════════════════
-   Alicia Lozano · Psicología — Sistema de diseño
-   Papel cálido, recortes de colores y una serif con alma.
+   Alicia Lozano · Psicología — Sistema de diseño «Hecho a mano»
+
+   La web es una pieza de taller: casi todo es barro, y el esmalte
+   va solo donde importa. Nada es perfecto (y eso es lo bonito).
+   Colores muestreados de las piezas de Ali y de Maddy y Furi.
    ════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Papel */
-  --oat: #f6f0e7;
-  --paper: #fcf9f4;
-  --sand: #ebddcb;
-  --clay: #dcc6ad;
+  /* ─── Barro: fondos ────────────────────────────────────── */
+  --bizcocho: #f5efe3; /* plato sin esmaltar · fondo de la web */
+  --esmalte: #fdfbf6; /* jarrón del arco · tarjetas y superficies */
+  --barbotina: #e9e0d0; /* botes de barbotina · secciones alternas */
+  --barro: #d9ccb6; /* barro crudo · bordes suaves, rellenos */
 
-  /* Tinta */
-  --ink: #2f2127;
-  --ink-2: #6a565c;
-  --line: color-mix(in oklab, var(--ink) 14%, transparent);
+  /* ─── Tintas: los gatos ────────────────────────────────── */
+  --furi: #1d1a1e; /* Furi, negro entero · texto */
+  --maddy: #5c5258; /* el negro de Maddy al sol · texto secundario */
 
-  /* Recortes */
-  --wine: #4e1f30;
-  --terracotta: #c66b4e;
-  --terracotta-ink: #a94f34;
-  --blush: #f2c6b6;
-  --rose: #e8a393;
-  --lilac: #c9c3f0;
-  --lilac-2: #a9a1e6;
-  --lilac-ink: #5b53b0;
-  --sage: #aab89b;
-  --sage-ink: #4f6347;
-  --butter: #f1d27e;
+  /* ─── Esmaltes ─────────────────────────────────────────── */
+  --cobalto: #2f4aa8; /* moteado del portalápices y la tetera · acción, enlaces, énfasis */
+  --cobalto-hondo: #24397f;
+  --celadon: #a9cfbf; /* cuenco de las flores caladas · calma */
+  --celadon-claro: #d6e8df;
+  --celadon-ink: #2f6a5f;
+  --ciruela: #6b4458; /* rayas de la jarra · secciones oscuras */
+  --ciruela-honda: #4f3242; /* el pie de la pieza · footer */
+  --naranja: #e8913f; /* cuadros de la jarra · destellos */
+  --naranja-ink: #a65412;
+  --lengua: #e48f9a; /* la lengüita de Maddy · cariño */
+  --rosa: #f2c3c4; /* rosa claro sobre oscuro */
+  --rosa-ink: #a8445a;
+  --ojo: #d3d77a; /* ojos de Maddy y Furi, y el pie de los saleros */
+  --ojo-ink: #5b6416;
+  --mantequilla: #f0e08e; /* centro de la flor */
+  --polvo: #c2d3e1; /* azul de la mantequera */
+  --granada: #a8463c; /* pétalos de la flor · avisos de error, sin regañar */
 
-  /* Tipografía */
-  --serif: var(--font-serif), Georgia, serif;
-  --sans: var(--font-sans), system-ui, sans-serif;
+  /* ─── Alias de compatibilidad (nombres del diseño anterior) ─ */
+  --oat: var(--bizcocho);
+  --paper: var(--esmalte);
+  --sand: var(--barbotina);
+  --clay: var(--barro);
+  --ink: var(--furi);
+  --ink-2: var(--maddy);
+  --line: color-mix(in oklab, var(--furi) 13%, transparent);
+  --wine: var(--ciruela-honda);
+  --terracotta: var(--naranja);
+  --terracotta-ink: var(--cobalto);
+  --blush: var(--rosa);
+  --rose: var(--lengua);
+  --lilac: var(--polvo);
+  --lilac-2: #9fb6cc;
+  --lilac-ink: var(--cobalto);
+  --sage: var(--celadon);
+  --sage-ink: var(--celadon-ink);
+  --butter: var(--mantequilla);
+
+  /* ─── Tipografía ───────────────────────────────────────── */
+  --serif: var(--font-serif), Georgia, serif; /* Fraunces blanda */
+  --sans: var(--font-sans), system-ui, sans-serif; /* Figtree */
+  --hand: var(--font-hand), "Comic Sans MS", cursive; /* letra a mano, solo notas */
 
   --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
   --step-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.45rem);
   --step-2: clamp(1.45rem, 1.25rem + 0.9vw, 2rem);
   --step-3: clamp(1.9rem, 1.5rem + 1.8vw, 3rem);
-  --step-4: clamp(2.4rem, 1.7rem + 3.2vw, 4.4rem);
-  --step-5: clamp(2.9rem, 1.8rem + 5.2vw, 6.6rem);
+  --step-4: clamp(2.3rem, 1.7rem + 3vw, 4.2rem);
+  --step-5: clamp(2.7rem, 1.8rem + 4.8vw, 6.2rem);
 
-  /* Espacio y forma */
+  /* ─── Espacio y forma: piezas hechas a mano ─────────────── */
   --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
   --section: clamp(4rem, 2.5rem + 6vw, 7.5rem);
-  --radius: 1.25rem;
-  --radius-lg: 2rem;
-  --arch: 999px 999px var(--radius) var(--radius);
+  /* ninguna esquina es igual a otra, como en una pieza de torno */
+  --radius: 1.3rem 1.05rem 1.25rem 1.1rem / 1.1rem 1.3rem 1.05rem 1.25rem;
+  --radius-lg: 2.2rem 1.7rem 2.35rem 1.8rem / 1.85rem 2.3rem 1.7rem 2.2rem;
+  --radius-xl: 3rem 2.4rem 3.2rem 2.6rem / 2.6rem 3.2rem 2.4rem 3rem;
+  --radius-pill: 1.9em 1.6em 1.8em 1.7em / 1.7em 1.9em 1.6em 1.8em;
+  /* arco del jarrón: casi simétrico, nunca del todo */
+  --arch: 48% 52% 1.3rem 1.1rem / 37% 40% 1.1rem 1.3rem;
   --max: 76rem;
   --header-h: 5.6rem;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --shadow: 0 1px 1px rgb(47 33 39 / 0.04), 0 8px 24px -8px rgb(47 33 39 / 0.14),
-    0 30px 60px -30px rgb(78 31 48 / 0.18);
+  --shadow: 0 1px 1px rgb(29 26 30 / 0.04), 0 8px 24px -8px rgb(29 26 30 / 0.13),
+    0 30px 60px -30px rgb(79 50 66 / 0.2);
+  /* brillo de esmalte: un reflejo arriba, como una pieza vidriada */
+  --vidriado: inset 0 2px 0 rgb(255 255 255 / 0.22), inset 0 -3px 6px rgb(0 0 0 / 0.12);
 
-  /* Grano de papel (SVG feTurbulence, sin peticiones extra) */
+  /* ─── Texturas ─────────────────────────────────────────── */
+  /* moteado de cobalto (portalápices "made with love", tetera) */
+  --moteado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='%232f4aa8'%3E%3Cellipse cx='58' cy='27' rx='0.6' ry='0.5' transform='rotate%2866 58 27%29'/%3E%3Cellipse cx='10' cy='91' rx='2.9' ry='1.8' transform='rotate%2816 10 91%29'/%3E%3Cellipse cx='76' cy='149' rx='0.8' ry='0.7' transform='rotate%28171 76 149%29'/%3E%3Cellipse cx='104' cy='71' rx='0.6' ry='0.5' transform='rotate%2852 104 71%29'/%3E%3Cellipse cx='26' cy='21' rx='1.6' ry='1.1' transform='rotate%28105 26 21%29'/%3E%3Cellipse cx='115' cy='67' rx='0.6' ry='0.4' transform='rotate%2837 115 67%29'/%3E%3Cellipse cx='122' cy='77' rx='1.3' ry='1.0' transform='rotate%2854 122 77%29'/%3E%3Cellipse cx='143' cy='126' rx='1.3' ry='1.1' transform='rotate%28158 143 126%29'/%3E%3Cellipse cx='131' cy='52' rx='0.7' ry='0.5' transform='rotate%28136 131 52%29'/%3E%3Cellipse cx='27' cy='88' rx='3.4' ry='3.1' transform='rotate%28103 27 88%29'/%3E%3Cellipse cx='158' cy='56' rx='1.3' ry='1.1' transform='rotate%2882 158 56%29'/%3E%3Cellipse cx='151' cy='170' rx='1.4' ry='0.9' transform='rotate%28126 151 170%29'/%3E%3Cellipse cx='116' cy='179' rx='0.9' ry='0.7' transform='rotate%28120 116 179%29'/%3E%3Cellipse cx='4' cy='83' rx='0.7' ry='0.4' transform='rotate%28138 4 83%29'/%3E%3Cellipse cx='23' cy='45' rx='1.7' ry='1.1' transform='rotate%2881 23 45%29'/%3E%3Cellipse cx='99' cy='159' rx='1.7' ry='1.2' transform='rotate%2875 99 159%29'/%3E%3Cellipse cx='65' cy='159' rx='0.7' ry='0.5' transform='rotate%2842 65 159%29'/%3E%3Cellipse cx='42' cy='87' rx='0.9' ry='0.5' transform='rotate%2875 42 87%29'/%3E%3Cellipse cx='66' cy='102' rx='1.5' ry='1.2' transform='rotate%28111 66 102%29'/%3E%3Cellipse cx='122' cy='10' rx='1.6' ry='1.5' transform='rotate%28144 122 10%29'/%3E%3Cellipse cx='71' cy='72' rx='3.3' ry='2.1' transform='rotate%2812 71 72%29'/%3E%3Cellipse cx='38' cy='29' rx='0.6' ry='0.3' transform='rotate%2827 38 29%29'/%3E%3Cellipse cx='18' cy='65' rx='3.9' ry='3.3' transform='rotate%2827 18 65%29'/%3E%3Cellipse cx='45' cy='63' rx='0.7' ry='0.6' transform='rotate%28179 45 63%29'/%3E%3Cellipse cx='84' cy='87' rx='2.1' ry='1.6' transform='rotate%2848 84 87%29'/%3E%3Cellipse cx='149' cy='29' rx='4.1' ry='3.3' transform='rotate%2826 149 29%29'/%3E%3Cellipse cx='98' cy='5' rx='1.9' ry='1.8' transform='rotate%28125 98 5%29'/%3E%3Cellipse cx='47' cy='66' rx='1.6' ry='1.3' transform='rotate%28140 47 66%29'/%3E%3Cellipse cx='59' cy='40' rx='1.9' ry='1.8' transform='rotate%28145 59 40%29'/%3E%3Cellipse cx='147' cy='133' rx='1.2' ry='0.9' transform='rotate%285 147 133%29'/%3E%3Cellipse cx='5' cy='50' rx='1.5' ry='1.4' transform='rotate%2881 5 50%29'/%3E%3Cellipse cx='169' cy='178' rx='1.0' ry='0.7' transform='rotate%2841 169 178%29'/%3E%3Cellipse cx='35' cy='37' rx='1.8' ry='1.6' transform='rotate%2886 35 37%29'/%3E%3Cellipse cx='118' cy='144' rx='3.4' ry='3.3' transform='rotate%28141 118 144%29'/%3E%3Cellipse cx='135' cy='86' rx='1.6' ry='1.2' transform='rotate%28144 135 86%29'/%3E%3Cellipse cx='175' cy='71' rx='1.8' ry='1.6' transform='rotate%2831 175 71%29'/%3E%3Cellipse cx='23' cy='27' rx='1.6' ry='1.1' transform='rotate%28149 23 27%29'/%3E%3Cellipse cx='176' cy='118' rx='1.3' ry='0.8' transform='rotate%283 176 118%29'/%3E%3Cellipse cx='175' cy='117' rx='1.8' ry='1.4' transform='rotate%28157 175 117%29'/%3E%3Cellipse cx='149' cy='38' rx='0.9' ry='0.6' transform='rotate%28106 149 38%29'/%3E%3Cellipse cx='47' cy='75' rx='1.8' ry='1.3' transform='rotate%2882 47 75%29'/%3E%3Cellipse cx='105' cy='163' rx='1.8' ry='1.4' transform='rotate%2896 105 163%29'/%3E%3Cellipse cx='94' cy='3' rx='0.8' ry='0.5' transform='rotate%28144 94 3%29'/%3E%3Cellipse cx='31' cy='85' rx='1.3' ry='0.9' transform='rotate%2893 31 85%29'/%3E%3Cellipse cx='100' cy='141' rx='3.2' ry='2.2' transform='rotate%2850 100 141%29'/%3E%3Cellipse cx='139' cy='91' rx='1.6' ry='1.5' transform='rotate%2880 139 91%29'/%3E%3C/g%3E%3C/svg%3E");
+  --moteado-claro: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='%23fdfbf6'%3E%3Cellipse cx='58' cy='27' rx='0.6' ry='0.5' transform='rotate%2866 58 27%29'/%3E%3Cellipse cx='10' cy='91' rx='2.9' ry='1.8' transform='rotate%2816 10 91%29'/%3E%3Cellipse cx='76' cy='149' rx='0.8' ry='0.7' transform='rotate%28171 76 149%29'/%3E%3Cellipse cx='104' cy='71' rx='0.6' ry='0.5' transform='rotate%2852 104 71%29'/%3E%3Cellipse cx='26' cy='21' rx='1.6' ry='1.1' transform='rotate%28105 26 21%29'/%3E%3Cellipse cx='115' cy='67' rx='0.6' ry='0.4' transform='rotate%2837 115 67%29'/%3E%3Cellipse cx='122' cy='77' rx='1.3' ry='1.0' transform='rotate%2854 122 77%29'/%3E%3Cellipse cx='143' cy='126' rx='1.3' ry='1.1' transform='rotate%28158 143 126%29'/%3E%3Cellipse cx='131' cy='52' rx='0.7' ry='0.5' transform='rotate%28136 131 52%29'/%3E%3Cellipse cx='27' cy='88' rx='3.4' ry='3.1' transform='rotate%28103 27 88%29'/%3E%3Cellipse cx='158' cy='56' rx='1.3' ry='1.1' transform='rotate%2882 158 56%29'/%3E%3Cellipse cx='151' cy='170' rx='1.4' ry='0.9' transform='rotate%28126 151 170%29'/%3E%3Cellipse cx='116' cy='179' rx='0.9' ry='0.7' transform='rotate%28120 116 179%29'/%3E%3Cellipse cx='4' cy='83' rx='0.7' ry='0.4' transform='rotate%28138 4 83%29'/%3E%3Cellipse cx='23' cy='45' rx='1.7' ry='1.1' transform='rotate%2881 23 45%29'/%3E%3Cellipse cx='99' cy='159' rx='1.7' ry='1.2' transform='rotate%2875 99 159%29'/%3E%3Cellipse cx='65' cy='159' rx='0.7' ry='0.5' transform='rotate%2842 65 159%29'/%3E%3Cellipse cx='42' cy='87' rx='0.9' ry='0.5' transform='rotate%2875 42 87%29'/%3E%3Cellipse cx='66' cy='102' rx='1.5' ry='1.2' transform='rotate%28111 66 102%29'/%3E%3Cellipse cx='122' cy='10' rx='1.6' ry='1.5' transform='rotate%28144 122 10%29'/%3E%3Cellipse cx='71' cy='72' rx='3.3' ry='2.1' transform='rotate%2812 71 72%29'/%3E%3Cellipse cx='38' cy='29' rx='0.6' ry='0.3' transform='rotate%2827 38 29%29'/%3E%3Cellipse cx='18' cy='65' rx='3.9' ry='3.3' transform='rotate%2827 18 65%29'/%3E%3Cellipse cx='45' cy='63' rx='0.7' ry='0.6' transform='rotate%28179 45 63%29'/%3E%3Cellipse cx='84' cy='87' rx='2.1' ry='1.6' transform='rotate%2848 84 87%29'/%3E%3Cellipse cx='149' cy='29' rx='4.1' ry='3.3' transform='rotate%2826 149 29%29'/%3E%3Cellipse cx='98' cy='5' rx='1.9' ry='1.8' transform='rotate%28125 98 5%29'/%3E%3Cellipse cx='47' cy='66' rx='1.6' ry='1.3' transform='rotate%28140 47 66%29'/%3E%3Cellipse cx='59' cy='40' rx='1.9' ry='1.8' transform='rotate%28145 59 40%29'/%3E%3Cellipse cx='147' cy='133' rx='1.2' ry='0.9' transform='rotate%285 147 133%29'/%3E%3Cellipse cx='5' cy='50' rx='1.5' ry='1.4' transform='rotate%2881 5 50%29'/%3E%3Cellipse cx='169' cy='178' rx='1.0' ry='0.7' transform='rotate%2841 169 178%29'/%3E%3Cellipse cx='35' cy='37' rx='1.8' ry='1.6' transform='rotate%2886 35 37%29'/%3E%3Cellipse cx='118' cy='144' rx='3.4' ry='3.3' transform='rotate%28141 118 144%29'/%3E%3Cellipse cx='135' cy='86' rx='1.6' ry='1.2' transform='rotate%28144 135 86%29'/%3E%3Cellipse cx='175' cy='71' rx='1.8' ry='1.6' transform='rotate%2831 175 71%29'/%3E%3Cellipse cx='23' cy='27' rx='1.6' ry='1.1' transform='rotate%28149 23 27%29'/%3E%3Cellipse cx='176' cy='118' rx='1.3' ry='0.8' transform='rotate%283 176 118%29'/%3E%3Cellipse cx='175' cy='117' rx='1.8' ry='1.4' transform='rotate%28157 175 117%29'/%3E%3Cellipse cx='149' cy='38' rx='0.9' ry='0.6' transform='rotate%28106 149 38%29'/%3E%3Cellipse cx='47' cy='75' rx='1.8' ry='1.3' transform='rotate%2882 47 75%29'/%3E%3Cellipse cx='105' cy='163' rx='1.8' ry='1.4' transform='rotate%2896 105 163%29'/%3E%3Cellipse cx='94' cy='3' rx='0.8' ry='0.5' transform='rotate%28144 94 3%29'/%3E%3Cellipse cx='31' cy='85' rx='1.3' ry='0.9' transform='rotate%2893 31 85%29'/%3E%3Cellipse cx='100' cy='141' rx='3.2' ry='2.2' transform='rotate%2850 100 141%29'/%3E%3Cellipse cx='139' cy='91' rx='1.6' ry='1.5' transform='rotate%2880 139 91%29'/%3E%3C/g%3E%3C/svg%3E");
+  /* chamota: puntitos de hierro del barro sin esmaltar */
+  --chamota: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cg fill='%23a8957c' fill-opacity='.55'%3E%3Ccircle cx='43' cy='98' r='0.52'/%3E%3Ccircle cx='109' cy='113' r='0.38'/%3E%3Ccircle cx='2' cy='151' r='0.47'/%3E%3Ccircle cx='42' cy='179' r='0.56'/%3E%3Ccircle cx='151' cy='86' r='0.64'/%3E%3Ccircle cx='27' cy='114' r='0.74'/%3E%3Ccircle cx='94' cy='133' r='0.65'/%3E%3Ccircle cx='12' cy='136' r='0.62'/%3E%3Ccircle cx='54' cy='6' r='0.74'/%3E%3Ccircle cx='85' cy='129' r='0.75'/%3E%3Ccircle cx='129' cy='166' r='0.53'/%3E%3Ccircle cx='144' cy='80' r='0.77'/%3E%3Ccircle cx='158' cy='18' r='0.41'/%3E%3Ccircle cx='39' cy='174' r='0.55'/%3E%3C/g%3E%3C/svg%3E");
+  /* grano fino */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .18 0 0 0 0 .13 0 0 0 0 .15 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* curva sonrisa (el perfil de un cuenco) */
+  --sonrisa: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 24' preserveAspectRatio='none'%3E%3Cpath d='M3 5c34 20 150 22 194 2' fill='none' stroke='%232f4aa8' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
 
   color-scheme: light;
-  accent-color: var(--terracotta-ink);
+  accent-color: var(--cobalto);
 }
 
 @view-transition {
@@ -81,7 +124,7 @@ html {
 }
 body {
   min-height: 100dvh;
-  background: var(--oat);
+  background: var(--chamota) var(--bizcocho);
   color: var(--ink);
   font-family: var(--sans);
   font-size: var(--step-0);
@@ -98,7 +141,7 @@ body::after {
   inset: 0;
   pointer-events: none;
   background-image: var(--grain);
-  opacity: 0.07;
+  opacity: 0.05;
   mix-blend-mode: multiply;
   z-index: 100;
 }
@@ -136,7 +179,7 @@ h4 {
   overflow-wrap: break-word;
 }
 ::selection {
-  background: var(--lilac);
+  background: var(--celadon);
   color: var(--ink);
 }
 :focus-visible {
@@ -152,17 +195,17 @@ h3,
 h4,
 .display {
   font-family: var(--serif);
-  font-weight: 380;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 420;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
   font-optical-sizing: auto;
   text-wrap: balance;
 }
 h1,
 .h1 {
   font-size: var(--step-5);
-  font-weight: 340;
-  letter-spacing: -0.035em;
+  font-weight: 400;
+  letter-spacing: -0.025em;
 }
 h2,
 .h2 {
@@ -187,13 +230,13 @@ h1 em,
 h2 em,
 h3 em,
 .display em {
-  font-weight: 330;
-  color: var(--lilac-ink);
+  font-weight: 380;
+  color: var(--cobalto);
 }
 .on-dark h1 em,
 .on-dark h2 em,
 .on-dark h3 em {
-  color: var(--lilac);
+  color: var(--rosa);
 }
 p {
   text-wrap: pretty;
@@ -210,28 +253,55 @@ p {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.6em;
+  gap: 0.65em;
   font-family: var(--sans);
   font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--terracotta-ink);
+  color: var(--cobalto);
 }
+/* una mota de esmalte, nunca un círculo perfecto */
 .eyebrow::before {
   content: "";
-  width: 0.55em;
-  height: 0.55em;
-  border-radius: 50%;
+  width: 0.62em;
+  height: 0.52em;
+  border-radius: 55% 45% 60% 40% / 50% 60% 40% 50%;
   background: currentColor;
+  rotate: -12deg;
 }
 .on-dark .eyebrow {
-  color: var(--blush);
+  color: var(--rosa);
 }
 .script {
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 300;
+  font-weight: 340;
+}
+/* letra a mano: solo para notas, firmas y susurros */
+.mano {
+  font-family: var(--hand);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+/* sello estampado en el barro, como "MADDY ♥" en su cuenco */
+.sello {
+  font-family: var(--sans);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--maddy) 85%, var(--barro));
+  text-shadow: 0 1px 0 rgb(255 255 255 / 0.75), 0 -1px 0 rgb(29 26 30 / 0.12);
+}
+.sello::after {
+  content: " ♥";
+  letter-spacing: 0;
+}
+/* subrayado sonrisa: el perfil de un cuenco */
+.sonrisa {
+  font-style: inherit;
+  padding-bottom: 0.1em;
+  background: var(--sonrisa) no-repeat 0 100% / 100% 0.3em;
 }
 
 /* ─── Layout ────────────────────────────────────────────── */
@@ -250,8 +320,8 @@ p {
   position: relative;
 }
 .on-dark {
-  background: var(--wine);
-  color: var(--oat);
+  background: var(--ciruela-honda);
+  color: var(--bizcocho);
 }
 .on-dark .muted,
 .on-dark .lead {
@@ -276,7 +346,7 @@ p {
   background: var(--ink);
   color: var(--oat);
   padding: 0.6rem 1rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   transition: top 0.2s;
 }
 .skip-link:focus {
@@ -285,16 +355,17 @@ p {
 
 /* ─── Botones ───────────────────────────────────────────── */
 .btn {
-  --bg: var(--ink);
-  --fg: var(--oat);
+  --bg: var(--cobalto);
+  --fg: var(--esmalte);
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.65em;
   padding: 0.95em 1.6em;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--bg);
+  box-shadow: var(--vidriado);
   color: var(--fg);
   font-family: var(--sans);
   font-size: var(--step-0);
@@ -311,7 +382,8 @@ p {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--terracotta-ink);
+  /* al pasar por encima, el esmalte se motea */
+  background: var(--moteado-claro) center / 120px, var(--cobalto-hondo);
   border-radius: inherit;
   transform: translateY(101%);
   transition: transform 0.5s var(--ease);
@@ -322,8 +394,8 @@ p {
 }
 .btn:hover {
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px -14px rgb(169 79 52 / 0.7);
+  transform: translateY(-2px) rotate(-0.6deg);
+  box-shadow: var(--vidriado), 0 14px 30px -14px rgb(47 74 168 / 0.7);
 }
 .btn .arrow {
   transition: transform 0.4s var(--ease);
@@ -337,7 +409,7 @@ p {
   box-shadow: inset 0 0 0 1.5px var(--ink);
 }
 .btn.ghost::before {
-  background: var(--ink);
+  background: var(--furi);
 }
 .btn.ghost:hover {
   color: var(--oat);
@@ -348,7 +420,7 @@ p {
   --fg: var(--ink);
 }
 .btn.light::before {
-  background: var(--blush);
+  background: var(--rosa);
 }
 .btn.light:hover {
   color: var(--ink);
@@ -377,7 +449,7 @@ p {
   align-items: center;
   gap: 0.5em;
   padding: 0.45em 0.95em;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-size: var(--step--1);
   font-weight: 500;
   background: color-mix(in oklab, var(--paper) 70%, transparent);
@@ -505,15 +577,15 @@ p {
   margin-top: 0.45em;
 }
 .prose ul li::marker {
-  color: var(--terracotta);
-  content: "✺  ";
-  font-size: 0.8em;
+  color: var(--cobalto);
+  content: "●  ";
+  font-size: 0.7em;
 }
 .prose blockquote {
   position: relative;
   margin-block: 2.2em;
   padding: 0.2em 0 0.2em 1.4em;
-  border-left: 3px solid var(--lilac-2);
+  border-left: 4px solid var(--celadon);
   font-family: var(--serif);
   font-style: italic;
   font-weight: 330;
@@ -525,10 +597,71 @@ p {
   border: 0;
   height: 1.2rem;
   margin-block: 2.5em;
-  background: radial-gradient(circle, var(--rose) 3px, transparent 3.5px) center / 1.4rem 100% repeat-x;
+  background: radial-gradient(circle at 20% 40%, var(--cobalto) 2.5px, transparent 3px),
+    radial-gradient(circle at 55% 60%, var(--cobalto) 4px, transparent 4.5px),
+    radial-gradient(circle at 85% 35%, var(--cobalto) 2px, transparent 2.5px);
   width: 4.2rem;
   margin-inline: auto;
 }
 .prose img {
   border-radius: var(--radius);
+}
+
+/* ════════════════════════════════════════════════════════════
+   Piezas del taller (utilidades del sistema «Hecho a mano»)
+   ════════════════════════════════════════════════════════════ */
+
+/* Moteado: el esmalte salpicado de cobalto */
+.moteado {
+  background-image: var(--moteado);
+  background-size: 180px;
+}
+.moteado-claro {
+  background-image: var(--moteado-claro);
+  background-size: 180px;
+}
+
+/* Vichy pintado a mano: la jarra de cuadros ciruela y naranja */
+.vichy {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 2.6rem, color-mix(in oklab, var(--ciruela) 80%, transparent) 2.6rem 2.8rem),
+    repeating-linear-gradient(0deg, transparent 0 2.3rem, color-mix(in oklab, var(--naranja) 75%, transparent) 2.3rem 2.55rem),
+    var(--esmalte);
+}
+
+/* Festón: el borde ondulado del cuenco de flores caladas.
+   Se aplica al borde superior de una sección. */
+.feston {
+  --r: clamp(0.9rem, 1.6vw, 1.4rem);
+  -webkit-mask:
+    radial-gradient(circle var(--r) at 50% var(--r), #000 calc(100% - 0.5px), #0000) 50% 0 / calc(var(--r) * 2) calc(var(--r) * 2) repeat-x,
+    linear-gradient(#000 0 0) 0 var(--r) / 100% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--r) at 50% var(--r), #000 calc(100% - 0.5px), #0000) 50% 0 / calc(var(--r) * 2) calc(var(--r) * 2) repeat-x,
+    linear-gradient(#000 0 0) 0 var(--r) / 100% 100% no-repeat;
+}
+
+/* Pieza: superficie esmaltada con un borde de barro */
+.pieza {
+  background-color: var(--esmalte);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 0 0 1px var(--line), 0 1px 0 var(--barro), 0 18px 34px -26px rgb(79 50 66 / 0.45);
+}
+
+/* Huella: una mota de barro donde apoyar una cifra o un icono */
+.huella {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 54% 46% 58% 42% / 46% 56% 44% 54%;
+  background: var(--celadon-claro);
+  color: var(--celadon-ink);
+}
+
+@keyframes parpadeo {
+  0%, 82%, 100% { transform: scaleY(1); }
+  88% { transform: scaleY(0.12); }
+}
+@keyframes asomarse {
+  0%, 100% { transform: translateY(0); }
+  45%, 60% { transform: translateY(14%); }
 }

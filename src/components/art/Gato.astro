@@ -1,0 +1,282 @@
+---
+/**
+ * Maddy y Furi, en el estilo de los saleros de cerámica que hizo Ali:
+ * cuerpo de huevo esmaltado en negro, cara rayada en el barro y el pie
+ * pintado de amarillo.
+ *
+ *   <Gato quien="maddy" />                     sentada, parpadeo lento
+ *   <Gato quien="furi" pose="asomado" />       se asoma por un borde
+ *   <Gato quien="furi" pose="dormido" />       hecho una bola al sol
+ *
+ * Maddy: la mayor, blanca y negra de pelo largo. Serena, independiente
+ *        y cariñosa → ojos entornados (el "parpadeo lento" con el que
+ *        los gatos dicen "confío en ti").
+ * Furi:  el pequeño, negro entero, asustadizo y mimoso con quien acepta
+ *        → orejas grandes, ojos muy abiertos, se asoma antes de acercarse.
+ */
+interface Props {
+  quien?: "maddy" | "furi";
+  pose?: "sentado" | "asomado" | "dormido";
+  size?: string;
+  class?: string;
+  style?: string;
+  /** si se pasa, el dibujo se anuncia a lectores de pantalla */
+  label?: string;
+}
+const { quien = "maddy", pose = "sentado", size = "8rem", class: className, style = "", label } = Astro.props;
+const uid = `g${quien[0]}${pose[0]}${Math.random().toString(36).slice(2, 6)}`;
+const maddy = quien === "maddy";
+
+// Geometría base (pose sentada, viewBox 0 0 120 150)
+const body = maddy
+  ? "M60 34C88 34 104 66 104 100C104 128 86 146 60 146C34 146 16 128 16 100C16 66 32 34 60 34Z"
+  : "M60 42C84 42 98 72 98 103C98 129 82 146 60 146C38 146 22 129 22 103C22 72 36 42 60 42Z";
+const earL = maddy
+  ? "M26 64C25 46 27 30 31 20C33 16 37 16 39 19C44 27 50 35 55 40Z"
+  : "M29 66C27 46 28 24 31 11C33 7 37 7 39 10C45 21 52 33 57 42Z";
+const earInL = maddy ? "M31 53C31 42 32 33 34.5 27C39 33 43 37 46 41Z" : "M33 55C33 41 33 28 35 20C40 28 45 35 48 41Z";
+const mirror = (d: string) => d.replace(/(-?\d+\.?\d*)\s+(-?\d+\.?\d*)/g, (_, x, y) => `${120 - +x} ${y}`);
+const fix = (d: string) => d.replace(/([A-Z])(-?\d)/g, "$1 $2").replace(/(\d)C/g, "$1 C");
+const earR = mirror(fix(earL));
+const earInR = mirror(fix(earInL));
+const eyeY = maddy ? 74 : 78;
+const eyeX = maddy ? [46, 74] : [47, 73];
+const noseY = eyeY + 9;
+---
+
+<span
+  class:list={["gato", `gato-${quien}`, `pose-${pose}`, className]}
+  style={`--gato-size:${size};${style}`}
+  role={label ? "img" : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : "true"}
+>
+  {
+    pose === "dormido" ? (
+      <svg viewBox="0 0 160 104">
+        <ellipse cx="80" cy="99" rx="62" ry="5" class="sombra" />
+        <path class="cuerpo" d="M92 30C130 30 150 50 150 70C150 90 128 98 90 98C56 98 26 92 26 70C26 50 54 30 92 30Z" />
+        <path class="brillo" d="M100 40C116 40 128 45 134 52" />
+        {/* cola rodeando el cuerpo */}
+        <path class="cola" d="M146 76C150 94 120 100 80 99C56 98 40 96 34 90" />
+        {/* cabeza apoyada */}
+        <g class="cabeza">
+          <path class="cuerpo" d="M22 48C18 36 19 24 22 17C24 14 27 15 29 17L38 30Z" />
+          <path class="cuerpo" d="M60 34C62 24 65 15 69 11C71 9 74 10 75 13C76 21 75 32 72 42Z" />
+          <ellipse class="cuerpo" cx="46" cy="60" rx="30" ry="26" />
+          {maddy && <path class="blanco" d="M34 64C36 60 40 61 46 65C52 61 56 60 58 64C61 70 57 79 46 80C35 79 31 70 34 64Z" />}
+          {maddy && <ellipse class="cuerpo" cx="39.5" cy="73" rx="2.6" ry="2" />}
+          <path class="raya" d="M30 56q5 4 10 0M52 56q5 4 10 0" />
+          <path class={maddy ? "nariz-rosa" : "nariz"} d="M43.5 64.5h5l-2.5 3z" />
+          <path class={maddy ? "raya-osc" : "raya"} d="M41.5 70.5q2.2 2.4 4.5 0q2.2 2.4 4.5 0" />
+          <path class="raya fina" d="M28 66l-14-2M28 69l-13 3M64 66l14-3M64 69l13 2" />
+        </g>
+        {/* patitas delante */}
+        <ellipse class={maddy ? "blanco" : "cuerpo"} cx="70" cy="92" rx="10" ry="6" />
+        <ellipse class={maddy ? "blanco" : "cuerpo"} cx="88" cy="94" rx="9" ry="5.5" />
+      </svg>
+    ) : (
+      <svg viewBox={pose === "asomado" ? "0 4 120 102" : "0 0 120 150"}>
+        <defs>
+          <clipPath id={`${uid}-c`}>
+            <path d={body} />
+          </clipPath>
+          {pose === "asomado" && (
+            <clipPath id={`${uid}-a`}>
+              <rect x="0" y="0" width="120" height="100" />
+            </clipPath>
+          )}
+        </defs>
+
+        {pose === "sentado" && (
+          <>
+            <ellipse cx="60" cy="146" rx="44" ry="4" class="sombra" />
+            {maddy ? (
+              <path class="cola gorda" d="M98 128C116 124 120 104 112 92" />
+            ) : (
+              <path class="cola" d="M94 136C112 132 116 112 108 102" />
+            )}
+          </>
+        )}
+
+        <g clip-path={pose === "asomado" ? `url(#${uid}-a)` : undefined}>
+          <g class="orejas">
+            <path class="cuerpo oreja oreja-i" d={fix(earL)} />
+            <path class="cuerpo oreja oreja-d" d={earR} />
+            <path class="interior oreja-i" d={fix(earInL)} />
+            <path class="interior oreja-d" d={earInR} />
+          </g>
+          <path class="cuerpo" d={body} />
+          <g clip-path={`url(#${uid}-c)`}>
+            {pose === "sentado" && <rect x="0" y="134" width="120" height="20" class="pie" />}
+            {pose === "sentado" && <path class="raya-pie" d="M10 134.5C40 137 80 137 110 134.5" />}
+            {maddy && pose === "sentado" && (
+              <path class="blanco" d="M42 106C50 100 70 100 78 106C82 117 75 129 60 134C45 129 38 117 42 106Z" />
+            )}
+          </g>
+          <path class="brillo" d={maddy ? "M33 70C33 58 37 49 43 44" : "M37 74C37 63 40 55 45 50"} />
+
+          {/* cara rayada en el barro */}
+          {maddy && (
+            <>
+              <path class="blanco" d={`M49 ${noseY - 4}C51 ${noseY - 8} 56 ${noseY - 7} 60 ${noseY - 3}C64 ${noseY - 7} 69 ${noseY - 8} 71 ${noseY - 4}C75 ${noseY + 3} 72 ${noseY + 13} 60 ${noseY + 15}C48 ${noseY + 13} 45 ${noseY + 3} 49 ${noseY - 4}Z`} />
+              <ellipse class="cuerpo" cx="52.5" cy={noseY + 8.5} rx="3" ry="2.3" />
+            </>
+          )}
+          <g class="ojos" style={`transform-origin: 60px ${eyeY}px`}>
+            {eyeX.map((x) => (
+              <g>
+                <ellipse class="ojo" cx={x} cy={eyeY} rx={maddy ? 6 : 6.8} ry={maddy ? 5.6 : 6.8} />
+                <ellipse class="pupila" cx={x} cy={eyeY} rx={maddy ? 1.3 : 3.1} ry={maddy ? 4.6 : 4.4} />
+                <circle class="destello" cx={x + 1.8} cy={eyeY - 2.2} r="1.3" />
+                {maddy && <path class="parpado" d={`M${x - 7.5} ${eyeY - 0.6}C${x - 4} ${eyeY - 3.2} ${x + 4} ${eyeY - 3.2} ${x + 7.5} ${eyeY - 0.6}V${eyeY - 8}H${x - 7.5}Z`} />}
+              </g>
+            ))}
+          </g>
+          <path class={maddy ? "nariz-rosa" : "nariz"} d={`M57 ${noseY}h6l-3 3.6z`} />
+          <path class={maddy ? "raya-osc" : "raya"} d={`M54 ${noseY + 5.5}q3 3.4 6 0q3 3.4 6 0`} />
+          <path class="raya fina" d={`M41 ${noseY + 2}l-17-3M41 ${noseY + 5.5}l-16 3M79 ${noseY + 2}l17-3M79 ${noseY + 5.5}l16 3`} />
+
+          {pose === "sentado" && (
+            <>
+              <ellipse class={maddy ? "blanco" : "cuerpo pata"} cx="48" cy="130" rx="8.5" ry="6" />
+              <ellipse class={maddy ? "blanco" : "cuerpo pata"} cx="72" cy="130" rx="8.5" ry="6" />
+              <path class={maddy ? "raya-osc fina" : "raya fina"} d="M45 131v3M51 131v3M69 131v3M75 131v3" />
+            </>
+          )}
+        </g>
+        {pose === "asomado" && (
+          <>
+            <ellipse class={maddy ? "blanco borde-pata" : "cuerpo pata borde-pata"} cx="40" cy="100" rx="9.5" ry="6" />
+            <ellipse class={maddy ? "blanco borde-pata" : "cuerpo pata borde-pata"} cx="80" cy="100" rx="9.5" ry="6" />
+            <path class={maddy ? "raya-osc fina" : "raya fina"} d="M37 100v3M43 100v3M77 100v3M83 100v3" />
+          </>
+        )}
+      </svg>
+    )
+  }
+</span>
+
+<style>
+  .gato {
+    display: inline-block;
+    width: var(--gato-size);
+    line-height: 0;
+    vertical-align: bottom;
+  }
+  .gato svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .cuerpo {
+    fill: var(--furi);
+  }
+  .blanco {
+    fill: var(--esmalte);
+  }
+  .interior {
+    fill: color-mix(in oklab, var(--ciruela) 80%, var(--lengua));
+  }
+  .pie {
+    fill: var(--ojo);
+  }
+  .raya-pie {
+    fill: none;
+    stroke: color-mix(in oklab, var(--furi) 30%, transparent);
+    stroke-width: 1;
+  }
+  .sombra {
+    fill: rgb(29 26 30 / 0.12);
+  }
+  .brillo {
+    fill: none;
+    stroke: rgb(255 255 255 / 0.32);
+    stroke-width: 3.2;
+    stroke-linecap: round;
+  }
+  .cola {
+    fill: none;
+    stroke: var(--furi);
+    stroke-width: 7;
+    stroke-linecap: round;
+  }
+  .cola.gorda {
+    stroke-width: 12;
+  }
+  .pose-dormido .cola {
+    stroke-width: 11;
+  }
+  .ojo {
+    fill: var(--ojo);
+  }
+  .pupila {
+    fill: var(--furi);
+  }
+  .destello {
+    fill: var(--esmalte);
+  }
+  .parpado {
+    fill: var(--furi);
+  }
+  .nariz {
+    fill: #4a3f45;
+  }
+  .nariz-rosa {
+    fill: var(--lengua);
+  }
+  /* rayas hechas con un punzón sobre el esmalte: se ve el barro */
+  .raya,
+  .raya-osc {
+    fill: none;
+    stroke: var(--barbotina);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .raya-osc {
+    stroke: var(--maddy);
+  }
+  .fina {
+    stroke-width: 1.05;
+  }
+  .gato-maddy .raya.fina {
+    stroke: color-mix(in oklab, var(--barbotina) 80%, transparent);
+  }
+  .borde-pata {
+    stroke: var(--furi);
+    stroke-width: 0;
+  }
+
+  /* Maddy: parpadeo lento ("confío en ti" en idioma gato) */
+  .gato-maddy .ojos {
+    animation: parpadeo 7s ease-in-out infinite;
+  }
+  /* Furi: orejas atentas */
+  .oreja-i,
+  .oreja-d {
+    transition: rotate 0.35s var(--ease);
+    transform-box: fill-box;
+  }
+  .oreja-i {
+    transform-origin: 100% 100%;
+  }
+  .oreja-d {
+    transform-origin: 0% 100%;
+  }
+  .gato-furi:hover .oreja-i,
+  :global(:hover) > .gato-furi .oreja-i {
+    rotate: -9deg;
+  }
+  .gato-furi:hover .oreja-d,
+  :global(:hover) > .gato-furi .oreja-d {
+    rotate: 9deg;
+  }
+  .gato-furi .ojos {
+    animation: parpadeo 4.5s ease-in-out infinite;
+    animation-delay: 1.2s;
+  }
+  .pose-dormido .ojos {
+    animation: none;
+  }
+</style>

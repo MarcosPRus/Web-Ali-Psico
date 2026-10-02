@@ -1,0 +1,127 @@
+---
+/**
+ * «Hecho a mano»: el corazón del sistema de diseño.
+ * Las piezas de cerámica de Ali, con sus imperfecciones, como metáfora
+ * de quererse a una misma. Cada pieza lleva su sello, como en el taller.
+ */
+const piezas = [
+  { src: "/img/taller/jarra-vichy.webp", alt: "Jarra de cerámica con cuadros pintados a mano en ciruela y naranja", sello: "las líneas tiemblan", r: -3 },
+  { src: "/img/taller/flor.webp", alt: "Flor de cerámica esmaltada en rojo granada con el centro amarillo", sello: "un pétalo más grande", r: 2 },
+  { src: "/img/taller/plato-mosaico.webp", alt: "Plato de cerámica con un mosaico pintado en azules y verdes", sello: "ningún trozo igual", r: -1.5 },
+  { src: "/img/taller/portalapices-made-with-love.webp", alt: "Portalápices blanco salpicado de cobalto con la frase made with love grabada", sello: "made with love", r: 3 },
+];
+---
+
+<section class="section hecho" aria-labelledby="hecho-title">
+  <div class="container wide">
+    <div class="head">
+      <p class="eyebrow" data-reveal>Hecho a mano</p>
+      <h2 id="hecho-title" data-reveal style="--d:1">
+        Ninguna pieza sale perfecta.<br /><em class="sonrisa">Y por eso es tuya.</em>
+      </h2>
+      <div class="texto" data-reveal style="--d:2">
+        <p class="lead">
+          Fuera de consulta hago cerámica. En el taller aprendí algo que también pasa en terapia: el borde se tuerce,
+          el esmalte chorrea más de un lado, se queda la huella de un dedo… y eso no estropea la pieza. La hace única.
+        </p>
+        <p>
+          Tu cuerpo y tu historia tampoco son una pieza de fábrica. No venimos a corregirte, sino a que aprendas a
+          mirarte con el mismo cariño con el que miras algo hecho a mano.
+        </p>
+      </div>
+    </div>
+
+    <ul class="estante">
+      {
+        piezas.map((p, i) => (
+          <li class="pieza-foto" style={`--r:${p.r}deg;--d:${i + 1}`} data-reveal>
+            <figure>
+              <img src={p.src} alt={p.alt} loading="lazy" decoding="async" width="500" height="500" />
+              <figcaption class="sello">{p.sello}</figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hecho {
+    background: var(--barbotina);
+    overflow: hidden;
+  }
+  /* borde superior festoneado, como el cuenco de flores caladas */
+  .hecho::before {
+    content: "";
+    position: absolute;
+    inset: -1px 0 auto;
+    height: 1.6rem;
+    background: radial-gradient(circle 1rem at 50% 0, var(--bizcocho) calc(100% - 0.5px), transparent) 50% 0 / 2rem 100% repeat-x;
+  }
+  .head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem clamp(2rem, 6vw, 6rem);
+    align-items: end;
+  }
+  .head .eyebrow {
+    grid-column: 1 / -1;
+  }
+  h2 {
+    font-size: var(--step-4);
+    max-width: 14ch;
+  }
+  .texto {
+    display: grid;
+    gap: 1rem;
+    max-width: 46ch;
+  }
+  .texto .lead {
+    color: var(--furi);
+    max-width: none;
+  }
+  .texto p:not(.lead) {
+    color: var(--maddy);
+  }
+  .estante {
+    list-style: none;
+    padding: 0;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+  .pieza-foto figure {
+    margin: 0;
+    padding: 0.7rem 0.7rem 0;
+    background: var(--esmalte);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 1px 0 var(--barro), 0 22px 36px -24px rgb(79 50 66 / 0.5);
+    rotate: var(--r);
+    transition: rotate 0.6s var(--ease), translate 0.6s var(--ease);
+  }
+  .pieza-foto:hover figure {
+    rotate: 0deg;
+    translate: 0 -6px;
+  }
+  .pieza-foto img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  figcaption {
+    padding: 0.9rem 0.3rem 1rem;
+    text-align: center;
+    font-size: 0.72rem;
+  }
+  @media (max-width: 60rem) {
+    .head {
+      grid-template-columns: 1fr;
+    }
+    .estante {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

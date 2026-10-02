@@ -3,15 +3,16 @@ import Media from "../art/Media.astro";
 import Shape from "../art/Shape.astro";
 import Seal from "../Seal.astro";
 import Icon from "../Icon.astro";
+import Gato from "../art/Gato.astro";
 ---
 
 <section class="hero">
-  <div class="blob" aria-hidden="true"></div>
+  <div class="charco" aria-hidden="true"></div>
   <div class="container wide grid">
     <div class="copy">
       <p class="eyebrow" data-reveal>Psicóloga sanitaria · Sevilla y online</p>
       <h1 data-reveal style="--d:1">
-        Un espacio para <span class="nw">hacer las paces</span> <em>contigo</em>.
+        Un espacio para <span class="nw">hacer las paces</span> <em class="sonrisa">contigo</em>.
       </h1>
       <p class="lead" data-reveal style="--d:2">
         Soy Alicia, psicóloga sanitaria. Te acompaño cuando la ansiedad, la autoestima o tus relaciones pesan más de la
@@ -30,7 +31,7 @@ import Icon from "../Icon.astro";
     </div>
 
     <div class="visual" data-reveal style="--d:2">
-      <Shape name="sun" color="var(--butter)" size="clamp(7rem, 14vw, 11rem)" class="sun" />
+      <span class="motas" aria-hidden="true"></span>
       <Media
         src="/img/ali-retrato.webp"
         shape="arch"
@@ -39,12 +40,10 @@ import Icon from "../Icon.astro";
         alt="Alicia Lozano, psicóloga, sonriendo en su despacho"
         class="portrait"
       />
-      <Shape name="sprig" color="var(--sage-ink)" size="clamp(4rem, 7vw, 6rem)" class="sprig float" style="--t:10s;--r:12deg" />
-      <Shape name="star" color="var(--terracotta)" size="clamp(2.5rem, 4vw, 3.4rem)" class="star float" style="--t:7s" />
-      <Seal class="seal" size="clamp(7rem, 11vw, 9.5rem)" text="psicología sanitaria ✺ sin juicios ✺ a tu ritmo ✺ "><span>a</span></Seal>
-      <p class="note">
-        <span class="script">“No tienes que hacerlo sola.”</span>
-      </p>
+      <Shape name="flower" color="var(--lengua)" size="clamp(3.4rem, 6vw, 4.6rem)" class="flor float" style="--t:11s;--r:-8deg" />
+      <Gato quien="maddy" size="clamp(5.5rem, 9vw, 7.5rem)" class="maddy" />
+      <Seal class="seal" size="clamp(6.5rem, 10vw, 8.5rem)" text="psicología sanitaria ● sin juicios ● a tu ritmo ● " color="var(--cobalto)"><span>a</span></Seal>
+      <p class="note mano">No tienes que hacerlo sola ♥</p>
     </div>
   </div>
 </section>
@@ -57,22 +56,23 @@ import Icon from "../Icon.astro";
     padding-bottom: clamp(4rem, 8vw, 7rem);
     overflow: clip;
   }
-  .blob {
+  /* un charco de esmalte celadón, como el del cuenco de flores caladas */
+  .charco {
     position: absolute;
-    width: min(62rem, 110vw);
-    aspect-ratio: 1;
-    right: -18rem;
-    top: -16rem;
+    width: min(56rem, 105vw);
+    aspect-ratio: 1.1;
+    right: -16rem;
+    top: -14rem;
     border-radius: 47% 53% 42% 58% / 52% 38% 62% 48%;
-    background: radial-gradient(circle at 40% 45%, color-mix(in oklab, var(--lilac) 70%, var(--blush)), color-mix(in oklab, var(--lilac) 25%, var(--oat)) 70%);
-    opacity: 0.75;
-    animation: morph 24s ease-in-out infinite alternate;
+    background: radial-gradient(circle at 38% 42%, var(--celadon-claro) 0 40%, color-mix(in oklab, var(--celadon) 70%, var(--bizcocho)) 75%);
+    opacity: 0.9;
+    animation: morph 26s ease-in-out infinite alternate;
     z-index: -1;
   }
   @keyframes morph {
     to {
       border-radius: 58% 42% 55% 45% / 42% 58% 42% 58%;
-      transform: rotate(12deg) scale(1.05);
+      transform: rotate(10deg) scale(1.04);
     }
   }
   .grid {
@@ -116,7 +116,7 @@ import Icon from "../Icon.astro";
     gap: 0.35rem;
   }
   .places :global(.icon) {
-    color: var(--terracotta-ink);
+    color: var(--cobalto);
   }
 
   .visual {
@@ -125,44 +125,56 @@ import Icon from "../Icon.astro";
     justify-self: center;
     margin-right: clamp(0rem, 3vw, 2rem);
   }
+  /* el retrato es el jarrón del arco: borde de esmalte blanco */
   .visual :global(.portrait) {
-    box-shadow: var(--shadow);
+    border: 0.7rem solid var(--esmalte);
+    box-shadow: var(--shadow), inset 0 0 0 1px var(--line);
   }
-  .visual :global(.sun) {
+  /* moteado de cobalto, como la tetera de Ali */
+  .motas {
     position: absolute;
-    top: -2.5rem;
-    right: -3rem;
-    animation: spin 40s linear infinite;
+    width: 58%;
+    aspect-ratio: 1;
+    right: -14%;
+    top: -9%;
+    border-radius: 52% 48% 45% 55% / 48% 55% 45% 52%;
+    background: var(--moteado) center / 150px, var(--esmalte);
+    box-shadow: inset 0 0 0 1px var(--line);
     z-index: -1;
+    rotate: 8deg;
   }
-  .visual :global(.sprig) {
+  .visual :global(.flor) {
     position: absolute;
-    right: -2.5rem;
-    bottom: 22%;
+    right: -1.6rem;
+    top: 34%;
   }
-  .visual :global(.star) {
+  .visual :global(.maddy) {
     position: absolute;
-    left: -1.2rem;
-    top: 18%;
+    right: -2.2rem;
+    bottom: -1.2rem;
+    filter: drop-shadow(0 10px 14px rgb(29 26 30 / 0.18));
   }
   .visual :global(.seal) {
     position: absolute;
-    left: -3.5rem;
-    bottom: -2.5rem;
+    left: -3.2rem;
+    bottom: 12%;
   }
   .visual :global(.seal .core span) {
     font-size: 1.1em;
+    color: var(--cobalto);
   }
   .note {
     position: absolute;
-    right: -1.5rem;
-    bottom: -1.4rem;
-    padding: 0.85rem 1.2rem;
-    border-radius: 999px;
-    background: var(--paper);
+    left: 12%;
+    bottom: -2.6rem;
+    padding: 0.7rem 1.15rem;
+    border-radius: var(--radius-pill);
+    background: var(--esmalte);
     box-shadow: var(--shadow);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     rotate: -3deg;
+    color: var(--ciruela);
+    white-space: nowrap;
   }
 
   @media (max-width: 60rem) {
@@ -177,8 +189,11 @@ import Icon from "../Icon.astro";
       left: -2rem;
     }
     .note {
-      right: -0.5rem;
+      left: 4%;
       font-size: 1rem;
+    }
+    .visual :global(.maddy) {
+      right: -1.2rem;
     }
   }
   @media (max-width: 40rem) {

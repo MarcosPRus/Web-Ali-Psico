@@ -24,7 +24,7 @@ const {
           {items.map((it, i) => (
             <li>
               <span class:list={[i % 2 && "it"]}>{it}</span>
-              <span class="dot">✺</span>
+              <span class="dot" />
             </li>
           ))}
         </ul>
@@ -36,12 +36,13 @@ const {
 <style>
   .marquee {
     position: relative;
-    background: var(--wine);
-    color: var(--oat);
+    /* una cinta de esmalte cobalto moteado */
+    background: var(--moteado-claro) center / 260px, var(--cobalto);
+    color: var(--esmalte);
     padding-block: 1.1rem;
     rotate: -1.6deg;
     margin-inline: -2rem;
-    box-shadow: 0 20px 40px -24px rgb(78 31 48 / 0.6);
+    box-shadow: var(--vidriado), 0 20px 40px -24px rgb(36 57 127 / 0.6);
     z-index: 2;
     overflow: hidden;
   }
@@ -71,11 +72,14 @@ const {
   }
   .it {
     font-style: italic;
-    color: var(--blush);
+    color: var(--mantequilla);
   }
+  /* una gota de esmalte, nunca un punto perfecto */
   .dot {
-    color: var(--terracotta);
-    font-size: 0.8em;
+    width: 0.42em;
+    height: 0.36em;
+    border-radius: 55% 45% 60% 40% / 50% 60% 40% 50%;
+    background: var(--naranja);
   }
   @keyframes marquee {
     to {

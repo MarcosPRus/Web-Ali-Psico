@@ -1,7 +1,7 @@
 ---
 import Icon from "./Icon.astro";
-import Media from "./art/Media.astro";
 import Shape from "./art/Shape.astro";
+import Gato from "./art/Gato.astro";
 import { CONTACT } from "../consts";
 interface Props {
   title?: string;
@@ -12,6 +12,7 @@ const { title } = Astro.props;
 <section class="cta section" aria-labelledby="cta-title">
   <div class="container wide">
     <div class="panel" data-reveal>
+      <Gato quien="furi" pose="asomado" size="clamp(6rem, 10vw, 8rem)" class="furi-asoma" />
       <div class="copy">
         <p class="eyebrow">Primer paso</p>
         <h2 id="cta-title">
@@ -34,9 +35,11 @@ const { title } = Astro.props;
         </p>
       </div>
       <div class="art">
-        <Media scene="sol" shape="arch" ratio="4 / 5" alt="" />
-        <Shape name="star" color="var(--terracotta)" size="4.5rem" class="star float" style="--t:7s" />
-        <Shape name="sprig" color="var(--sage-ink)" size="5rem" class="sprig float" style="--t:11s;--r:-10deg" />
+        <figure class="foto">
+          <img src="/img/gatos/furi-sentado.webp" alt="Furi, el gato negro de Alicia, sentado y mirando con curiosidad" loading="lazy" decoding="async" width="800" height="1158" />
+        </figure>
+        <p class="furi-nota mano">Dar el primer paso da miedo.<br />A Furi también le costó ♥</p>
+        <Shape name="flower" color="var(--lengua)" size="4rem" class="flor float" style="--t:9s" />
       </div>
     </div>
   </div>
@@ -53,20 +56,31 @@ const { title } = Astro.props;
     align-items: center;
     gap: clamp(2rem, 5vw, 5rem);
     padding: clamp(2rem, 6vw, 5.5rem);
-    border-radius: calc(var(--radius-lg) * 1.4);
-    background: var(--blush);
-    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background: var(--celadon-claro);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--celadon-ink) 14%, transparent);
+  }
+  /* Furi se asoma por el borde de la pieza: tímido, pero curioso */
+  .panel :global(.furi-asoma) {
+    position: absolute;
+    top: 0;
+    left: clamp(2rem, 8vw, 6rem);
+    translate: 0 -90%;
+    z-index: 2;
+  }
+  .panel :global(.furi-asoma svg) {
+    animation: asomarse 6s ease-in-out infinite;
   }
   .panel::before {
     content: "";
     position: absolute;
-    width: 40rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--rose);
-    opacity: 0.35;
-    left: -18rem;
-    bottom: -26rem;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--moteado) right bottom / 170px;
+    opacity: 0.18;
+    -webkit-mask: radial-gradient(circle at 100% 100%, #000, transparent 55%);
+    mask: radial-gradient(circle at 100% 100%, #000, transparent 55%);
+    pointer-events: none;
   }
   .copy {
     position: relative;
@@ -88,27 +102,55 @@ const { title } = Astro.props;
   }
   .art {
     position: relative;
-    max-width: 22rem;
+    max-width: 21rem;
     justify-self: center;
     width: 100%;
   }
-  .art :global(.star) {
-    position: absolute;
-    top: -1.2rem;
-    right: -1.2rem;
+  .foto {
+    margin: 0;
+    padding: 0.7rem;
+    background: var(--esmalte);
+    border-radius: var(--arch);
+    box-shadow: var(--shadow);
+    rotate: 2deg;
   }
-  .art :global(.sprig) {
+  .foto img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 20%;
+    border-radius: var(--arch);
+  }
+  .furi-nota {
     position: absolute;
-    bottom: 1rem;
-    left: -2.4rem;
+    left: -2.5rem;
+    bottom: -1.5rem;
+    padding: 0.7rem 1.1rem;
+    background: var(--esmalte);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow);
+    font-size: 1rem;
+    line-height: 1.3;
+    color: var(--ciruela);
+    rotate: -4deg;
+  }
+  .art :global(.flor) {
+    position: absolute;
+    top: -1.4rem;
+    right: -1.4rem;
   }
   @media (max-width: 52rem) {
     .panel {
       grid-template-columns: 1fr;
     }
     .art {
-      max-width: 16rem;
+      max-width: 15rem;
       grid-row: 1;
+      margin-top: 2rem;
+    }
+    .furi-nota {
+      left: -1.5rem;
+      font-size: 0.92rem;
     }
   }
 </style>

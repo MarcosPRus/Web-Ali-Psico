@@ -4,7 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import SectionHead from "../components/SectionHead.astro";
 import Locations from "../components/Locations.astro";
 import Icon from "../components/Icon.astro";
-import Shape from "../components/art/Shape.astro";
+import Gato from "../components/art/Gato.astro";
 import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
 ---
 
@@ -22,7 +22,7 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   <section class="section" style="padding-top:0">
     <div class="container wide grid">
       <div class="form-card" data-reveal>
-        <Shape name="flower" color="var(--lilac)" size="5rem" class="deco float" style="--t:9s" />
+        <Gato quien="furi" pose="asomado" size="clamp(5.5rem, 9vw, 7rem)" class="deco" />
         <form
           data-form
           data-key={FORM_ACCESS_KEY}
@@ -102,6 +102,7 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
         </a>
         <div class="note" data-reveal style="--d:4">
           <p class="script">“Escribir ya es un primer paso. Y no tienes que tenerlo claro para darlo.”</p>
+          <p class="mano firma">— Ali (y Furi, que también es tímido)</p>
         </div>
       </aside>
     </div>
@@ -174,14 +175,19 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   .form-card {
     position: relative;
     padding: clamp(1.5rem, 4vw, 3rem);
-    border-radius: calc(var(--radius-lg) * 1.3);
-    background: #fff;
+    border-radius: var(--radius-xl);
+    background: var(--esmalte);
     box-shadow: var(--shadow);
   }
+  /* Furi se asoma: escribir da un poco de miedo, también a él */
   .form-card :global(.deco) {
     position: absolute;
-    right: -1.5rem;
-    top: -2rem;
+    right: clamp(1.5rem, 5vw, 3.5rem);
+    top: 0;
+    translate: 0 -90%;
+  }
+  .form-card :global(.deco svg) {
+    animation: asomarse 6s ease-in-out infinite;
   }
   form {
     display: grid;
@@ -230,7 +236,7 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   textarea:focus {
     outline: none;
     background: #fff;
-    box-shadow: inset 0 0 0 2px var(--terracotta);
+    box-shadow: inset 0 0 0 2px var(--cobalto);
   }
   fieldset {
     border: 0;
@@ -255,7 +261,7 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
   .pill span {
     display: inline-block;
     padding: 0.6rem 1.05rem;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--oat);
     box-shadow: inset 0 0 0 1px var(--line);
     font-size: 0.92rem;
@@ -331,24 +337,25 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
     place-items: center;
     width: 3rem;
     height: 3rem;
-    border-radius: 50%;
-    background: var(--blush);
-    color: var(--terracotta-ink);
+    border-radius: 54% 46% 58% 42% / 46% 56% 44% 54%;
+    background: var(--celadon-claro);
+    color: var(--celadon-ink);
     flex: none;
   }
   .wa {
-    background: var(--ink);
-    color: var(--oat);
+    background: var(--moteado-claro) center / 160px, var(--cobalto);
+    color: var(--esmalte);
+    box-shadow: var(--vidriado);
   }
   .wa:hover {
-    background: var(--wine);
+    background-color: var(--cobalto-hondo);
   }
   .wa small {
     color: color-mix(in oklab, var(--oat) 70%, transparent);
   }
   .wa .ico {
-    background: var(--terracotta);
-    color: #fff;
+    background: var(--esmalte);
+    color: var(--cobalto);
   }
   .quick :global(.go) {
     opacity: 0.6;
@@ -357,9 +364,14 @@ import { CONTACT, FORM_ACCESS_KEY, LOCATIONS } from "../consts";
     margin-top: 0.75rem;
     padding: 1.5rem;
     border-radius: var(--radius-lg);
-    background: var(--lilac);
+    background: var(--rosa);
     font-size: var(--step-1);
     line-height: 1.35;
+  }
+  .firma {
+    margin-top: 0.8rem;
+    font-size: 1rem;
+    color: var(--ciruela);
   }
   .places {
     background: var(--sand);

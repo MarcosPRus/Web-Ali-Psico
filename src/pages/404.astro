@@ -1,16 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
-import Media from "../components/art/Media.astro";
+import Gato from "../components/art/Gato.astro";
 import Icon from "../components/Icon.astro";
 ---
 
 <Base title="Página no encontrada">
   <section class="section nf">
     <div class="container narrow wrap">
-      <Media scene="ventana" shape="arch" ratio="4 / 5" class="art" />
+      <Gato quien="furi" pose="dormido" size="15rem" class="art" label="Furi, el gato negro de Alicia, durmiendo hecho una bola" />
       <p class="eyebrow">Error 404</p>
-      <h1>Esta página se ha ido <em>a dar un paseo</em></h1>
-      <p class="lead">No pasa nada: a veces perderse también es parte del camino. Te ayudo a volver.</p>
+      <h1>Esta página se ha quedado <em class="sonrisa">dormida</em></h1>
+      <p class="lead">Como Furi al sol: no hay quien la despierte. No pasa nada, a veces perderse también es parte del camino. Te ayudo a volver.</p>
       <div class="btns">
         <a class="btn" href="/">Volver al inicio <Icon name="arrow" class="arrow" /></a>
         <a class="btn ghost" href="/contacto">Contactar</a>

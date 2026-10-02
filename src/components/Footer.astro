@@ -1,13 +1,13 @@
 ---
 import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
-import Shape from "./art/Shape.astro";
+import Gato from "./art/Gato.astro";
 import { CONTACT, LOCATIONS, NAV } from "../consts";
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer on-dark">
-  <Shape name="sun" color="var(--terracotta)" size="22rem" class="f-sun" />
+  <Gato quien="maddy" pose="dormido" size="clamp(8rem, 14vw, 11rem)" class="f-maddy" />
   <div class="container wide">
     <div class="top">
       <div class="about">
@@ -55,6 +55,7 @@ const year = new Date().getFullYear();
 
     <div class="bottom">
       <p>© {year} Alicia Lozano · {CONTACT.license}</p>
+      <p class="sello f-sello">Hecho a mano en Sevilla</p>
       <ul class="inline">
         <li><a href="/aviso-legal">Aviso legal</a></li>
         <li><a href="/privacidad">Privacidad</a></li>
@@ -66,20 +67,33 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
+  /* la base de la pieza: esmalte ciruela con el borde festoneado */
   .site-footer {
     position: relative;
-    overflow: hidden;
-    padding-top: clamp(4rem, 8vw, 7rem);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    margin-top: -2rem;
+    padding-top: clamp(4.5rem, 8vw, 7rem);
+    margin-top: -1rem;
     z-index: 1;
   }
-  .site-footer :global(.f-sun) {
+  .site-footer::before {
+    content: "";
     position: absolute;
-    right: -6rem;
-    top: -7rem;
-    opacity: 0.35;
-    animation: spin 80s linear infinite;
+    inset: -1.2rem 0 auto;
+    height: 1.25rem;
+    background: radial-gradient(circle 1.25rem at 50% 100%, var(--ciruela-honda) calc(100% - 0.5px), transparent) 50% 0 / 2.5rem 100% repeat-x;
+  }
+  .site-footer > :not(.f-maddy) {
+    position: relative;
+  }
+  .giant {
+    overflow: hidden;
+  }
+  /* Maddy duerme la siesta encima del pie de página */
+  .site-footer :global(.f-maddy) {
+    position: absolute;
+    right: clamp(1rem, 6vw, 6rem);
+    top: 0;
+    translate: 0 -78%;
+    z-index: 2;
   }
   .top {
     position: relative;
@@ -105,13 +119,13 @@ const year = new Date().getFullYear();
     place-items: center;
     width: 2.8rem;
     height: 2.8rem;
-    border-radius: 50%;
+    border-radius: 52% 48% 55% 45% / 48% 54% 46% 52%;
     box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--oat) 30%, transparent);
     transition: background-color 0.3s, color 0.3s, transform 0.4s var(--ease);
   }
   .social a:hover {
-    background: var(--blush);
-    color: var(--wine);
+    background: var(--rosa);
+    color: var(--ciruela-honda);
     transform: translateY(-3px);
   }
   .col-title {
@@ -120,7 +134,7 @@ const year = new Date().getFullYear();
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--blush);
+    color: var(--rosa);
     margin-bottom: 1rem;
   }
   .col-title:not(:first-child) {
@@ -152,7 +166,12 @@ const year = new Date().getFullYear();
     text-decoration-color: currentColor;
   }
   .site-footer a:hover {
-    color: var(--blush);
+    color: var(--rosa);
+  }
+  .f-sello {
+    color: color-mix(in oklab, var(--bizcocho) 62%, transparent);
+    text-shadow: 0 1px 0 rgb(0 0 0 / 0.35);
+    font-size: 0.72rem;
   }
   .email {
     word-break: break-all;
@@ -189,7 +208,7 @@ const year = new Date().getFullYear();
     content: attr(data-t);
   }
   .giant em {
-    color: color-mix(in oklab, var(--blush) 22%, transparent);
+    color: color-mix(in oklab, var(--rosa) 22%, transparent);
   }
   @media (max-width: 56rem) {
     .top {
@@ -200,9 +219,8 @@ const year = new Date().getFullYear();
     }
   }
   @media (max-width: 34rem) {
-    .site-footer :global(.f-sun) {
-      right: -13rem;
-      opacity: 0.25;
+    .site-footer :global(.f-maddy) {
+      right: 1rem;
     }
     .top {
       grid-template-columns: 1fr;

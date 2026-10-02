@@ -22,22 +22,22 @@ const timeline = [
 type Fact = { t: string; s: "sun" | "leaf" | "flower" | "blob" | "star"; c: string; img?: string; alt?: string };
 const facts: Fact[] = [
   {
-    t: "Tengo dos gatos, por si alguna vez se pasan a saludar durante la consulta online.",
+    t: "Tengo dos gatos: Maddy, la mayor, elegante e independiente, y Furi, un pequeño gato negro que encontramos asustado en el motor de un coche. Si alguna vez se pasan a saludar en la consulta online, ya sabes quiénes son.",
     s: "blob",
     c: "var(--blush)",
-    img: "/img/gatos.webp",
-    alt: "Los dos gatos de Alicia, uno blanco y negro y otro negro, sentados en el pasillo",
+    img: "/img/gatos/maddy-y-furi-siesta.webp",
+    alt: "Maddy, blanca y negra de pelo largo, y Furi, negro, durmiendo juntos sobre una colcha de flores",
   },
   { t: "Desayuno sin prisa siempre que puedo. Es mi momento sagrado del día.", s: "sun", c: "var(--butter)" },
-  { t: "Amante del café: el primero de la mañana no se negocia.", s: "star", c: "var(--terracotta)" },
+  { t: "Amante del café: el primero de la mañana no se negocia.", s: "star", c: "var(--naranja)" },
   {
     t: "Soy ceramista aficionada. Mancharme las manos de barro es mi forma favorita de desconectar.",
     s: "sun",
     c: "var(--sage)",
-    img: "/img/tetera-ceramica.webp",
-    alt: "Tetera de cerámica blanca con motas negras hecha por Alicia",
+    img: "/img/taller/jarron-arco.webp",
+    alt: "Jarrón de cerámica blanco con forma de arco y flores amarillas, hecho por Alicia",
   },
-  { t: "Leo novelas antes de dormir y subrayo frases que luego acaban en consulta.", s: "leaf", c: "var(--lilac-2)" },
+  { t: "Leo novelas antes de dormir y subrayo frases que luego acaban en consulta.", s: "leaf", c: "var(--polvo)" },
   { t: "Creo que comer con quienes quieres es una de las mejores cosas de la vida.", s: "flower", c: "var(--rose)" },
 ];
 ---
@@ -66,12 +66,12 @@ const facts: Fact[] = [
       </div>
     </div>
 
-    <div class="strip" aria-label="Galería provisional">
+    <div class="strip" aria-label="Mi día a día: consulta, taller y gatos">
       <Media src="/img/ali-retrato.webp" ratio="3 / 4" class="s1" alt="Alicia Lozano en su despacho" loading="eager" />
-      <Media scene="mesa" ratio="3 / 4" class="s2" loading="eager" />
-      <Media scene="jardin" ratio="3 / 4" class="s3" loading="eager" />
-      <Media scene="ventana" ratio="3 / 4" class="s4" loading="eager" />
-      <Media scene="taza" ratio="3 / 4" class="s5" loading="eager" />
+      <Media src="/img/taller/cuenco-flores-caladas.webp" ratio="3 / 4" class="s2" alt="Cuenco de cerámica celadón con el borde ondulado y flores caladas, hecho por Alicia" loading="eager" />
+      <Media src="/img/gatos/maddy-retrato.webp" ratio="3 / 4" class="s3" alt="Maddy, la gata blanca y negra de pelo largo de Alicia, mirando a cámara" loading="eager" />
+      <Media src="/img/taller/saleros-gatos.webp" ratio="3 / 4" class="s4" alt="Dos saleros de cerámica con forma de gato, uno negro y otro blanco y negro, hechos por Alicia" loading="eager" />
+      <Media src="/img/gatos/furi-al-sol.webp" ratio="3 / 4" class="s5" alt="Furi de pequeño, tumbado al sol sobre una mesa de madera" loading="eager" />
     </div>
   </section>
 
@@ -80,7 +80,7 @@ const facts: Fact[] = [
       <div class="story-aside">
         <p class="eyebrow" data-reveal>Mi historia</p>
         <h2 data-reveal style="--d:1">Por qué hago <em>lo que hago</em></h2>
-        <Shape name="squiggle" color="var(--terracotta)" size="6rem" class="squiggle" />
+        <Shape name="squiggle" color="var(--naranja)" size="6rem" class="squiggle" />
       </div>
       <div class="prose" data-reveal style="--d:1">
         <p>
@@ -199,7 +199,7 @@ const facts: Fact[] = [
     letter-spacing: -0.055em;
   }
   .comma {
-    color: var(--terracotta);
+    color: var(--naranja);
     font-style: italic;
   }
   .intro-grid {
@@ -242,7 +242,7 @@ const facts: Fact[] = [
     translate: 0 -2rem;
   }
   .strip :global(.s3) {
-    border-radius: 50% 50% var(--radius-lg) var(--radius-lg) / 30% 30% var(--radius-lg) var(--radius-lg);
+    border-radius: 48% 52% 2.2rem 1.8rem / 30% 32% 2rem 2.3rem;
   }
   .strip :global(.s4) {
     translate: 0 -3rem;
@@ -275,20 +275,19 @@ const facts: Fact[] = [
     font-size: 4.6em;
     line-height: 0.8;
     padding: 0.08em 0.12em 0 0;
-    color: var(--terracotta);
+    color: var(--cobalto);
   }
   .signature {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 3.2rem;
-    color: var(--terracotta-ink);
+    font-family: var(--hand);
+    font-weight: 500;
+    font-size: 2.6rem;
+    color: var(--cobalto);
     rotate: -4deg;
     display: inline-block;
   }
 
   .training {
-    border-radius: calc(var(--radius-lg) * 1.5);
+    border-radius: var(--radius-xl);
     margin-inline: clamp(0.5rem, 1.5vw, 1.5rem);
   }
   .train-grid {
@@ -351,7 +350,7 @@ const facts: Fact[] = [
     width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
-    border-radius: calc(var(--radius-lg) - 0.5rem);
+    border-radius: var(--radius);
   }
   .facts-grid li {
     display: grid;

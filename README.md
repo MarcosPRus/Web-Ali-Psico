@@ -27,7 +27,9 @@ Cloudflare Pages: *Build command* `npm run build`, *Output directory* `dist`, va
 | Página “Sobre mí” (historia, formación, curiosidades) | `src/pages/sobre-mi.astro` |
 | Portada | `src/pages/index.astro` y `src/components/home/*` |
 | Textos legales | `src/pages/aviso-legal.astro`, `privacidad.astro`, `cookies.astro` |
-| Colores y tipografías | `src/styles/global.css` (variables al principio) |
+| Colores, tipografías y formas | `src/styles/global.css` (variables al principio). Guía completa en [`DISENO.md`](DISENO.md) |
+| Maddy y Furi (ilustraciones) | `src/components/art/Gato.astro` |
+| Fotos de cerámica y de los gatos | `public/img/taller/` y `public/img/gatos/` |
 
 ### Escribir un artículo nuevo
 
@@ -73,7 +75,7 @@ Mientras esté vacía, el formulario abre la aplicación de correo de la persona
 ## Detalles técnicos
 
 - Sin frameworks de JavaScript: solo unos pocos scripts pequeños (menú, mapa de consultas, frases interactivas, filtro del blog).
-- Tipografías *Fraunces* y *Figtree* alojadas en la propia web, recortadas a los caracteres del español para que carguen rápido.
+- Tipografías *Fraunces* (versión «blanda»), *Figtree* y *Shantell Sans* (solo notas a mano) alojadas en la propia web, recortadas a los caracteres del español para que carguen rápido.
 - Sin cookies ni rastreadores, así que no hace falta banner de cookies.
 - SEO: sitemap, RSS, Open Graph (`public/og.jpg`) y datos estructurados `Psychologist` para Google.
 - `public/_redirects` redirige las rutas antiguas (`/services/…`) a `/servicios/…`.
