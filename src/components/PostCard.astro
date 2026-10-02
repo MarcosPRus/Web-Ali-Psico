@@ -7,20 +7,11 @@ interface Props {
 }
 const { post, index = 0 } = Astro.props;
 const d = post.data;
-const date = d.pubDate.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
-const minutes = Math.max(2, Math.round((post.body ?? "").split(/\s+/).length / 200));
 const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4"];
 ---
 
 <article class="post" data-reveal style={`--d:${index % 3}`}>
   <Portada src={d.heroImage} alt={d.title} category={d.category} forma={formas[index % 4]} class="thumb" />
-  <div class="meta">
-    <span class="cat">{d.category}</span>
-    <span aria-hidden="true">·</span>
-    <time datetime={d.pubDate.toISOString()}>{date}</time>
-    <span aria-hidden="true">·</span>
-    <span>{minutes} min</span>
-  </div>
   <h3><a href={`/blog/${post.id}`}>{d.title}</a></h3>
 </article>
 
@@ -34,17 +25,6 @@ const formas = ["--forma-1", "--forma-2", "--forma-3", "--forma-4"];
   .post:hover :global(.thumb img),
   .post:hover :global(.thumb .etiqueta) {
     transform: scale(1.04);
-  }
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    font-size: var(--t-xs);
-    color: var(--gris);
-  }
-  .cat {
-    font-weight: 700;
-    color: var(--cobalto);
   }
   h3 a {
     text-decoration: none;

@@ -14,8 +14,6 @@ export async function getStaticPaths() {
 const { post } = Astro.props as { post: CollectionEntry<"blog"> };
 const d = post.data;
 const { Content } = await render(post);
-const fmt = (x: Date) => x.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
-const minutes = Math.max(2, Math.round((post.body ?? "").split(/\s+/).length / 200));
 const related = (await getCollection("blog", (p) => !p.data.draft && p.id !== post.id))
   .sort((a, b) => Number(b.data.category === d.category) - Number(a.data.category === d.category) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
@@ -36,10 +34,6 @@ const related = (await getCollection("blog", (p) => !p.data.draft && p.id !== po
             <img class="avatar" src="/img/ali-avatar.webp" alt="" width="32" height="32" />
             Alicia Lozano
           </span>
-          <span>·</span>
-          <time datetime={d.pubDate.toISOString()}>{fmt(d.pubDate)}</time>
-          <span>·</span>
-          <span>{minutes} min de lectura</span>
         </p>
       </div>
       {
