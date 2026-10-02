@@ -12,28 +12,15 @@ export default defineConfig({
   prefetch: { prefetchAll: true, defaultStrategy: "hover" },
   fonts: [
     {
-      // Serif editorial para titulares (variable: peso + tamaño óptico)
+      // Schibsted Grotesk: una sola familia (variable 400–900) para toda la web
       provider: fontProviders.local(),
-      name: "Fraunces",
-      cssVariable: "--font-serif",
-      fallbacks: ["Georgia", "serif"],
-      options: {
-        variants: [
-          { src: ["./src/assets/fonts/fraunces-normal.woff2"], weight: "300 600", style: "normal", display: "swap" },
-          { src: ["./src/assets/fonts/fraunces-italic.woff2"], weight: "300 600", style: "italic", display: "swap" },
-        ],
-      },
-    },
-    {
-      // Sans cálida y legible para el texto
-      provider: fontProviders.local(),
-      name: "Figtree",
+      name: "Schibsted Grotesk",
       cssVariable: "--font-sans",
-      fallbacks: ["system-ui", "sans-serif"],
+      fallbacks: ["Helvetica Neue", "Arial", "sans-serif"],
       options: {
         variants: [
-          { src: ["./src/assets/fonts/figtree-normal.woff2"], weight: "300 900", style: "normal", display: "swap" },
-          { src: ["./src/assets/fonts/figtree-italic.woff2"], weight: "300 900", style: "italic", display: "swap" },
+          { src: ["./src/assets/fonts/schibsted-normal.woff2"], weight: "400 900", style: "normal", display: "swap" },
+          { src: ["./src/assets/fonts/schibsted-italic.woff2"], weight: "400 900", style: "italic", display: "swap" },
         ],
       },
     },
