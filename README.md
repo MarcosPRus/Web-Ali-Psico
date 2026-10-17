@@ -1,6 +1,6 @@
 # Alicia Lozano · Psicología
 
-Web de [www.alilozanopsico.es](https://www.alilozanopsico.es), hecha con **Astro** y publicada como web estática en **Cloudflare Pages** (plan gratuito).
+Web de [www.alilozanopsico.es](https://www.alilozanopsico.es), hecha con **Astro** y publicada como web estática en **GitHub Pages** (se publica sola con cada push a `main`, ver `.github/workflows/deploy.yml`).
 
 > Todo el contenido que ves (textos, formación, precios, ilustraciones) es **provisional**. Aquí abajo explicamos cómo cambiarlo.
 
@@ -9,10 +9,10 @@ Web de [www.alilozanopsico.es](https://www.alilozanopsico.es), hecha con **Astro
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # genera /dist (lo que publica Cloudflare)
+npm run build    # genera /dist (lo que se publica)
 ```
 
-Cloudflare Pages: *Build command* `npm run build`, *Output directory* `dist`, variable `NODE_VERSION=22`.
+GitHub Pages: lo publica la GitHub Action con Node 22. El dominio propio está en `public/CNAME`.
 
 ## Dónde se cambia cada cosa
 

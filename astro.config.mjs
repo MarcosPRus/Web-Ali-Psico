@@ -7,6 +7,17 @@ import { defineConfig, fontProviders } from "astro/config";
 export default defineConfig({
   site: "https://www.alilozanopsico.es",
   trailingSlash: "ignore",
+  // Las antiguas fichas de servicio ahora son artículos del blog
+  // (GitHub Pages no lee public/_redirects; Astro genera páginas de redirección)
+  redirects: {
+    "/servicios/tca": "/blog/tca-mucho-mas-que-comida",
+    "/servicios/imagen-corporal": "/blog/imagen-corporal-cuando-mirarte-duele",
+    "/servicios/psiconutricion": "/blog/psiconutricion-salir-del-circulo",
+    "/servicios/gestion-emocional": "/blog/ansiedad-y-autoexigencia",
+    "/servicios/familias": "/blog/familias-y-tca-como-acompanar",
+    "/servicios/terapia-online": "/blog/terapia-online-como-funciona",
+    "/services": "/servicios",
+  },
   devToolbar: { enabled: false },
   integrations: [mdx(), sitemap()],
   prefetch: { prefetchAll: true, defaultStrategy: "hover" },
