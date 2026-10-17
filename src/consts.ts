@@ -93,7 +93,7 @@ export const NAV = [
 
 // Tarifa única: todas las sesiones (también la primera) cuestan lo mismo
 export const PRICE = {
-  amount: "55 €",
+  amount: "60 €",
   duration: "60 minutos",
   durationShort: "1 hora",
 };
