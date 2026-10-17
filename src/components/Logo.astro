@@ -1,56 +1,48 @@
 ---
-import paths from "./logo-paths.json";
+/**
+ * Logo «ali · PSICOLOGÍA» (guía de octubre de 2026, carpeta «Logo ali»).
+ * - horizontal + color: cabecera y menú móvil. Firma en morado (--lilac-ink, #815799)
+ *   en lugar del terracota original; «PSICOLOGÍA» en tinta 2.
+ * - apilado + light: pie sobre fondo vino. Colores originales de la versión
+ *   «sobre-vino» (firma papel, PSICOLOGÍA rubor).
+ */
+import logo from "./logo-ali.json";
+
 interface Props {
   class?: string;
-  tone?: "ink" | "light";
+  variant?: "horizontal" | "apilado";
+  tone?: "color" | "light";
 }
-const { class: className, tone = "ink" } = Astro.props;
+const { class: className, variant = "horizontal", tone = "color" } = Astro.props;
+
+const src = variant === "apilado" ? logo.apiladoVino : logo.horizontal;
+const fills =
+  tone === "light"
+    ? { firma: "#fcf9f4", psicologia: "#f2c6b6" }
+    : { firma: "var(--lilac-ink)", psicologia: "var(--ink-2)" };
 ---
 
-<span class:list={["logo", `tone-${tone}`, className]}>
-  <svg class="mark" viewBox="0 0 120 120" aria-hidden="true">
-    <path d={paths.sun} fill="var(--terracotta)" />
-    <path d={paths.a} fill="var(--paper)" />
+<span class:list={["logo", `v-${variant}`, className]}>
+  <svg viewBox={src.viewBox} role="img" aria-label="Alicia Lozano · Psicología">
+    <path fill={fills.firma} d={src.firma} />
+    <path fill={fills.psicologia} d={src.psicologia} />
   </svg>
-  <span class="words">
-    <span class="name">Alicia Lozano</span>
-    <span class="role">Psicología</span>
-  </span>
 </span>
 
 <style>
   .logo {
     display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    line-height: 1;
+    line-height: 0;
   }
-  .mark {
-    width: 2.6rem;
-    height: 2.6rem;
-    transition: transform 0.9s var(--ease);
+  svg {
+    display: block;
+    height: auto;
   }
-  :global(a:hover) > .logo .mark {
-    transform: rotate(-40deg);
+  /* Guía: horizontal mínimo 150 px de ancho; apilado mínimo 90 px */
+  .v-horizontal svg {
+    width: 9.6rem;
   }
-  .words {
-    display: grid;
-    gap: 0.3rem;
-  }
-  .name {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    font-weight: 420;
-    letter-spacing: -0.02em;
-  }
-  .role {
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .tone-light .role {
-    color: var(--blush);
+  .v-apilado svg {
+    width: 7.5rem;
   }
 </style>
