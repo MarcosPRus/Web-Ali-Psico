@@ -4,6 +4,7 @@ description: "Pedir ayuda cuesta. Te cuento cómo es la primera sesión para que
 pubDate: "2026-08-21"
 category: "Terapia"
 scene: "ventana"
+heroImage: "/img/fotos/consulta-sillones.webp"
 ---
 
 Dar el paso de escribir a una psicóloga puede llevar semanas, meses o incluso años. Así que, si estás leyendo esto porque te lo estás planteando, lo primero: **enhorabuena por estar aquí**.

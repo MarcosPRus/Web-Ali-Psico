@@ -7,11 +7,12 @@ interface Props {
   eyebrow?: string;
   scene?: Scene;
   src?: string;
+  alt?: string;
   crumbs?: { href?: string; label: string }[];
   tone?: "lilac" | "blush" | "sage" | "butter";
   compact?: boolean;
 }
-const { eyebrow, scene, src, crumbs = [], tone = "blush", compact = false } = Astro.props;
+const { eyebrow, scene, src, alt = "", crumbs = [], tone = "blush", compact = false } = Astro.props;
 const toneVar = { lilac: "var(--lilac)", blush: "var(--blush)", sage: "#cfd8c4", butter: "#f6e2ac" }[tone];
 ---
 
@@ -40,7 +41,7 @@ const toneVar = { lilac: "var(--lilac)", blush: "var(--blush)", sage: "#cfd8c4",
     {
       (scene || src) && (
         <div class="visual" data-reveal style="--d:2">
-          <Media scene={scene} src={src} shape="arch" ratio="4 / 5" loading="eager" />
+          <Media scene={scene} src={src} alt={alt} shape="arch" ratio="4 / 5" loading="eager" />
           <Shape name="star" color="var(--terracotta)" size="3.2rem" class="star float" style="--t:8s" />
           <Shape name="sun" color="var(--butter)" size="7rem" class="sun" />
         </div>

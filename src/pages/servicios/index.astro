@@ -17,7 +17,13 @@ const services = (await getCollection("services")).sort((a, b) => a.data.order -
   title="Cómo te puedo ayudar"
   description="Terapia psicológica para ansiedad, autoestima, relaciones, TCA, imagen corporal y familias. Presencial en Tomares, Dos Hermanas y Mairena, y online."
 >
-  <PageHero eyebrow="Servicios" scene="jarrones" tone="lilac" crumbs={[{ label: "Cómo te ayudo" }]}>
+  <PageHero
+    eyebrow="Servicios"
+    src="/img/fotos/servicios.webp"
+    alt="Alicia sentada en el sillón de su consulta"
+    tone="lilac"
+    crumbs={[{ label: "Cómo te ayudo" }]}
+  >
     Cómo te puedo <em>ayudar</em>
     <Fragment slot="lead">
       Cada historia es distinta y cada proceso también. Estas son las áreas en las que trabajo; si lo tuyo no encaja del
