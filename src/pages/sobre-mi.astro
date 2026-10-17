@@ -44,7 +44,7 @@ const facts: Fact[] = [
 
 <Base
   title="Sobre mí"
-  description="Soy Alicia Lozano, psicóloga sanitaria especializada en TCA, imagen corporal y psiconutrición. Conoce mi historia, mi formación y cómo trabajo."
+  description="Soy Alicia Lozano, psicóloga sanitaria en Sevilla y online. Acompaño en ansiedad, autoestima, relaciones y gestión emocional, con especialización en TCA e imagen corporal."
 >
   <section class="intro">
     <div class="bg" aria-hidden="true"></div>
@@ -53,13 +53,16 @@ const facts: Fact[] = [
       <h1 class="hello" data-reveal style="--d:1">Soy Alicia<span class="comma">,</span></h1>
       <div class="intro-grid">
         <p class="big" data-reveal style="--d:2">
-          psicóloga sanitaria, especializada en trastornos de la conducta alimentaria e imagen corporal. Y, antes que
-          nada, <em>una persona que cree que todas merecemos una relación tranquila con la comida y con nuestro cuerpo.</em>
+          psicóloga sanitaria. Te acompaño cuando la ansiedad, la autoexigencia, la autoestima o tus relaciones pesan
+          más de la cuenta, o cuando la comida y el cuerpo se han vuelto un problema. <em
+            >Sea lo que sea lo que te trae, aquí hay sitio para hablarlo con calma.</em
+          >
         </p>
         <div class="intro-side" data-reveal style="--d:3">
           <p>
-            Acompaño a adolescentes y personas adultas en Tomares, Dos Hermanas, Mairena del Aljarafe y online. Mi
-            trabajo combina rigor científico, perspectiva de género y mucha, mucha escucha.
+            Atiendo a adolescentes y personas adultas en Tomares, Dos Hermanas, Mairena del Aljarafe y online. Estoy
+            especializada en trastornos de la conducta alimentaria, y trabajo con rigor científico, perspectiva de
+            género y mucha, mucha escucha.
           </p>
           <a href="/contacto" class="btn">Pide tu primera cita <Icon name="arrow" class="arrow" /></a>
         </div>
@@ -67,50 +70,11 @@ const facts: Fact[] = [
     </div>
 
     <div class="strip" aria-label="Fotos de Alicia">
-      <Media src="/img/fotos/sobre-mi-1.webp" ratio="3 / 4" class="s1" alt="Alicia Lozano con pañuelo, sonriendo en su consulta" loading="eager" />
+      <Media scene="jardin" ratio="3 / 4" class="s1" loading="eager" />
       <Media src="/img/fotos/sobre-mi-2.webp" ratio="3 / 4" class="s2" alt="Alicia en su escritorio, tomando notas" loading="eager" />
-      <Media src="/img/fotos/sobre-mi-3.webp" ratio="3 / 4" class="s3" alt="Alicia sonriendo en casa" loading="eager" />
+      <Media scene="taza" ratio="3 / 4" class="s3" loading="eager" />
       <Media src="/img/fotos/sobre-mi-4.webp" ratio="3 / 4" class="s4" alt="Alicia leyendo en un sillón junto a la ventana" loading="eager" />
-      <Media src="/img/fotos/sobre-mi-5.webp" ratio="3 / 4" class="s5" alt="Alicia riéndose" loading="eager" />
-    </div>
-  </section>
-
-  <section class="section story">
-    <div class="container wide story-grid">
-      <div class="story-aside">
-        <p class="eyebrow" data-reveal>Mi historia</p>
-        <h2 data-reveal style="--d:1">Por qué hago <em>lo que hago</em></h2>
-        <Shape name="squiggle" color="var(--terracotta)" size="6rem" class="squiggle" />
-      </div>
-      <div class="prose" data-reveal style="--d:1">
-        <p>
-          Siempre he sentido curiosidad por entender el <em>porqué</em> de las cosas. Por qué pensamos lo que pensamos,
-          por qué sentimos lo que sentimos y por qué, a veces, hacemos cosas que nos hacen daño aunque sepamos que no
-          nos convienen.
-        </p>
-        <p>
-          Durante la carrera empecé a darme cuenta de algo que me removió: muchas de las mujeres que conocía (amigas,
-          compañeras, familiares) vivían en guerra con la comida y con su cuerpo. Dietas eternas, culpa después de
-          comer, fotos borradas, planes cancelados. Y casi siempre se vivía en silencio, como algo normal.
-        </p>
-        <blockquote>No es normal sufrir para comer. Es frecuente, que es muy distinto.</blockquote>
-        <p>
-          Por eso decidí especializarme en <strong>trastornos de la conducta alimentaria</strong>, imagen corporal y
-          psiconutrición. Desde entonces he acompañado a muchas personas en su proceso, y cada una me ha confirmado
-          lo mismo: <strong>la recuperación es posible</strong>, y se construye desde la comprensión, no desde el
-          castigo.
-        </p>
-        <p>
-          Hoy trabajo desde un enfoque integrador basado en la evidencia (terapia cognitivo-conductual, ACT, DBT y
-          terapia centrada en la compasión) y siempre con una mirada crítica hacia la cultura de la dieta y los ideales
-          de belleza que tanto nos pesan.
-        </p>
-        <p>
-          Mi consulta quiere ser eso: un lugar tranquilo donde puedas soltar, entenderte y empezar a vivir con más
-          espacio para todo lo demás.
-        </p>
-        <p class="signature">Alicia</p>
-      </div>
+      <Media scene="ventana" ratio="3 / 4" class="s5" loading="eager" />
     </div>
   </section>
 
@@ -173,6 +137,7 @@ const facts: Fact[] = [
     position: relative;
     margin-top: calc(-1 * var(--header-h));
     padding-top: calc(var(--header-h) + clamp(2rem, 4vw, 3.5rem));
+    padding-bottom: clamp(3rem, 7vw, 6rem);
     overflow: clip;
   }
   .intro .bg {
@@ -249,42 +214,6 @@ const facts: Fact[] = [
   }
   .strip :global(.s5) {
     translate: 0 -1rem;
-  }
-
-  .story-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: clamp(2rem, 6vw, 6rem);
-    align-items: start;
-  }
-  .story-aside {
-    position: sticky;
-    top: 7rem;
-    display: grid;
-    gap: 1rem;
-  }
-  .story-aside :global(.squiggle) {
-    margin-top: 1rem;
-  }
-  .story .prose {
-    max-width: 38rem;
-  }
-  .story .prose > p:first-child::first-letter {
-    float: left;
-    font-family: var(--serif);
-    font-size: 4.6em;
-    line-height: 0.8;
-    padding: 0.08em 0.12em 0 0;
-    color: var(--terracotta);
-  }
-  .signature {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 3.2rem;
-    color: var(--terracotta-ink);
-    rotate: -4deg;
-    display: inline-block;
   }
 
   .training {
@@ -378,12 +307,8 @@ const facts: Fact[] = [
 
   @media (max-width: 56rem) {
     .intro-grid,
-    .story-grid,
     .train-grid {
       grid-template-columns: 1fr;
-    }
-    .story-aside {
-      position: static;
     }
     .strip {
       grid-template-columns: repeat(5, 42vw);
