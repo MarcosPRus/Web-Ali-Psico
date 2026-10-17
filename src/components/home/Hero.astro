@@ -41,7 +41,7 @@ import Icon from "../Icon.astro";
       />
       <Shape name="sprig" color="var(--sage-ink)" size="clamp(4rem, 7vw, 6rem)" class="sprig float" style="--t:10s;--r:12deg" />
       <Shape name="star" color="var(--terracotta)" size="clamp(2.5rem, 4vw, 3.4rem)" class="star float" style="--t:7s" />
-      <Seal class="seal" size="clamp(7rem, 11vw, 9.5rem)" text="psicología sanitaria ✺ sin juicios ✺ a tu ritmo ✺ "><span>a</span></Seal>
+      <Seal class="seal" size="clamp(7rem, 11vw, 9.5rem)" text="psicología sanitaria ✺ sin juicios ✺ a tu ritmo ✺ "><svg class="seal-a" viewBox="0 0 256 256" aria-hidden="true"><path fill="var(--lilac-ink)" transform="translate(43.34,-40.31)" d="M87.42,197.41Q76.44,204.03 63.31,201.99Q54.83,200.68 48.39,195.58Q41.42,190.06 38.56,181.48Q33.5,166.29 39.72,149.96Q46.13,133.13 60.82,125.29Q60.95,125.23 61.08,125.16Q74.16,118.62 87.78,122.88Q101.13,127.05 109.18,139.94Q110.34,141.65 110.76,143.57Q111.22,145.53 110.88,147.63Q110.22,153.1 108.48,163.28Q105.66,179.7 106.25,185.3Q109.74,184.56 112.85,179.9Q115.37,176.11 119.84,175.21Q124.31,174.32 128.1,176.85Q131.89,179.37 132.79,183.84Q133.68,188.31 131.15,192.1Q122.47,205.13 109.13,207.13Q101.75,208.24 95.58,205.06Q90.39,202.38 87.42,197.41ZM88.51,148.84Q85.37,145.17 81.22,143.87Q76.13,142.28 71.05,144.78Q63.73,148.74 60.28,157.79Q56.85,166.78 59.44,174.52Q61.06,179.38 66.69,180.26Q73.56,181.32 79.37,176.07Q85.43,169.8 88.51,148.84Z" /></svg></Seal>
       <p class="note">
         <span class="script">“No tienes que hacerlo sola.”</span>
       </p>
@@ -185,5 +185,9 @@ import Icon from "../Icon.astro";
     .visual :global(.seal) {
       display: none;
     }
+  }
+  .hero :global(.seal-a) {
+    width: 60%;
+    height: auto;
   }
 </style>
