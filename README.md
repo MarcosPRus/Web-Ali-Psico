@@ -1,6 +1,6 @@
 # Alicia Lozano · Psicología
 
-Web de [alicialozanopsicologia.com](https://alicialozanopsicologia.com), hecha con **Astro** y publicada como web estática en **Cloudflare Pages** (plan gratuito).
+Web de [www.alilozanopsico.es](https://www.alilozanopsico.es), hecha con **Astro** y publicada como web estática en **Cloudflare Pages** (plan gratuito).
 
 > Todo el contenido que ves (textos, formación, precios, ilustraciones) es **provisional**. Aquí abajo explicamos cómo cambiarlo.
 

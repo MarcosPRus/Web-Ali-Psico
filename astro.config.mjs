@@ -5,7 +5,7 @@ import { defineConfig, fontProviders } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://alicialozanopsicologia.com",
+  site: "https://www.alilozanopsico.es",
   trailingSlash: "ignore",
   devToolbar: { enabled: false },
   integrations: [mdx(), sitemap()],
