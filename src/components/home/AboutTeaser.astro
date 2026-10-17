@@ -8,13 +8,12 @@ import Icon from "../Icon.astro";
   <div class="container wide grid">
     <div class="collage" data-reveal>
       <Media
-        src="/img/fotos/consulta-sillon.webp"
+        src="/img/fotos/sillon-blusa.webp"
         shape="rounded"
         ratio="3 / 4"
         class="big"
         alt="Alicia sentada en el sillón de su consulta, sonriendo"
       />
-      <Media src="/img/fotos/taza.webp" shape="circle" ratio="1 / 1" class="small" alt="" />
       <Shape name="squiggle" color="var(--terracotta)" size="7rem" class="squiggle" />
     </div>
 
@@ -51,20 +50,11 @@ import Icon from "../Icon.astro";
   }
   .collage {
     position: relative;
-    padding-right: 18%;
-    padding-bottom: 10%;
+    padding-right: 6%;
   }
   .collage :global(.big) {
     box-shadow: var(--shadow);
     rotate: -2deg;
-  }
-  .collage :global(.small) {
-    position: absolute;
-    width: 42%;
-    right: 0;
-    bottom: 0;
-    border: 8px solid var(--oat);
-    box-shadow: var(--shadow);
   }
   .collage :global(.squiggle) {
     position: absolute;
